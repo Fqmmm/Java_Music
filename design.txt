@@ -1,0 +1,34 @@
+class Note:     # 一个音符
+    int scale
+    double fraction
+    int duration    # 在Music里确定
+    int velocity
+    int instrument
+
+class Lyric:    # 一句歌词
+    ArrayList<Note> notes
+
+    # 需要迭代器
+
+class Music:    # 一首歌
+    ArrayList<Lyric> lyrics
+    int pace
+
+    void setNoteDuration
+    # 需要迭代器
+
+class MusicPlayer:
+    private Synthesizer synth;      // 声音合成器
+    private MidiChannel[] channels; // 通道
+
+    void playNote(Note note)
+
+    void playLyric(Lyric lyric)
+
+    void playMusic(Music music)
+
+    void playMultipleMusic(Music... musics)
+
+class Settings:
+    int velocity = 100  // 音量
+    int instrument = 0  // 钢琴
