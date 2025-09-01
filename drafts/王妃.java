@@ -1,3 +1,8 @@
+package drafts;
+import model.Lyric;
+import model.Music;
+import model.MusicDraft;
+import model.Note;
 
 /**
  * 萧敬腾《王妃》的乐谱 (最终精确版)。

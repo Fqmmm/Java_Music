@@ -1,3 +1,4 @@
+package model;
 
 public interface MusicDraft {
     public static final int[] low = {0, 48, 50, 52, 53, 55, 57, 59};

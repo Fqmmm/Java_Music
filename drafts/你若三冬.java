@@ -1,7 +1,14 @@
+package drafts;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import model.GMInstruments;
+import model.Lyric;
+import model.Music;
+import model.MusicDraft;
+import model.Note;
 
 public class 你若三冬 implements MusicDraft {
     private static final int increment_scale = 8;

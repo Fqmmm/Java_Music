@@ -1,7 +1,13 @@
+package drafts;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import model.Lyric;
+import model.Music;
+import model.MusicDraft;
+import model.Note;
 
 public class 花海 implements MusicDraft {
 

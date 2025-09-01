@@ -1,3 +1,8 @@
+package drafts;
+import model.Lyric;
+import model.Music;
+import model.MusicDraft;
+import model.Note;
 
 /**
  * 《大东北我的家乡》的乐谱。

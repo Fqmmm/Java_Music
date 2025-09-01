@@ -1,3 +1,4 @@
+package model;
 import javax.sound.midi.*;
 
 public class MusicPlayer {

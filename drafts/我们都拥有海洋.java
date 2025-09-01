@@ -1,6 +1,13 @@
+package drafts;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import model.GMInstruments;
+import model.Lyric;
+import model.Music;
+import model.MusicDraft;
+import model.Note;
 
 /**
  * 《我们都拥有海洋》的乐谱集。

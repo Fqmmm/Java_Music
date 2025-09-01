@@ -1,3 +1,4 @@
+package model;
 public class Note {
     
     private int scale;          // 音阶
