@@ -181,6 +181,8 @@ public class 你若三冬 implements MusicDraft {
     public Music getMusic(int pace) {
         return getMusic(pace, -1);
     }
+
+    @Override
     public Music getMusic(int pace, int instrument) {
         Music music = Music.fromLyrics(pace,
             空一拍,

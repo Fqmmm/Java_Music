@@ -18,4 +18,6 @@ public interface MusicDraft {
     public static final Lyric 空四分之一拍 = Lyric.fromNotes(new Note(0, 0.25));
 
     Music getMusic(int pace);
+
+    Music getMusic(int pace, int instrument);
 }

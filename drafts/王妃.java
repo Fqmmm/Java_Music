@@ -197,6 +197,7 @@ public class 王妃 implements MusicDraft {
         return getMusic(pace, -1);
     }
 
+    @Override
     public Music getMusic(int pace, int instrument) {
         Music music = Music.fromLyrics(pace,
             空一拍,

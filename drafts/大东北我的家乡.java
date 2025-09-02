@@ -50,20 +50,13 @@ public class 大东北我的家乡 implements MusicDraft {
         Note.halfNote(medium[5]), Note.halfNote(medium[5]), Note.halfNote(medium[3]), Note.halfNote(high[1]), new Note(medium[6], 3)
     );
 
-    /**
-     * 默认方法，返回一个钢琴版的音乐。
-     */
+    
     @Override
     public Music getMusic(int pace) {
         return getMusic(pace, -1);
     }
     
-    /**
-     * 核心方法：允许在生成音乐时，为所有音符动态指定一个乐器。
-     * @param pace 速度 (BPM)
-     * @param instrument 要使用的乐器ID (来自 GMInstruments)
-     * @return 一个使用指定乐器配置的 Music 对象
-     */
+    @Override
     public Music getMusic(int pace, int instrument) {
         Music music = Music.fromLyrics(pace, 前奏);
         // 设置乐器
