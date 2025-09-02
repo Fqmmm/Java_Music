@@ -42,7 +42,19 @@ public class PlayGround {
         }
     }
 
+    public static void play你若三冬() {
+        try {
+            MusicPlayer player = new MusicPlayer();
+            你若三冬 winterDraft = new 你若三冬();
+            Music winter = winterDraft.getMusic(120);
+            player.playMusic(winter);
+            player.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
-        play花海();
+        play你若三冬();
     }
 }
