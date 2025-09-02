@@ -1,6 +1,5 @@
+import constant.GMInstruments;
 import drafts.*;
-
-import model.GMInstruments;
 import model.Music;
 import model.MusicPlayer;
 

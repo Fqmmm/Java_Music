@@ -1,4 +1,7 @@
 package model;
+
+import constant.Settings;
+
 public class Note {
     
     private int scale;          // 音阶

@@ -1,4 +1,4 @@
-package model;
+package constant;
 /**
  * 通用MIDI (General MIDI - GM) 乐器列表。
  * 该列表提供了从 0 到 127 的标准乐器程序编号（Program Change Number）。

@@ -1,6 +1,6 @@
 package drafts;
 
-import model.GMInstruments;
+import constant.GMInstruments;
 import model.Lyric;
 import model.Music;
 import model.MusicDraft;
