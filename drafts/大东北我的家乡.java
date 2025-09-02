@@ -15,7 +15,7 @@ public class 大东北我的家乡 implements MusicDraft {
      * 前奏部分 (共4行，16小节)。
      * 这是一个纯粹的乐谱定义，使用默认乐器。
      */
-    public static final Lyric 前奏 = Lyric.fromNotes(null,
+    public static final Lyric 前奏 = Lyric.fromNotes(
         Note.emptyNote(1),
         // --- 第1行 ---
         // | 6 6·5 63 5 |

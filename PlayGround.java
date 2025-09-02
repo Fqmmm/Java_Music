@@ -1,5 +1,5 @@
-import drafts.大东北我的家乡;
-import drafts.王妃;
+import drafts.*;
+
 import model.GMInstruments;
 import model.Music;
 import model.MusicPlayer;
@@ -30,7 +30,19 @@ public class PlayGround {
         }
     }
 
+    public static void play花海() {
+        try {
+            MusicPlayer player = new MusicPlayer();
+            花海 花海draft = new 花海();
+            Music 花海 = 花海draft.getMusic(80);
+            player.playMusic(花海);
+            player.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
-        play王妃();
+        play花海();
     }
 }

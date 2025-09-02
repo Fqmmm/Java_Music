@@ -11,11 +11,11 @@ public interface MusicDraft {
     // public static final Note[] 空半拍 = Note.emptyNoteList(0.5);
     // public static final Note[] 空四分之一拍 = Note.emptyNoteList(0.25);
 
-    public static final Lyric 空四拍 = Lyric.fromNotes(null, new Note(0, 4));
-    public static final Lyric 空两拍 = Lyric.fromNotes(null, new Note(0, 2));
-    public static final Lyric 空一拍 = Lyric.fromNotes(null, new Note(0, 1));
-    public static final Lyric 空半拍 = Lyric.fromNotes(null, new Note(0, 0.5));
-    public static final Lyric 空四分之一拍 = Lyric.fromNotes(null, new Note(0, 0.25));
+    public static final Lyric 空四拍 = Lyric.fromNotes(new Note(0, 4));
+    public static final Lyric 空两拍 = Lyric.fromNotes(new Note(0, 2));
+    public static final Lyric 空一拍 = Lyric.fromNotes(new Note(0, 1));
+    public static final Lyric 空半拍 = Lyric.fromNotes(new Note(0, 0.5));
+    public static final Lyric 空四分之一拍 = Lyric.fromNotes(new Note(0, 0.25));
 
     Music getMusic(int pace);
 }

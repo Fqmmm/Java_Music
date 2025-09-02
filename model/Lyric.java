@@ -22,11 +22,19 @@ public class Lyric implements Iterable<Note> {
         return lyric;
     };
 
+    public static Lyric fromNotes(Note... manyNotes) {
+        return fromNotes(null, manyNotes);
+    }
+
     /**
      * 曲调一样，词不一样
      */
     public static Lyric fromLyricOfSameTone(String words, Lyric lyric) {
         return new Lyric(lyric.notes, words);
+    }
+
+    public static Lyric fromLyricOfSameTone(Lyric lyric) {
+        return new Lyric(lyric.notes);
     }
 
     public void show() {
