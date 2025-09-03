@@ -2,6 +2,10 @@ package model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * 音乐类
+ * 包含：这首歌所有的歌词、歌曲速度
+ */
 public class Music implements Iterable<Lyric>, Cloneable {
     private ArrayList<Lyric> lyrics;
     private int pace;

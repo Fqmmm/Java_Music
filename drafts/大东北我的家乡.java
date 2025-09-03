@@ -5,9 +5,7 @@ import model.MusicDraft;
 import model.Note;
 
 /**
- * 《大东北我的家乡》的乐谱。
- * 实现了 MusicDraft 接口，只包含前奏部分。
- * 乐谱本身是“纯粹”的，不指定乐器。乐器在 getMusic 方法中被动态赋予。
+ * 《大东北我的家乡》的乐谱。只包含前奏部分。
  */
 public class 大东北我的家乡 implements MusicDraft {
 

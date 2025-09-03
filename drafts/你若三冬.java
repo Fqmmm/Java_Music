@@ -6,6 +6,9 @@ import model.Music;
 import model.MusicDraft;
 import model.Note;
 
+/**
+ * 《你若三冬》的乐谱。只包含一段主歌+一段副歌。
+ */
 public class 你若三冬 implements MusicDraft {
     private static final int increment_scale = 8;
     private static final int CHORUS_INSTRUMENT = GMInstruments.LEAD_2_SAWTOOTH; // 新的写法，清晰明了！

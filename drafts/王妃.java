@@ -5,8 +5,7 @@ import model.MusicDraft;
 import model.Note;
 
 /**
- * 萧敬腾《王妃》的乐谱 (最终精确版)。
- * 严格按照提供的完整简谱进行逐小节精细转录，包含前奏和主副歌。
+ * 《王妃》的乐谱。只包含一段主歌+一段副歌。
  */
 public class 王妃 implements MusicDraft {
     public static Lyric 摇晃的红酒杯 = Lyric.fromNotes("摇晃的红酒杯",

@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * MusicDraft接口定义了写一个乐谱所需要的常量
+ */
 public interface MusicDraft {
     public static final int[] low = {0, 48, 50, 52, 53, 55, 57, 59};
     public static final int[] medium = {0, 60, 62, 64, 65, 67, 69, 71};

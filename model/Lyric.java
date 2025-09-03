@@ -2,6 +2,10 @@ package model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * 歌词类
+ * 包含：这句歌词的音符和歌词本身（字符串）
+ */
 public class Lyric implements Iterable<Note>, Cloneable {
     private ArrayList<Note> notes;
     private String words;   

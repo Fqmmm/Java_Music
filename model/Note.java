@@ -2,6 +2,9 @@ package model;
 
 import constant.Settings;
 
+/**
+ * 音符类
+ */
 public class Note implements Cloneable {
     
     private int scale;          // 音阶

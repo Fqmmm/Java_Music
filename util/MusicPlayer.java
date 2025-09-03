@@ -5,6 +5,9 @@ import model.Lyric;
 import model.Music;
 import model.Note;
 
+/**
+ * 音乐播放器
+ */
 public class MusicPlayer {
     private Synthesizer synth;      // 声音合成器
     private MidiChannel[] channels; // 通道

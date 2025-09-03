@@ -6,6 +6,9 @@ import model.Music;
 import model.MusicDraft;
 import model.Note;
 
+/**
+ * 《花海》的乐谱。只包含一段主歌+一段副歌。
+ */
 public class 花海 implements MusicDraft {
 
     // 你编写的所有 Lyric 数组都保留在这里，无需任何改动
