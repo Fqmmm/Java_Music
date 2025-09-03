@@ -276,19 +276,8 @@ public class 花海 implements MusicDraft {
         Note.emptyNote(3)
     );
     public static final Lyric 回忆划不开 = 距离隔不开;
-
-
-    @Override
-    public Music getMusic(int pace) {
-        return getMusic(pace, -1);
-    }
-
-    /**
-     * 工厂方法：将所有乐句组装成一首完整的《花海》Music对象
-     * @param pace 歌曲的速度 (BPM)
-     * @return 一个可播放的 Music 对象
-     */
-    public Music getMusic(int pace, int instrument) {
+    
+    public Music getMusic(int pace, int instrument, int velocity) {
         // 定义整首歌曲的结构，按照播放顺序排列
         Music music = Music.fromLyrics(pace,
             前奏,
@@ -329,6 +318,9 @@ public class 花海 implements MusicDraft {
             music.unifyInstrument(instrument);
         }
 
+        if (velocity >= 0) {
+            music.unifyVelocity(velocity);
+        }
         return music;
     }
 }

@@ -66,15 +66,15 @@ public class PlayGround {
             // 必须保证主旋律与和声的速度一致
             int pace = 71; 
             Music melody = melodyDraft.getMusic(pace, 0);
-            Music harmony = harmonyDraft.getMusic(pace, GMInstruments.STRINGS_VIOLIN);
+            Music harmony = harmonyDraft.getMusic(pace, GMInstruments.STRINGS_VIOLIN, 60);
 
             // 4. 使用多音轨播放功能，同时播放主旋律与和声
-            System.out.println("正在播放：《我们都拥有海洋》...");
+            // System.out.println("正在播放：《我们都拥有海洋》...");
             player.playMultipleMusic(melody, harmony);
 
             // 5. 播放完毕后，关闭播放器并释放资源
             player.close();
-            System.out.println("播放结束。");
+            // System.out.println("播放结束。");
 
         } catch (Exception e) {
             e.printStackTrace();

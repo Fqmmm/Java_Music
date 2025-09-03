@@ -1,6 +1,5 @@
 package drafts;
 
-import constant.GMInstruments;
 import model.Lyric;
 import model.Music;
 import model.MusicDraft;
@@ -196,15 +195,9 @@ public final class 我们都拥有海洋 {
             Note.quarterNote(high[1]), Note.emptyNote(0.25), Note.quarterNote(medium[7]), Note.emptyNote(0.5),
             new Note(high[1], 1.25)
         );
-
-        @Override
-        public Music getMusic(int pace) {
-            // [修正] 明确默认乐器为钢琴 (Acoustic Grand Piano)
-            return getMusic(pace, GMInstruments.PIANO_ACOUSTIC_GRAND);
-        }
         
         @Override
-        public Music getMusic(int pace, int instrument) {
+        public Music getMusic(int pace, int instrument, int velocity) {
             Music music = Music.fromLyrics(pace,
                 空四拍, 空一拍,
                 如果这是再不返回的夏天, 空一拍,
@@ -281,12 +274,17 @@ public final class 我们都拥有海洋 {
                 就让我自己走吧, 空一拍, 空四分之一拍,
                 不管答案是什么Hello, 空四拍, 空四分之一拍,
                 我们都拥有海洋收尾, 空两拍, 空一拍
-            );
+            ).clone();
 
             if (instrument >= 0) {
                 music.unifyInstrument(instrument);
             }
-            return music.clone();
+
+            if (velocity >= 0) {
+                music.unifyVelocity(velocity);
+            }
+
+            return music;
         }
     }
 
@@ -377,13 +375,7 @@ public final class 我们都拥有海洋 {
         public static final Lyric 我的模样2 = Lyric.fromLyricOfSameTone("我的模样", 穿着球鞋);
         
         @Override
-        public Music getMusic(int pace) {
-            // [修正] 明确默认乐器为弦乐 (String Ensemble 1)
-            return getMusic(pace, GMInstruments.ENSEMBLE_STRING_1);
-        }
-        
-        @Override
-        public Music getMusic(int pace, int instrument) {
+        public Music getMusic(int pace, int instrument, int velocity) {
             Music music = Music.fromLyrics(pace,
                 // --- 歌曲结构 ---
                 空四拍,
@@ -458,14 +450,17 @@ public final class 我们都拥有海洋 {
                 我不遗忘,
                 我的模样2, 空半拍,
                 HelloHelloHello
-            );
+            ).clone();
 
             if (instrument >= 0) {
                 music.unifyInstrument(instrument);
             }
 
-            music.unifyVelocity(50);
-            return music.clone();
+            if (velocity >= 0) {
+                music.unifyVelocity(velocity);
+            }
+            
+            return music;
         }
     }
 

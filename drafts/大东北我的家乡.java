@@ -48,18 +48,17 @@ public class 大东北我的家乡 implements MusicDraft {
         Note.halfNote(medium[5]), Note.halfNote(medium[5]), Note.halfNote(medium[3]), Note.halfNote(high[1]), new Note(medium[6], 3)
     );
 
-    
     @Override
-    public Music getMusic(int pace) {
-        return getMusic(pace, -1);
-    }
-    
-    @Override
-    public Music getMusic(int pace, int instrument) {
+    public Music getMusic(int pace, int instrument, int velocity) {
         Music music = Music.fromLyrics(pace, 前奏);
         // 设置乐器
-        if (instrument > 0) {
+        if (instrument >= 0) {
             music.unifyInstrument(instrument);
+        }
+
+        // 设置音量
+        if (velocity >= 0) {
+            music.unifyVelocity(velocity);
         }
         return music;
     }

@@ -14,7 +14,13 @@ public interface MusicDraft {
     public static final Lyric 空半拍 = Lyric.fromNotes(new Note(0, 0.5));
     public static final Lyric 空四分之一拍 = Lyric.fromNotes(new Note(0, 0.25));
 
-    Music getMusic(int pace);
+    default Music getMusic(int pace) {
+        return getMusic(pace, -1);
+    }
 
-    Music getMusic(int pace, int instrument);
+    default Music getMusic(int pace, int instrument) {
+        return getMusic(pace, instrument, -1);
+    }
+
+    Music getMusic(int pace, int instrument, int velocity);
 }
