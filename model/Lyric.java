@@ -86,4 +86,12 @@ public class Lyric implements Iterable<Note>, Cloneable {
             throw new AssertionError();
         }
     }
+
+    /**
+     * 为了防止和声重复播放主旋律的歌词，设计了一个函数，把一句歌词的音符保留，歌词拿掉。
+     * @return  旋律相同、没有词的歌词
+     */
+    public Lyric toEmptyWords() {
+        return new Lyric(this.notes);
+    }
 }

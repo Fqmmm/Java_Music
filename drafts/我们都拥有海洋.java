@@ -57,7 +57,7 @@ public final class 我们都拥有海洋 {
         public static final Lyric 去哪 = Lyric.fromNotes("去哪", Note.halfNote(medium[5]), Note.fullNote(low[6]));
         public static final Lyric 如果 = Lyric.fromLyricOfSameTone("如果", 去哪);
         public static final Lyric 那我 = Lyric.fromLyricOfSameTone("那我", 去哪);
-        public static final Lyric 跑的脚踝到底是为什么 = Lyric.fromNotes("跑的脚踝到底是为什么",
+        public static final Lyric 跑的脚踝到底是为什么 = Lyric.fromNotes(
             Note.halfNote(low[6]), Note.halfNote(medium[2]), Note.quarterNote(medium[1]), Note.halfNote(low[7]),
             Note.quarterNote(low[7]), Note.quarterNote(medium[1]), Note.quarterNote(medium[2]),
             Note.dottedNote1_5(medium[2]), Note.quarterNote(medium[6]), new Note(medium[6], 1.25)
@@ -172,14 +172,14 @@ public final class 我们都拥有海洋 {
                 为剧烈的心动, 跑起来去见喜欢的我, 兴趣使然的, 怎么判断有用谁来规定无用, 空半拍,
                 完美的旅程, 为何每一站是一样的路牌, 空一拍, 石头, 空一拍, 所以没有悟空, 空四分之一拍,
                 就让我自己走吧, 空一拍, 空半拍, 我的球鞋, 空一拍, 空半拍, 我的暴雪, 空一拍, 空半拍, 要去见所有我喜欢的一切, 空四分之一拍,
-                就让我自己走吧, 空半拍, 别对我说, 空一拍, 空四分之一拍, 去成为谁的模样, 空一拍, 未来不在, 空四分之一拍, 我本该拥有海洋, 空一拍, 空四分之一拍, 我本该拥有海洋, 空一拍, 空四分之一拍, 就让我自己走吧, 空一拍, 空四分之一拍, 不管会遇见什么Hello, 空两拍,
+                就让我自己走吧, 空半拍, 别对我说, 空一拍, 空四分之一拍, 去成为谁的模样, 空一拍, 未来不在.toEmptyWords(), 空四分之一拍, 我本该拥有海洋, 空一拍, 空四分之一拍, 我本该拥有海洋, 空一拍, 空四分之一拍, 就让我自己走吧, 空一拍, 空四分之一拍, 不管会遇见什么Hello, 空两拍,
                 空一拍, 你可见过两片相同的树叶, 空一拍, 人不可复写, 空两拍, 生命是原创的情节, 空两拍,
                 去问明天渴望怎样一张脸, 空一拍, 它说是少年, 空两拍, 它说和我一样毫无经验,
-                不懂, 空两拍, 空半拍, 是否, 空两拍, 空半拍, 多久, 空半拍, 空四分之一拍, 去爱天空怎能害怕坠落, 空一拍,
+                不懂, 空两拍, 空半拍, 是否, 空两拍, 空半拍, 多久, 空半拍, 空四分之一拍, 去爱天空怎能害怕坠落.toEmptyWords(), 空一拍,
                 人生中的考场, 我会勇敢地给出回答, 亲手署名吧, 有时也会考砸不抄谁的答案, 空半拍,
                 挥手告别吧, 记得二十岁流着泪的笑脸, 空半拍, 卡关, 空半拍, 借来加血加防, 空四分之一拍,
                 就让我自己走吧, 空一拍, 空半拍, 我的球鞋, 空一拍, 空半拍, 我的暴雪, 空一拍, 空半拍, 要去见所有我喜欢的一切, 空四分之一拍,
-                就让我自己走吧, 空半拍, 别对我说, 空一拍, 空四分之一拍, 去成为谁的模样, 空一拍, 未来不在, 空四分之一拍, 我本该拥有海洋, 空一拍, 空四分之一拍, 我本该拥有海洋, 空一拍, 空四分之一拍, 就让我自己走吧, 空一拍, 空四分之一拍, 不管会遇见什么, 空一拍, 空四分之一拍, 我本该拥有海洋, 空一拍, 空四分之一拍, 我本该拥有海洋, 空一拍, 空四分之一拍, 就让我自己走吧, 空一拍, 空四分之一拍, 不管答案是什么Hello,
+                就让我自己走吧, 空半拍, 别对我说, 空一拍, 空四分之一拍, 去成为谁的模样, 空一拍, 未来不在.toEmptyWords(), 空四分之一拍, 我本该拥有海洋, 空一拍, 空四分之一拍, 我本该拥有海洋, 空一拍, 空四分之一拍, 就让我自己走吧, 空一拍, 空四分之一拍, 不管会遇见什么, 空一拍, 空四分之一拍, 我本该拥有海洋, 空一拍, 空四分之一拍, 我本该拥有海洋, 空一拍, 空四分之一拍, 就让我自己走吧, 空一拍, 空四分之一拍, 不管答案是什么Hello,
                 空四拍, 空四分之一拍, 我们都拥有海洋收尾, 空两拍, 空一拍
             );
 
@@ -224,7 +224,7 @@ public final class 我们都拥有海洋 {
         );
         public static final Lyric 迎着暴雪 = Lyric.fromLyricOfSameTone("迎着暴雪", 穿着球鞋);
         public static final Lyric 朝着山野 = Lyric.fromLyricOfSameTone("朝着山野", 穿着球鞋);
-        public static final Lyric 所有我喜欢的一切 = Lyric.fromNotes("所有我喜欢的一切",
+        public static final Lyric 所有我喜欢的一切 = Lyric.fromNotes(
             Note.quarterNote(medium[5]), Note.quarterNote(medium[5]), Note.quarterNote(medium[5]),
             Note.quarterNote(medium[5]), Note.quarterNote(medium[6]), Note.quarterNote(medium[5]),
             Note.quarterNote(medium[4]), Note.quarterNote(medium[3])
@@ -268,14 +268,20 @@ public final class 我们都拥有海洋 {
                 // --- 歌曲结构 ---
                 空四拍, 空四拍, 空四拍, 空四拍, 空四拍, 空四拍, 空四拍, 空四拍, 空四拍,
                 空半拍, 让我选择, 空两拍, 空半拍, 只有岸没有海, 空一拍, 空半拍, 长奔跑的脚踝到底是为什么, 空一拍,
-                Melody.为剧烈的心动, Melody.跑起来去见喜欢的我, 空四拍, Melody.怎么判断有用谁来规定无用, 空半拍,
-                Melody.完美的旅程, Melody.为何每一站是一样的路牌, 没有, 空一拍, 所以, 空一拍, 没有悟空, 空两拍,
+                Melody.为剧烈的心动.toEmptyWords(), Melody.跑起来去见喜欢的我.toEmptyWords(), 空四拍,
+                Melody.怎么判断有用谁来规定无用.toEmptyWords(), 空半拍,
+                Melody.完美的旅程.toEmptyWords(), Melody.为何每一站是一样的路牌,
+                没有, 空一拍, 所以, 空一拍, 没有悟空.toEmptyWords(), 空两拍,
                 穿着球鞋, 迎着暴雪, 朝着山野, 所有我喜欢的一切, 空两拍,
                 空四分之一拍, 哪一代, 空四分之一拍, 什么浪, 空四分之一拍, 都不是, 我的模样, 空一拍, 未来不在沙滩上, 空一拍, 孤岛极光, 虚拟城邦, 星球流浪, 空半拍, HelloHelloHello,
-                空四拍, 空四拍, 空一拍, 空四分之一拍, 唔, Melody.生命是原创的情节, 空两拍, Melody.去问明天渴望怎样一张脸, 空一拍, Melody.它说是少年, 空两拍, Melody.它说和我一样毫无经验, 空半拍, 空半拍,
+                空四拍, 空四拍, 空一拍, 空四分之一拍, 唔, Melody.生命是原创的情节.toEmptyWords(), 空两拍,
+                Melody.去问明天渴望怎样一张脸.toEmptyWords(), 空一拍, Melody.它说是少年.toEmptyWords(), 空两拍,
+                Melody.它说和我一样毫无经验.toEmptyWords(), 空半拍, 空半拍,
                 天高地厚, 空两拍, 空半拍, 是短暂的自由, 空一拍, 空半拍, 像风筝去爱天空怎能害怕坠落, 空一拍,
-                Melody.人生中的考场, Melody.我会勇敢地给出回答, Melody.亲手署名吧, Melody.有时也会考砸不抄谁的答案, 空半拍,
-                Melody.挥手告别吧, Melody.记得二十岁流着泪的笑脸, 前路, 空半拍, 借来, 空一拍, 加血加防, 空两拍,
+                Melody.人生中的考场.toEmptyWords(), Melody.我会勇敢地给出回答.toEmptyWords(),
+                Melody.亲手署名吧.toEmptyWords(), Melody.有时也会考砸不抄谁的答案.toEmptyWords(), 空半拍,
+                Melody.挥手告别吧.toEmptyWords(), Melody.记得二十岁流着泪的笑脸.toEmptyWords(),
+                前路, 空半拍, 借来, 空一拍, 加血加防.toEmptyWords(), 空两拍,
                 穿着球鞋, 迎着暴雪, 朝着山野, 所有我喜欢的一切, 空两拍,
                 空四分之一拍, 哪一代, 空四分之一拍, 什么浪, 空四分之一拍, 都不是, 我的模样, 空一拍, 未来不在沙滩上, 空半拍,
                 孤岛极光, 虚拟城邦, 星球流浪, 我将走向, 无垠远方, 我不遗忘, 我的模样, 空一拍, HelloHelloHello
