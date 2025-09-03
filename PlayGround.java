@@ -83,5 +83,6 @@ public class PlayGround {
 
     public static void main(String[] args) {
         play我们都拥有海洋();
+        System.out.println("aaa");
     }
 }
