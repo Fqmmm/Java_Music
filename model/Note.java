@@ -58,6 +58,10 @@ public class Note implements Cloneable {
         this.instrument = instrument;
     }
     
+    public void setVelocity(int velocity) {
+        this.velocity = velocity;
+    }
+    
     // 空节拍
     public static Note emptyNote(double fraction) {
         return new Note(0, fraction);
