@@ -2,7 +2,7 @@ package model;
 
 import constant.Settings;
 
-public class Note {
+public class Note implements Cloneable {
     
     private int scale;          // 音阶
     private double fraction;    // 占这一小节的几分之几
@@ -115,6 +115,18 @@ public class Note {
     // 附点(dotted note)，但是音量和乐器取默认值
     public static Note dottedNote1_5(int scale) {
         return new Note(scale, 1.5);
+    }
+
+    @Override
+    public Note clone() {
+        try {
+            // 因为 Note 类的所有字段都是基本类型，
+            // 所以 Object.clone() 执行的浅拷贝已经等同于深拷贝。
+            return (Note) super.clone();
+        } catch (CloneNotSupportedException e) {
+            // 这不应该发生，因为我们实现了 Cloneable
+            throw new AssertionError();
+        }
     }
 
 }

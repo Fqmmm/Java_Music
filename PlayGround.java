@@ -1,7 +1,7 @@
 import constant.GMInstruments;
 import drafts.*;
 import model.Music;
-import model.MusicPlayer;
+import util.MusicPlayer;
 
 public class PlayGround {
     
@@ -53,7 +53,35 @@ public class PlayGround {
         }
     }
 
+    public static void play我们都拥有海洋() {
+        try {
+            // 1. 初始化播放器
+            MusicPlayer player = new MusicPlayer();
+
+            // 2. 创建主旋律和和声的 "乐谱草稿"
+            我们都拥有海洋.Melody melodyDraft = new 我们都拥有海洋.Melody();
+            我们都拥有海洋.Harmony harmonyDraft = new 我们都拥有海洋.Harmony();
+
+            // 3. 设定歌曲速度 (BPM)，并根据草稿生成最终的 Music 对象
+            // 必须保证主旋律与和声的速度一致
+            int pace = 71; 
+            Music melody = melodyDraft.getMusic(pace, 0);
+            Music harmony = harmonyDraft.getMusic(pace, GMInstruments.STRINGS_VIOLIN);
+
+            // 4. 使用多音轨播放功能，同时播放主旋律与和声
+            System.out.println("正在播放：《我们都拥有海洋》...");
+            player.playMultipleMusic(melody, harmony);
+
+            // 5. 播放完毕后，关闭播放器并释放资源
+            player.close();
+            System.out.println("播放结束。");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
-        play你若三冬();
+        play我们都拥有海洋();
     }
 }

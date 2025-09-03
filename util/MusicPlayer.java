@@ -1,5 +1,9 @@
-package model;
+package util;
 import javax.sound.midi.*;
+
+import model.Lyric;
+import model.Music;
+import model.Note;
 
 public class MusicPlayer {
     private Synthesizer synth;      // 声音合成器

@@ -2,7 +2,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Music implements Iterable<Lyric> {
+public class Music implements Iterable<Lyric>, Cloneable {
     private ArrayList<Lyric> lyrics;
     private int pace;
 
@@ -67,6 +67,29 @@ public class Music implements Iterable<Lyric> {
     public void show() {
         for (Lyric lyric : lyrics) {
             lyric.show();
+        }
+    }
+
+    @Override
+    public Music clone() {
+        try {
+            // 1. 调用 Object.clone() 创建一个浅拷贝。
+            // 这会复制所有的基本类型字段（如此处的 pace）和对象引用。
+            Music clonedMusic = (Music) super.clone();
+
+            // 2. 为 lyrics 字段创建一个新的 ArrayList 实例，实现深拷贝。
+            clonedMusic.lyrics = new ArrayList<>();
+
+            // 3. 遍历原始列表中的每个 Lyric，克隆它们，并添加到新列表中。
+            for (Lyric lyric : this.lyrics) {
+                clonedMusic.lyrics.add(lyric.clone());
+            }
+
+            return clonedMusic;
+        } catch (CloneNotSupportedException e) {
+            // 这理论上不应该发生，因为 Music 类实现了 Cloneable 接口。
+            // 使用 AssertionError 是一种常见的处理方式。
+            throw new AssertionError();
         }
     }
 } 

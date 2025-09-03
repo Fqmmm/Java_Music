@@ -2,7 +2,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Lyric implements Iterable<Note> {
+public class Lyric implements Iterable<Note>, Cloneable {
     private ArrayList<Note> notes;
     private String words;   
     public Lyric(ArrayList<Note> notes) {
@@ -66,6 +66,24 @@ public class Lyric implements Iterable<Note> {
             index++;
             return nextNote;
             
+        }
+    }
+
+    @Override
+    public Lyric clone() {
+        try {
+            Lyric clonedLyric = (Lyric) super.clone();
+            
+            // 深拷贝 notes 列表
+            clonedLyric.notes = new ArrayList<>();
+            for (Note note : this.notes) {
+                clonedLyric.notes.add(note.clone());
+            }
+
+            return clonedLyric;
+        } catch (CloneNotSupportedException e) {
+            // 这不应该发生，因为我们实现了 Cloneable
+            throw new AssertionError();
         }
     }
 }
