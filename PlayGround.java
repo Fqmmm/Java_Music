@@ -34,6 +34,7 @@ public class PlayGround {
             MusicPlayer player = new MusicPlayer();
             花海 花海draft = new 花海();
             Music 花海 = 花海draft.getMusic(80);
+            花海.setSinger("周杰伦");
             player.playMusic(花海);
             player.close();
         } catch (Exception e) {
@@ -82,6 +83,6 @@ public class PlayGround {
     }
 
     public static void main(String[] args) {
-        play我们都拥有海洋();
+        play花海();
     }
 }

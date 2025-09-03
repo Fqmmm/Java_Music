@@ -9,11 +9,31 @@ import java.util.Iterator;
 public class Music implements Iterable<Lyric>, Cloneable {
     private ArrayList<Lyric> lyrics;
     private int pace;
+    private String title;   // 歌曲名
+    private String singer;  // 歌手
 
     public Music(ArrayList<Lyric> lyrics, int pace) {
         this.lyrics = lyrics;
         this.pace = pace;
         this.setNoteDuration();     // 设置每个音符的时长
+        // this.title = this.getClass().getName();     // 歌曲名默认为类名
+        this.singer = null;
+    }
+
+    public String title() {
+        return this.title;
+    }
+
+    public String singer() {
+        return this.singer;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setSinger(String singer) {
+        this.singer = singer;
     }
 
     public static Music fromLyrics(int pace, Lyric... manyLyrics) {
@@ -51,7 +71,7 @@ public class Music implements Iterable<Lyric>, Cloneable {
             }
         }
     }
-    
+
     public Iterator<Lyric> iterator() {
         return new MusicIterator();
     }
@@ -75,12 +95,6 @@ public class Music implements Iterable<Lyric>, Cloneable {
             return nextLyric;
         }
         
-    }
-
-    public void show() {
-        for (Lyric lyric : lyrics) {
-            lyric.show();
-        }
     }
 
     @Override

@@ -313,7 +313,6 @@ public class 花海 implements MusicDraft {
             结尾空三拍
         );
 
-        // 设置乐器
         if (instrument >= 0) {
             music.unifyInstrument(instrument);
         }
@@ -321,6 +320,8 @@ public class 花海 implements MusicDraft {
         if (velocity >= 0) {
             music.unifyVelocity(velocity);
         }
+
+        music.setTitle(this.getClass().getSimpleName());    // 歌名默认为类名
         return music;
     }
 }

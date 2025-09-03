@@ -52,6 +52,14 @@ public class MusicPlayer {
     }
 
     public void playMusic(Music music) {
+        if (music.title() != null) {
+            System.out.println("即将播放歌曲：" + music.title());
+        }
+
+        if (music.singer() != null) {
+            System.out.println("歌手：" + music.singer());
+        }
+
         for (Lyric lyric : music) {
             playLyric(lyric);
         }
