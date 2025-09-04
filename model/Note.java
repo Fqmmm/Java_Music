@@ -64,8 +64,33 @@ public class Note implements Cloneable {
         this.velocity = velocity;
     }
 
-    // --- 核心修改：让所有创建Note的入口都通过NoteCache ---
+    /**
+     * 创建并返回一个当前音符经过移调（升/降调）后的新实例。
+     * 这个方法是不可变的，它不会修改原始音符。
+     *
+     * @param value 需要提升/降低（传入负数）的半音数量
+     * @return 一个全新的、经过移调的 Note 对象
+     */
+    public Note transposed(int value) {
+        // 如果是休止符，返回一个相同的休止符
+        if (this.scale <= 0) {
+            return this; // 或者 Note.create(0, this.fraction, ...);
+        }
 
+        int newScale = this.scale + value;
+
+        // 边界检查
+        if (newScale > 127)
+            newScale = 127;
+        if (newScale < 0)
+            newScale = 0; // 如果降调太多，变成休止符
+
+        // 通过工厂方法创建并返回一个全新的 Note 对象
+        // 这会自动利用缓存，如果移调后的音符已存在，就会复用
+        return Note.create(newScale, this.fraction, this.velocity, this.instrument);
+    }
+
+    // --- 核心修改：让所有创建Note的入口都通过NoteCache ---
     public static Note create(int scale, double fraction, int velocity, int instrument) {
         return NoteCache.getNote(scale, fraction, velocity, instrument);
     }

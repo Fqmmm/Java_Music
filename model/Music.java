@@ -1,4 +1,5 @@
 package model;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -9,14 +10,14 @@ import java.util.Iterator;
 public class Music implements Iterable<Lyric>, Cloneable {
     private ArrayList<Lyric> lyrics;
     private int pace;
-    private String title;   // 歌曲名
-    private String singer;  // 歌手
+    private String title; // 歌曲名
+    private String singer; // 歌手
 
     public Music(ArrayList<Lyric> lyrics, int pace) {
         this.lyrics = lyrics;
         this.pace = pace;
-        this.setNoteDuration();     // 设置每个音符的时长
-        // this.title = this.getClass().getName();     // 歌曲名默认为类名
+        this.setNoteDuration(); // 设置每个音符的时长
+        // this.title = this.getClass().getName(); // 歌曲名默认为类名
         this.singer = null;
     }
 
@@ -41,7 +42,7 @@ public class Music implements Iterable<Lyric>, Cloneable {
         for (Lyric lyric : manyLyrics) {
             music.lyrics.add(lyric);
         }
-        music.setNoteDuration();    //  在这里设置每个音符的时长
+        music.setNoteDuration(); // 在这里设置每个音符的时长
         return music;
     }
 
@@ -60,12 +61,32 @@ public class Music implements Iterable<Lyric>, Cloneable {
             lyric.unifyInstrument(instrument);
         }
     }
-    
+
     // 统一音量
     public void unifyVelocity(int velocity) {
         for (Lyric lyric : this) {
             lyric.unifyInstrument(velocity);
         }
+    }
+
+    /**
+     * 创建并返回一首经过整体移调的新乐曲。
+     * 
+     * @param value 需要提升的半音数量
+     * @return 一个全新的 Music 对象
+     */
+    public Music transposed(int value) {
+        ArrayList<Lyric> transposedLyrics = new ArrayList<>();
+        for (Lyric lyric : this) {
+            transposedLyrics.add(lyric.transposed(value));
+        }
+        // 返回一个包含新乐句列表的新 Music 实例
+        Music newMusic = new Music(transposedLyrics, this.pace);
+
+        // 如果有其他属性（如 singer），也一并复制
+        newMusic.setTitle(this.title);
+        newMusic.setSinger(this.singer);
+        return newMusic;
     }
 
     public Iterator<Lyric> iterator() {
@@ -90,7 +111,7 @@ public class Music implements Iterable<Lyric>, Cloneable {
             index++;
             return nextLyric;
         }
-        
+
     }
 
     @Override
@@ -115,4 +136,4 @@ public class Music implements Iterable<Lyric>, Cloneable {
             throw new AssertionError();
         }
     }
-} 
+}

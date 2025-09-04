@@ -1,4 +1,5 @@
 package model;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -8,7 +9,8 @@ import java.util.Iterator;
  */
 public class Lyric implements Iterable<Note>, Cloneable {
     private ArrayList<Note> notes;
-    private String words;   
+    private String words;
+
     public Lyric(ArrayList<Note> notes) {
         this(notes, null);
     }
@@ -29,7 +31,22 @@ public class Lyric implements Iterable<Note>, Cloneable {
             note.setVelocity(velocity);
         }
     }
-    
+
+    /**
+     * 创建并返回一个包含移调后所有音符的新乐句。
+     * 
+     * @param value 需要提升的半音数量
+     * @return 一个全新的 Lyric 对象
+     */
+    public Lyric transposed(int value) {
+        ArrayList<Note> transposedNotes = new ArrayList<>();
+        for (Note note : this) {
+            transposedNotes.add(note.transposed(value));
+        }
+        // 返回一个包含新音符列表的新 Lyric 实例
+        return new Lyric(transposedNotes, this.words);
+    }
+
     public static Lyric fromNotes(String words, Note... manyNotes) {
         Lyric lyric = new Lyric(new ArrayList<>(), words);
         for (Note note : manyNotes) {
@@ -66,7 +83,7 @@ public class Lyric implements Iterable<Note>, Cloneable {
 
     private class LyricIterator implements Iterator<Note> {
         private int index;
-        
+
         public LyricIterator() {
             index = 0;
         }
@@ -81,7 +98,7 @@ public class Lyric implements Iterable<Note>, Cloneable {
             Note nextNote = notes.get(index);
             index++;
             return nextNote;
-            
+
         }
     }
 
@@ -89,7 +106,7 @@ public class Lyric implements Iterable<Note>, Cloneable {
     public Lyric clone() {
         try {
             Lyric clonedLyric = (Lyric) super.clone();
-            
+
             // 深拷贝 notes 列表
             clonedLyric.notes = new ArrayList<>();
             for (Note note : this.notes) {
@@ -105,7 +122,8 @@ public class Lyric implements Iterable<Note>, Cloneable {
 
     /**
      * 为了防止和声重复播放主旋律的歌词，设计了一个函数，把一句歌词的音符保留，歌词拿掉。
-     * @return  旋律相同、没有词的歌词
+     * 
+     * @return 旋律相同、没有词的歌词
      */
     public Lyric toEmptyWords() {
         return new Lyric(this.notes);
