@@ -18,6 +18,18 @@ public class Lyric implements Iterable<Note>, Cloneable {
         this.words = words;
     }
 
+    public void unifyInstrument(int instrument) {
+        for (Note note : this) {
+            note.setInstrument(instrument);
+        }
+    }
+
+    public void unifyVelocity(int velocity) {
+        for (Note note : this) {
+            note.setVelocity(velocity);
+        }
+    }
+    
     public static Lyric fromNotes(String words, Note... manyNotes) {
         Lyric lyric = new Lyric(new ArrayList<>(), words);
         for (Note note : manyNotes) {

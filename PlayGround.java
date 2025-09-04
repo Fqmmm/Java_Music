@@ -83,6 +83,6 @@ public class PlayGround {
     }
 
     public static void main(String[] args) {
-        play花海();
+        play我们都拥有海洋();
     }
 }
