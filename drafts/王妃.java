@@ -80,7 +80,7 @@ public class 王妃 implements MusicDraft {
     public static final Lyric 夜太美尽管再危险 = Lyric.fromNotes("夜太美尽管再危险",
         Note.fullNote(medium[3]),
         Note.fullNote(medium[5]),
-        Note.fullNote(medium[6], 150, 80),
+        Note.fullNote(medium[6]),
         Note.emptyNote(1),
 
         Note.halfNote(medium[3]),

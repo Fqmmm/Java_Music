@@ -83,6 +83,6 @@ public class PlayGround {
     }
 
     public static void main(String[] args) {
-        play我们都拥有海洋();
+        play大东北我的家乡();
     }
 }

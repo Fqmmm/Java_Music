@@ -1,19 +1,21 @@
 package model;
 
+import java.util.Objects;
+
 import constant.Settings;
+import util.NoteCache;
 
 /**
  * 音符类
  */
 public class Note implements Cloneable {
-    
-    private int scale;          // 音阶
-    private double fraction;    // 占这一小节的几分之几
-    private int duration;       // 持续时间（毫秒）
-    private int velocity;       // 响度
-    private int instrument;     // 乐器
-        
-    
+
+    private int scale; // 音阶
+    private double fraction; // 占这一小节的几分之几
+    private int duration; // 持续时间（毫秒）
+    private int velocity; // 响度
+    private int instrument; // 乐器
+
     public Note(int scale, double fraction) {
         this(scale, fraction, Settings.velocity, Settings.instrument);
     }
@@ -25,7 +27,7 @@ public class Note implements Cloneable {
     public Note(int scale, double fraction, int velocity, int instrument) {
         this.scale = scale;
         this.fraction = fraction;
-        // this.duration = (int) (fraction * 60 / Settings.pace * 1000);   // 毫秒
+        // this.duration = (int) (fraction * 60 / Settings.pace * 1000); // 毫秒
         this.velocity = velocity;
         this.instrument = instrument;
     }
@@ -45,7 +47,7 @@ public class Note implements Cloneable {
     public double fraction() {
         return fraction;
     }
-    
+
     public double instrument() {
         return instrument;
     }
@@ -57,71 +59,68 @@ public class Note implements Cloneable {
     public void setInstrument(int instrument) {
         this.instrument = instrument;
     }
-    
+
     public void setVelocity(int velocity) {
         this.velocity = velocity;
     }
-    
-    // 空节拍
+
+    // --- 核心修改：让所有创建Note的入口都通过NoteCache ---
+
+    public static Note create(int scale, double fraction, int velocity, int instrument) {
+        return NoteCache.getNote(scale, fraction, velocity, instrument);
+    }
+
+    public static Note create(int scale, double fraction, int instrument) {
+        return NoteCache.getNote(scale, fraction, Settings.velocity, instrument);
+    }
+
+    public static Note create(int scale, double fraction) {
+        return NoteCache.getNote(scale, fraction, Settings.velocity, Settings.instrument);
+    }
+
+    // 静态工厂方法现在调用 create 方法
     public static Note emptyNote(double fraction) {
-        return new Note(0, fraction);
+        return create(0, fraction);
     }
 
-    // 生成空节拍列表
-    public static Note[] emptyNoteList(double fraction) {
-        Note[] n = new Note[1];
-        n[0] = emptyNote(fraction);
-        return n;
-    }
-
-    // 1/4拍
-    public static Note quarterNote(int scale, int velocity, int instrument) {
-        return new Note(scale, 0.25, velocity, instrument);
-    }
-
-    // 1/4拍，但是音量和乐器取默认值
     public static Note quarterNote(int scale) {
-        return new Note(scale, 0.25);
+        return create(scale, 0.25);
     }
 
-    // 1/2拍
-    public static Note halfNote(int scale, int velocity, int instrument) {
-        return new Note(scale, 0.5, velocity, instrument);
+    public static Note quarterNote(int scale, int velocity, int instrument) {
+        return create(scale, 0.25, velocity, instrument);
     }
 
-    // 1/2拍，但是音量和乐器取默认值
     public static Note halfNote(int scale) {
-        return new Note(scale, 0.5);
+        return create(scale, 0.5);
     }
 
-    // 1拍
-    public static Note fullNote(int scale, int velocity, int instrument) {
-        return new Note(scale, 1, velocity, instrument);
+    public static Note halfNote(int scale, int velocity, int instrument) {
+        return create(scale, 0.5, velocity, instrument);
     }
 
-    // 1拍，但是音量和乐器取默认值
     public static Note fullNote(int scale) {
-        return new Note(scale, 1);
+        return create(scale, 1.0);
     }
 
-    // 附点(dotted note)
-    public static Note dottedNote0_75(int scale, int velocity, int instrument) {
-        return new Note(scale, 0.75, velocity, instrument);
+    public static Note fullNote(int scale, int velocity, int instrument) {
+        return create(scale, 1.0, velocity, instrument);
     }
 
-    // 附点(dotted note)，但是音量和乐器取默认值
     public static Note dottedNote0_75(int scale) {
-        return new Note(scale, 0.75);
+        return create(scale, 0.75);
     }
 
-    // 附点(dotted note)
-    public static Note dottedNote1_5(int scale, int velocity, int instrument) {
-        return new Note(scale, 1.5, velocity, instrument);
+    public static Note dottedNote0_75(int scale, int velocity, int instrument) {
+        return create(scale, 0.75, velocity, instrument);
     }
 
-    // 附点(dotted note)，但是音量和乐器取默认值
     public static Note dottedNote1_5(int scale) {
-        return new Note(scale, 1.5);
+        return create(scale, 1.5);
+    }
+
+    public static Note dottedNote1_5(int scale, int velocity, int instrument) {
+        return create(scale, 1.5, velocity, instrument);
     }
 
     @Override
@@ -134,6 +133,26 @@ public class Note implements Cloneable {
             // 这不应该发生，因为我们实现了 Cloneable
             throw new AssertionError();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        Note note = (Note) o;
+        return scale == note.scale &&
+                Double.compare(note.fraction, fraction) == 0 &&
+                velocity == note.velocity &&
+                instrument == note.instrument;
+    }
+
+    @Override
+    public int hashCode() {
+        // 使用 Objects.hash 来根据核心属性生成一个一致的哈希码
+        return Objects.hash(scale, fraction, velocity, instrument);
     }
 
 }
