@@ -2,27 +2,66 @@ package util;
 
 import java.util.HashMap;
 import java.util.Map;
-import model.Note; // 假设 Note 在 model 包下
+import model.Note; // 假设您的 Note 类在 model 包下
 
+/**
+ * Note 对象的缓存类 (Flyweight 工厂)，带有统计功能。
+ */
 public final class NoteCache {
 
     private static final Map<String, Note> cache = new HashMap<>();
+    
+    // --- 新增：统计变量 ---
+    private static int hitCount = 0;
+    private static int missCount = 0;
 
     private NoteCache() {}
 
-    /**
-     * 根据音符属性，生成一个唯一的字符串 Key。
-     * 这是一个很好的封装，符合 DRY 原则。
-     */
     private static String getKey(int scale, double fraction, int velocity, int instrument) {
         return "s" + scale + "f" + fraction + "v" + velocity + "i" + instrument;
     }
 
     public static Note getNote(int scale, double fraction, int velocity, int instrument) {
-        // 1. 调用封装好的方法创建 Key
         String key = getKey(scale, fraction, velocity, instrument);
         
-        // 2. 使用 computeIfAbsent 实现缓存逻辑
-        return cache.computeIfAbsent(key, _ -> new Note(scale, fraction, velocity, instrument));
+        Note note = cache.get(key);
+        
+        if (note == null) {
+            // --- 缓存未命中 (Cache Miss) ---
+            missCount++; // 增加未命中计数
+            note = new Note(scale, fraction, velocity, instrument);
+            cache.put(key, note);
+        } else {
+            // --- 缓存命中 (Cache Hit) ---
+            hitCount++; // 增加命中计数
+        }
+        
+        return note;
+    }
+
+    public static int getHitCount() {
+        return hitCount;
+    }
+
+    public static int getMissCount() {
+        return missCount;
+    }
+
+    public static int getCacheSize() {
+        return cache.size();
+    }
+    
+    public static void printStats() {
+        System.out.println("--- NoteCache 统计信息 ---");
+        System.out.println("缓存大小 (Cache Size): " + getCacheSize());
+        System.out.println("缓存命中 (Hits)    : " + getHitCount());
+        System.out.println("缓存未命中 (Misses): " + getMissCount());
+        System.out.println("--------------------------");
+    }
+    
+    public static void resetStats() {
+        cache.clear();
+        hitCount = 0;
+        missCount = 0;
     }
 }
