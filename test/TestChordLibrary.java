@@ -1,11 +1,13 @@
 package test;
 
 import util.ChordLibrary;
+import constant.GMInstruments; // 假设您的 GMInstruments 在 constant 包下
 import model.MusicDraft;
 import util.MusicPlayer;
 
 /**
- * 用于测试 ChordLibrary 中各种和弦生成方法的程序。
+ * 用于全面测试 ChordLibrary 中所有重载方法的程序。
+ * 它会依次演示每种和弦的默认、指定乐器、指定乐器和音量三种创建方式。
  */
 public class TestChordLibrary {
 
@@ -13,42 +15,57 @@ public class TestChordLibrary {
         MusicPlayer player = null;
         try {
             player = new MusicPlayer();
-            int pace = 100; // 测试用的速度
-            double length = 1.0; // 每个和弦播放一拍
-            
-            // 使用 MusicDraft 接口中的常量，更具通用性
+            // --- 全局测试参数 ---
+            int pace = 100;
+            double length = 2; // 每个和弦播放一拍
             int rootNoteC = MusicDraft.medium[1]; // 中央 C = 60
             int rootNoteG = MusicDraft.medium[5]; // G4 = 67
-            
-            System.out.println("--- 正在测试 ChordLibrary ---");
 
-            // --- 测试三和弦 ---
-            System.out.println("播放: C Major (C大三和弦)");
+            System.out.println("--- 开始全面测试 ChordLibrary 的重载方法 ---");
+
+            // --- 1. 测试大三和弦 (Major Triad) ---
+            System.out.println("\n--- 测试 Major Triads ---");
             player.playChord(ChordLibrary.majorTriad(rootNoteC, length, pace));
-            Thread.sleep(1500); // 增加停顿以便听清楚
+            System.out.println("  |> 播放: C Major (默认乐器: 钢琴)");
+            Thread.sleep(1500);
 
-            System.out.println("播放: C Minor (C小三和弦)");
+            player.playChord(ChordLibrary.majorTriad(rootNoteC, length, pace, GMInstruments.GUITAR_ACOUSTIC_STEEL));
+            System.out.println("  |> 播放: C Major (指定乐器: 钢弦吉他)");
+            Thread.sleep(1500);
+
+            player.playChord(ChordLibrary.majorTriad(rootNoteC, length, pace, GMInstruments.BRASS_TRUMPET, 127));
+            System.out.println("  |> 播放: C Major (指定乐器: 小号, 音量: 127 - 最大)");
+            Thread.sleep(1500);
+
+            // --- 2. 测试小三和弦 (Minor Triad) ---
+            System.out.println("\n--- 测试 Minor Triads ---");
             player.playChord(ChordLibrary.minorTriad(rootNoteC, length, pace));
+            System.out.println("  |> 播放: C Minor (默认乐器: 钢琴)");
             Thread.sleep(1500);
 
-            System.out.println("播放: C Diminished (C减三和弦)");
-            player.playChord(ChordLibrary.diminishedTriad(rootNoteC, length, pace));
+            player.playChord(ChordLibrary.minorTriad(rootNoteC, length, pace, GMInstruments.STRINGS_VIOLIN));
+            System.out.println("  |> 播放: C Minor (指定乐器: 小提琴)");
             Thread.sleep(1500);
 
-            // --- 测试七和弦 ---
-            System.out.println("播放: G Dominant 7th (G属七和弦)");
+            player.playChord(ChordLibrary.minorTriad(rootNoteC, length, pace, GMInstruments.REED_CLARINET, 80));
+            System.out.println("  |> 播放: C Minor (指定乐器: 单簧管, 音量: 80 - 柔和)");
+            Thread.sleep(1500);
+
+            // --- 3. 测试属七和弦 (Dominant 7th) ---
+            System.out.println("\n--- 测试 Dominant 7th Chords ---");
             player.playChord(ChordLibrary.dominant7th(rootNoteG, length, pace));
+            System.out.println("  |> 播放: G7 (默认乐器: 钢琴)");
             Thread.sleep(1500);
 
-            System.out.println("播放: G Major 7th (G大七和弦)");
-            player.playChord(ChordLibrary.major7th(rootNoteG, length, pace));
-            Thread.sleep(1500);
-
-            System.out.println("播放: C Minor 7th (C小七和弦)");
-            player.playChord(ChordLibrary.minor7th(rootNoteC, length, pace));
+            player.playChord(ChordLibrary.dominant7th(rootNoteG, length, pace, GMInstruments.GUITAR_ELECTRIC_JAZZ));
+            System.out.println("  |> 播放: G7 (指定乐器: 爵士电吉他)");
             Thread.sleep(1500);
             
-            System.out.println("--- 测试结束 ---");
+            player.playChord(ChordLibrary.dominant7th(rootNoteG, length, pace, GMInstruments.ORGAN_ROCK, 110));
+            System.out.println("  |> 播放: G7 (指定乐器: 摇滚风琴, 音量: 110 - 响亮)");
+            Thread.sleep(1500);
+
+            System.out.println("\n--- 所有测试已完成 ---");
 
         } catch (Exception e) {
             e.printStackTrace();
