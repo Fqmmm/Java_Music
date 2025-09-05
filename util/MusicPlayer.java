@@ -1,6 +1,9 @@
 package util;
+import java.util.List;
+
 import javax.sound.midi.*;
 
+import model.Chord;
 import model.Lyric;
 import model.Music;
 import model.Note;
@@ -84,6 +87,55 @@ public class MusicPlayer {
         }
     }
 
+    /**
+     * 播放单个和弦。
+     * @param chord 要播放的和弦
+     */
+    public void playChord(Chord chord) {
+        List<Note> notes = chord.getNotes();
+        if (notes == null || notes.isEmpty()) {
+            return; // 如果是空和弦，直接返回
+        }
+
+        // --- 步骤 1: 同时开启所有音符 ---
+        for (Note note : notes) {
+            // scale 为 0 代表休止符，不发声
+            if (note.scale() > 0) {
+                MidiChannel channel = channels[(int)note.instrument() % 16];
+                channel.programChange((int)note.instrument());
+                channel.noteOn(note.scale(), note.velocity());
+            }
+        }
+
+        // --- 步骤 2: 计算并等待持续时间 ---
+        // 和弦的持续时间通常由其中最短的音符决定。
+        // 我们需要找到最短的 duration。
+        int shortestDuration = Integer.MAX_VALUE;
+        for (Note note : notes) {
+            if (note.duration() < shortestDuration) {
+                shortestDuration = note.duration();
+            }
+        }
+        // 如果没有找到有效时长（比如都是休止符），则不等待
+        if (shortestDuration == Integer.MAX_VALUE) {
+            shortestDuration = 0;
+        }
+
+        try {
+            Thread.sleep(shortestDuration);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // --- 步骤 3: 同时关闭所有音符 ---
+        for (Note note : notes) {
+            if (note.scale() > 0) {
+                MidiChannel channel = channels[(int)note.instrument() % 16];
+                channel.noteOff(note.scale());
+            }
+        }
+    }
+    
     /**
      * 关闭合成器释放资源
      */

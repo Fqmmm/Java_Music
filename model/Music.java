@@ -46,7 +46,7 @@ public class Music implements Iterable<Lyric>, Cloneable {
         return music;
     }
 
-    // 设置每个音符的时长
+    // 每个音符的时长
     public void setNoteDuration() {
         for (Lyric lyric : this.lyrics) {
             for (Note note : lyric) {
