@@ -28,6 +28,7 @@ public class TestChord {
                 Note.quarterNote(64), // E4
                 Note.quarterNote(67)  // G4
             );
+            cMajor.showDebugInfo();
             player.playChord(cMajor);
             
             Thread.sleep(2000);
@@ -40,6 +41,7 @@ public class TestChord {
                 Note.halfNote(59),    // B3, 二分音符
                 Note.fullNote(62)     // D4, 全音符
             );
+            mixedChord.showDebugInfo();
             player.playChord(mixedChord);
             
             Thread.sleep(2000);
@@ -49,7 +51,7 @@ public class TestChord {
             // transposed 方法会返回一个新的 Chord 对象，
             // 这个新对象的构造函数同样会自动计算并设置新音符的时长。
             Chord dMajor = cMajor.transposed(2);
-            
+            dMajor.showDebugInfo();
             // 现在 dMajor 里的音符已经有了正确的 duration，可以直接播放！
             player.playChord(dMajor);
 
