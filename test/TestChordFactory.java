@@ -17,7 +17,7 @@ public class TestChordFactory {
             player = new MusicPlayer();
             // --- 全局测试参数 ---
             int pace = 100;
-            double length = 2; // 每个和弦播放一拍
+            double length = 2; // 每个和弦播放两拍
             int rootNoteC = MusicDraft.medium[1]; // 中央 C = 60
             int rootNoteG = MusicDraft.medium[5]; // G4 = 67
 
