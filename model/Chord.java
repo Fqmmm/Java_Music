@@ -96,6 +96,7 @@ public final class Chord {
 
     public void showDebugInfo() {
         int i = 1;
+        System.out.println("duration:" + duration);
         for (Note note : notes) {
             System.out.println("第" + i + "个Note");
             note.showDebugInfo();
