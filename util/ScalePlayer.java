@@ -7,18 +7,23 @@ import model.*;
 /**
  * 音乐播放器
  */
-public class ScalePlayer extends MusicalInstrument {
+public class ScalePlayer {
+    private Synthesizer synth; // 声音合成器
+    private MidiChannel[] channels; // 通道
+    private int instrumentID; // 用的什么乐器
 
     public ScalePlayer(int id) throws Exception {
-        super(id);
+        this.synth = MidiSystem.getSynthesizer();
+        synth.open();
+        this.channels = synth.getChannels();
+        this.instrumentID = id;
     }
 
-    @Override
     public void playNote(Note note) {
         // 为不同的乐器分配不同的通道
         int channelIndex = instrumentID % 16;
-        MidiChannel channel = channels[channelIndex]; 
-        
+        MidiChannel channel = channels[channelIndex];
+
         // 设置乐器
         channel.programChange(instrumentID);
 
@@ -38,7 +43,6 @@ public class ScalePlayer extends MusicalInstrument {
         }
     }
 
-    @Override
     public void playLyric(Lyric lyric) {
         lyric.show();
         for (Note note : lyric) {
@@ -46,7 +50,6 @@ public class ScalePlayer extends MusicalInstrument {
         }
     }
 
-    @Override
     public void playMusic(Music music) {
         if (music.title() != null) {
             System.out.println("即将播放歌曲：" + music.title());
@@ -80,19 +83,19 @@ public class ScalePlayer extends MusicalInstrument {
         }
     }
 
-
     /**
      * 播放单个和弦 (最终修正版)
      * 1. 修正了通道分配逻辑，避免使用打击乐通道 9。
      * 2. 在改变乐器后增加微小延迟，提高播放成功率。
+     * 
      * @param chord 要播放的和弦
      */
     public void playChord(Chord chord) {
         if (chord == null || chord.getNotes().isEmpty()) {
             return;
         }
-        
-        List<Note> notes = chord.getNotes();        
+
+        List<Note> notes = chord.getNotes();
         int channelIndex = instrumentID % 16;
         MidiChannel channel = channels[channelIndex];
 
@@ -104,7 +107,7 @@ public class ScalePlayer extends MusicalInstrument {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
+
         // 同时开启所有音符
         for (Note note : notes) {
             if (note.scale() > 0) {
@@ -123,6 +126,12 @@ public class ScalePlayer extends MusicalInstrument {
             if (note.scale() > 0) {
                 channel.noteOff(note.scale());
             }
+        }
+    }
+
+    public void close() {
+        if (synth != null && synth.isOpen()) {
+            synth.close();
         }
     }
 }
