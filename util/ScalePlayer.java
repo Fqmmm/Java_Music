@@ -13,51 +13,6 @@ public class ScalePlayer extends MusicalInstrument {
         super(id);
     }
 
-    public void playNote(Note note) {
-        // 为不同的乐器分配不同的通道
-        int channelIndex = instrumentID % 16;
-        MidiChannel channel = channels[channelIndex];
-
-        // 设置乐器
-        channel.programChange(instrumentID);
-
-        // scale为0代表休止符，不发声
-        if (note.scale() > 0) {
-            channel.noteOn(note.scale(), note.velocity());
-        }
-
-        try {
-            Thread.sleep(note.duration());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        if (note.scale() > 0) {
-            channel.noteOff(note.scale());
-        }
-    }
-
-    public void playLyric(Lyric lyric) {
-        lyric.show();
-        for (Note note : lyric) {
-            playNote(note);
-        }
-    }
-
-    public void playMusic(Music music) {
-        if (music.title() != null) {
-            System.out.println("即将播放歌曲：" + music.title());
-        }
-
-        if (music.singer() != null) {
-            System.out.println("歌手：" + music.singer());
-        }
-
-        for (Lyric lyric : music) {
-            playLyric(lyric);
-        }
-    }
-
     /**
      * 播放多声部音乐 (新版)。
      * @param parts 一个或多个 Part 对象，每个 Part 包含一个乐器和它要演奏的乐谱。
@@ -103,6 +58,7 @@ public class ScalePlayer extends MusicalInstrument {
      * 
      * @param chord 要播放的和弦
      */
+    @Override
     public void playChord(Chord chord) {
         if (chord == null || chord.getNotes().isEmpty()) {
             return;
