@@ -3,7 +3,6 @@ package model;
 import java.util.Objects;
 
 import constant.Settings;
-import util.NoteCache;
 
 /**
  * 音符类
@@ -85,67 +84,52 @@ public class Note implements Cloneable {
         if (newScale < 0)
             newScale = 0; // 如果降调太多，变成休止符
 
-        // 通过工厂方法创建并返回一个全新的 Note 对象
-        // 这会自动利用缓存，如果移调后的音符已存在，就会复用
-        return Note.create(newScale, this.fraction, this.velocity, this.instrument);
-    }
-
-    // --- 核心修改：让所有创建Note的入口都通过NoteCache ---
-    public static Note create(int scale, double fraction, int velocity, int instrument) {
-        return NoteCache.getNote(scale, fraction, velocity, instrument);
-    }
-
-    public static Note create(int scale, double fraction, int instrument) {
-        return NoteCache.getNote(scale, fraction, Settings.velocity, instrument);
-    }
-
-    public static Note create(int scale, double fraction) {
-        return NoteCache.getNote(scale, fraction, Settings.velocity, Settings.instrument);
+        return new Note(newScale, this.fraction, this.velocity, this.instrument);
     }
 
     // 静态工厂方法现在调用 create 方法
     public static Note emptyNote(double fraction) {
-        return create(0, fraction);
+        return new Note(0, fraction);
     }
 
     public static Note quarterNote(int scale) {
-        return create(scale, 0.25);
+        return new Note(scale, 0.25);
     }
 
     public static Note quarterNote(int scale, int velocity, int instrument) {
-        return create(scale, 0.25, velocity, instrument);
+        return new Note(scale, 0.25, velocity, instrument);
     }
 
     public static Note halfNote(int scale) {
-        return create(scale, 0.5);
+        return new Note(scale, 0.5);
     }
 
     public static Note halfNote(int scale, int velocity, int instrument) {
-        return create(scale, 0.5, velocity, instrument);
+        return new Note(scale, 0.5, velocity, instrument);
     }
 
     public static Note fullNote(int scale) {
-        return create(scale, 1.0);
+        return new Note(scale, 1.0);
     }
 
     public static Note fullNote(int scale, int velocity, int instrument) {
-        return create(scale, 1.0, velocity, instrument);
+        return new Note(scale, 1.0, velocity, instrument);
     }
 
     public static Note dottedNote0_75(int scale) {
-        return create(scale, 0.75);
+        return new Note(scale, 0.75);
     }
 
     public static Note dottedNote0_75(int scale, int velocity, int instrument) {
-        return create(scale, 0.75, velocity, instrument);
+        return new Note(scale, 0.75, velocity, instrument);
     }
 
     public static Note dottedNote1_5(int scale) {
-        return create(scale, 1.5);
+        return new Note(scale, 1.5);
     }
 
     public static Note dottedNote1_5(int scale, int velocity, int instrument) {
-        return create(scale, 1.5, velocity, instrument);
+        return new Note(scale, 1.5, velocity, instrument);
     }
 
     @Override
