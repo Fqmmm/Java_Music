@@ -15,6 +15,10 @@ public class Guitar extends MusicalInstrument {
     private GuitarString[] guitarStrings;
     private int[] tuning; // 调弦方式
 
+    public Guitar() throws Exception {
+        this(GMInstruments.GUITAR_ACOUSTIC_NYLON, GuitarTuning.STANDARD_TUNING);
+    }
+
     public Guitar(int id) throws Exception {
         this(id, GuitarTuning.STANDARD_TUNING);
     }
@@ -50,6 +54,22 @@ public class Guitar extends MusicalInstrument {
         for (GuitarString guitarString : guitarStrings) {
             guitarString.setFret(-1);
         }
+    }
+
+    /**
+     * 和弦转换
+     * @param chord
+     */
+    public void switchChordTo(Chord chord) {
+
+    }
+
+    /**
+     * 弹一根弦
+     * @param stringIndex 从1开始数
+     */
+    public void playSingleString(int stringIndex) {
+
     }
 
     /**
