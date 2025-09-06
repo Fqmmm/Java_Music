@@ -7,30 +7,36 @@ import java.util.List;
 import javax.sound.midi.MidiChannel;
 
 import constant.GMInstruments;
-import drafts.MusicDraft;
+import constant.GuitarTuning;
 import model.*;
 
 public class Guitar extends MusicalInstrument {
 
     private GuitarString[] guitarStrings;
+    private int[] tuning; // 调弦方式
 
     public Guitar(int id) throws Exception {
+        this(id, GuitarTuning.STANDARD_TUNING);
+    }
+
+    public Guitar(int id, int[] tuning) throws Exception {
         if (id < GMInstruments.GUITAR_ACOUSTIC_NYLON || id > GMInstruments.GUITAR_HARMONICS) {
             throw new Exception("id不在吉他的范围内");
         }
 
         super(id);
+        this.tuning = tuning;
         this.initGuitarStrings();
     }
 
     private void initGuitarStrings() {
         this.guitarStrings = new GuitarString[6];
-        this.guitarStrings[0] = new GuitarString(MusicDraft.high[3]);
-        this.guitarStrings[1] = new GuitarString(MusicDraft.medium[7]);
-        this.guitarStrings[2] = new GuitarString(MusicDraft.medium[5]);
-        this.guitarStrings[3] = new GuitarString(MusicDraft.medium[2]);
-        this.guitarStrings[4] = new GuitarString(MusicDraft.low[6]);
-        this.guitarStrings[5] = new GuitarString(MusicDraft.low[3]);
+        // 修正：确保琴弦和调音正确对应
+        // guitarStrings[0] -> 1弦, tuning[5] -> 1弦音高
+        // guitarStrings[5] -> 6弦, tuning[0] -> 6弦音高
+        for (int i = 0; i < 6; i++) {
+            this.guitarStrings[i] = new GuitarString(this.tuning[5 - i]);
+        }
     }
 
     public GuitarString[] getGuitarStrings() {
@@ -42,7 +48,7 @@ public class Guitar extends MusicalInstrument {
      */
     public void reset() throws Exception {
         for (GuitarString guitarString : guitarStrings) {
-            guitarString.setFret(0);
+            guitarString.setFret(-1);
         }
     }
 
