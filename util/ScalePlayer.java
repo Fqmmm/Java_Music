@@ -7,16 +7,10 @@ import model.*;
 /**
  * 音乐播放器
  */
-public class ScalePlayer {
-    private Synthesizer synth; // 声音合成器
-    private MidiChannel[] channels; // 通道
-    private int instrumentID; // 用的什么乐器
+public class ScalePlayer extends MusicalInstrument {
 
     public ScalePlayer(int id) throws Exception {
-        this.synth = MidiSystem.getSynthesizer();
-        synth.open();
-        this.channels = synth.getChannels();
-        this.instrumentID = id;
+        super(id);
     }
 
     public void playNote(Note note) {
@@ -126,12 +120,6 @@ public class ScalePlayer {
             if (note.scale() > 0) {
                 channel.noteOff(note.scale());
             }
-        }
-    }
-
-    public void close() {
-        if (synth != null && synth.isOpen()) {
-            synth.close();
         }
     }
 }
