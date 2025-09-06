@@ -58,13 +58,32 @@ public class ScalePlayer extends MusicalInstrument {
         }
     }
 
-    public void playMultipleMusic(Music... musics) {
-        // 为每一首音乐创建一个线程
-        Thread[] threads = new Thread[musics.length];
-        for (int i = 0; i < musics.length; i++) {
-            final Music music = musics[i];
-            threads[i] = new Thread(() -> playMusic(music));
-            threads[i].start();
+    /**
+     * 播放多声部音乐 (新版)。
+     * @param parts 一个或多个 Part 对象，每个 Part 包含一个乐器和它要演奏的乐谱。
+     */
+    public static void playMultipleMusic(Part... parts) {
+        if (parts == null || parts.length == 0) {
+            return;
+        }
+
+        // 为每一个 "声部" (Part) 创建一个线程
+        Thread[] threads = new Thread[parts.length];
+        for (int i = 0; i < parts.length; i++) {
+            final Part part = parts[i];
+            
+            // 创建一个新的线程，其任务是：使用指定的乐器来演奏指定的乐谱
+            threads[i] = new Thread(() -> {
+                MusicalInstrument instrument = part.getInstrument();
+                Music music = part.getMusic();
+                
+                // 遍历乐谱中的每一个乐句
+                for (Lyric lyric : music) {
+                    // 调用乐器自己的 playLyric 方法来演奏
+                    instrument.playLyric(lyric);
+                }
+            });
+            threads[i].start(); // 启动线程
         }
 
         // 等待所有线程执行完毕
