@@ -93,4 +93,13 @@ public final class Chord {
         }
         return new Chord(transposedNotes, this.pace);
     }
+
+    public void showDebugInfo() {
+        int i = 1;
+        for (Note note : notes) {
+            System.out.println("第" + i + "个Note");
+            note.showDebugInfo();
+            i++;
+        }
+    }
 }
