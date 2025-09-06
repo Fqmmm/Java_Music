@@ -8,18 +8,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import constant.Settings;
+import constant.GuitarTuning;
 
 public final class GuitarChord extends Chord {
     
     // 吉他标准调弦 (从6弦到1弦)
-    private static final int[] GUITAR_TUNING = {
-        MusicDraft.low[3],    // E2 (6弦)
-        MusicDraft.low[6],    // A2 (5弦)
-        MusicDraft.medium[2], // D3 (4弦)
-        MusicDraft.medium[5], // G3 (3弦)
-        MusicDraft.medium[7], // B3 (2弦)
-        MusicDraft.high[3]    // E4 (1弦)
-    };
+    private static final int[] GUITAR_TUNING = GuitarTuning.STANDARD_TUNING;
     
     private final String fingering; // 指法，例如 "x32010"
 
@@ -39,7 +34,6 @@ public final class GuitarChord extends Chord {
      * @return 一个 GuitarChord 对象，如果找不到则返回 null
      */
     public static GuitarChord fromString(String name, int pace) {
-        // --- 1. 解析名称和构建路径 ---
         String root;
         String suffix;
 
@@ -52,21 +46,20 @@ public final class GuitarChord extends Chord {
             suffix = name.substring(1);
         }
 
-        // 假设 chords-db 项目与你的项目在同一级目录下
-        // 请根据你的实际情况修改这个基础路径！
-        String basePath = "./chords-db/src/db/guitar/chords/";
+        String basePath = Settings.DBPath;
         String filePath = basePath + root + "/" + suffix + ".js";
 
         try {
-            // --- 2. 读取和清理文件 ---
+            // 读取和清理文件
             String content = new String(Files.readAllBytes(Paths.get(filePath)));
+
             // 移除 "export default " 和结尾的 ";"
             content = content.replace("export default ", "").trim();
             if (content.endsWith(";")) {
                 content = content.substring(0, content.length() - 1);
             }
 
-            // --- 3. 解析 JSON ---
+            // 解析json
             JSONObject chordData = new JSONObject(content);
             JSONArray positions = chordData.getJSONArray("positions");
             
@@ -77,13 +70,13 @@ public final class GuitarChord extends Chord {
 
             // 我们总是选择第一个、最常见的指法
             JSONObject firstPosition = positions.getJSONObject(0);
-            String frets = firstPosition.getString("frets");
+            String fingering = firstPosition.getString("frets");
 
-            // --- 4. 转换 frets 为 Note 列表 ---
-            List<Note> notes = fretsToNotes(frets);
+            // 转换 fingering 为 Note
+            List<Note> notes = fingeringToNotes(fingering);
             
             // --- 5. 创建并返回 GuitarChord 实例 ---
-            return new GuitarChord(notes, pace, frets);
+            return new GuitarChord(notes, pace, fingering);
 
         } catch (IOException e) {
             System.err.println("错误: 无法读取和弦文件: " + filePath + "。请检查路径和文件名。");
@@ -98,11 +91,11 @@ public final class GuitarChord extends Chord {
     /**
      * 私有辅助方法：将 frets 字符串 ("x32010") 转换为 Note 列表。
      */
-    private static List<Note> fretsToNotes(String frets) {
+    private static List<Note> fingeringToNotes(String fingering) {
         ArrayList<Note> notes = new ArrayList<>();
-        // frets 字符串的顺序是从6弦到1弦
-        for (int i = 0; i < frets.length() && i < 6; i++) {
-            char fretChar = frets.charAt(i);
+        // fingering 字符串的顺序是从6弦到1弦
+        for (int i = 0; i < fingering.length() && i < 6; i++) {
+            char fretChar = fingering.charAt(i);
             
             if (fretChar == 'x' || fretChar == 'X') {
                 continue; // 跳过不发声的弦
