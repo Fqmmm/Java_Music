@@ -15,6 +15,7 @@ public class Chord implements Cloneable {
     
     // 字段设为 final，确保和弦在创建后其内容不被改变。
     private final List<Note> notes;
+    private final double fraction;
     private final int duration; // Chord 自己持有统一的播放时长
     private final int pace;
 
@@ -27,6 +28,7 @@ public class Chord implements Cloneable {
         this.pace = pace;
         this.notes = notes;
         double shortestFraction = shortestFraction();
+        this.fraction = shortestFraction;
         
         // 根据最短时值和速度，计算并存储自己的 duration
         if (shortestFraction == Double.POSITIVE_INFINITY || shortestFraction <= 0) {
