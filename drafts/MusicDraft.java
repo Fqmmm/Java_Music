@@ -1,4 +1,8 @@
-package model;
+package drafts;
+
+import model.Lyric;
+import model.Music;
+import model.Note;
 
 /**
  * MusicDraft接口定义了写一个乐谱所需要的常量

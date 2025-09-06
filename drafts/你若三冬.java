@@ -3,7 +3,6 @@ package drafts;
 import constant.GMInstruments;
 import model.Lyric;
 import model.Music;
-import model.MusicDraft;
 import model.Note;
 
 /**
