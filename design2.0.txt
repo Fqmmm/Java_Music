@@ -1,0 +1,38 @@
+class MusicalInstrument:
+    Synthesizer synth
+    int[] channels
+    int[] availableGM     // 可用的GMInstrument索引，例如吉他只能从24-31选；ScalePlayer可以选所有的
+    int id                // 什么乐器
+    void playNote(Note note)
+    void playLyric(Lyric lyric)
+    void playMusic(Music music)
+    void playChord(Chord chord)
+
+class ScalePlayer(原MusicPlayer) extends MusicalInstrument      
+
+    void playNote(Note note)
+    void playLyric(Lyric lyric)
+    void playMusic(Music music)
+    void playChord(Chord chord)
+
+class GuitarString:     // 吉他弦
+    int base                // 基准音
+    int fret            // 当前按在哪个品格上, 0代表空按
+
+class Guitar extends MusicalInstrument:
+    GuitarString[] GuitarStrings            // 是否把index=0空出来？
+
+    void playNote(Note note)
+    void playLyric(Lyric lyric)
+    void playMusic(Music music)  
+    void playChord(Chord chord)             // 普通意义上的弹和弦
+
+    void playChordByPicking(Chord chord, 节奏)     // 一根一根弦拨
+
+    void playChordByStrumming(Chord chord)   // 扫弦
+
+    void shiftTo(Chord chord)               // 换弦
+
+    void reset()                            // 松手
+
+    int getScale(int stringIndex, int freg)      
