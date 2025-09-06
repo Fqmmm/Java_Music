@@ -25,22 +25,18 @@ public final class Chord {
      */
     public Chord(List<Note> notes, int pace) {
         this.pace = pace;
-
-        // 1. 找到所有音符中最短的时值 (fraction)
+        this.notes = notes;
         double shortestFraction = shortestFraction();
-
-        // 2. 存储音符列表的不可修改副本
-        if (notes == null || notes.isEmpty()) {
-            this.notes = List.of(); // 创建一个空的不可变列表
-        } else {
-            this.notes = List.of(notes.toArray(new Note[0]));
-        }
         
-        // 3. 根据最短时值和速度，计算并存储自己的 duration
+        // 根据最短时值和速度，计算并存储自己的 duration
         if (shortestFraction == Double.POSITIVE_INFINITY || shortestFraction <= 0) {
             this.duration = 0; // 如果没有有效音符或时值为0，则时长为0
         } else {
             this.duration = (int) (shortestFraction * 60.0 / pace * 1000);
+        }
+
+        for (Note note : notes) {
+            note.setDuration(duration);
         }
     }
 
@@ -101,6 +97,7 @@ public final class Chord {
             System.out.println("第" + i + "个Note");
             note.showDebugInfo();
             i++;
+            System.out.println();
         }
     }
 }
