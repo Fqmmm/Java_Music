@@ -195,11 +195,6 @@ public class 你若三冬 implements MusicDraft {
             每逢落叶过挥手南雁几排, 触景生情自古以来
         );
 
-        // 设置乐器
-        if (instrument >= 0) {
-            music.unifyInstrument(instrument);
-        }
-
         if (velocity >= 0) {
             music.unifyVelocity(velocity);
         }

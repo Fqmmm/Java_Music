@@ -20,11 +20,11 @@ public class Lyric implements Iterable<Note>, Cloneable {
         this.words = words;
     }
 
-    public void unifyInstrument(int instrument) {
-        for (Note note : this) {
-            note.setInstrument(instrument);
-        }
-    }
+    // public void unifyInstrument(int instrument) {
+    //     for (Note note : this) {
+    //         note.setInstrument(instrument);
+    //     }
+    // }
 
     public void unifyVelocity(int velocity) {
         for (Note note : this) {

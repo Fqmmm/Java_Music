@@ -56,16 +56,16 @@ public class Music implements Iterable<Lyric>, Cloneable {
     }
 
     // 统一乐器
-    public void unifyInstrument(int instrument) {
-        for (Lyric lyric : this) {
-            lyric.unifyInstrument(instrument);
-        }
-    }
+    // public void unifyInstrument(int instrument) {
+    //     for (Lyric lyric : this) {
+    //         lyric.unifyInstrument(instrument);
+    //     }
+    // }
 
     // 统一音量
     public void unifyVelocity(int velocity) {
         for (Lyric lyric : this) {
-            lyric.unifyInstrument(velocity);
+            lyric.unifyVelocity(velocity);
         }
     }
 

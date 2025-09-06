@@ -1,13 +1,14 @@
 package test;
 
+import constant.GMInstruments;
 import drafts.花海;
 import model.Music;
-import util.MusicPlayer;
+import util.ScalePlayer;
 
 public class TestTranspose {
 
     public static void main(String[] args) throws Exception {
-        MusicPlayer player = new MusicPlayer();
+        ScalePlayer player = new ScalePlayer(GMInstruments.PIANO_ACOUSTIC_GRAND);
         花海 花海draft = new 花海();
         Music 花海 = 花海draft.getMusic(80);
         花海.setSinger("周杰伦");

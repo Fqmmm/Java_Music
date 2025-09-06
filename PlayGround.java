@@ -1,13 +1,13 @@
 import constant.GMInstruments;
 import drafts.*;
 import model.Music;
-import util.MusicPlayer;
+import util.ScalePlayer;
 
 public class PlayGround {
     
     public static void play王妃() {
         try {
-            MusicPlayer player = new MusicPlayer();
+            ScalePlayer player = new ScalePlayer(GMInstruments.BRASS_TRUMPET);
             王妃 wangfeiDraft = new 王妃();
             Music wangfeiMusic = wangfeiDraft.getMusic(128);
             player.playMusic(wangfeiMusic);
@@ -19,7 +19,7 @@ public class PlayGround {
 
     public static void play大东北我的家乡() {
         try {
-            MusicPlayer player = new MusicPlayer();
+            ScalePlayer player = new ScalePlayer(GMInstruments.BRASS_TRUMPET);
             大东北我的家乡 dongbei = new 大东北我的家乡();
             Music dongbeiMusic = dongbei.getMusic(130, GMInstruments.LEAD_2_SAWTOOTH);
             player.playMusic(dongbeiMusic);
@@ -31,7 +31,7 @@ public class PlayGround {
 
     public static void play花海() {
         try {
-            MusicPlayer player = new MusicPlayer();
+            ScalePlayer player = new ScalePlayer(GMInstruments.PIANO_ACOUSTIC_GRAND);
             花海 花海draft = new 花海();
             Music 花海 = 花海draft.getMusic(80);
             花海.setSinger("周杰伦");
@@ -44,7 +44,7 @@ public class PlayGround {
 
     public static void play你若三冬() {
         try {
-            MusicPlayer player = new MusicPlayer();
+            ScalePlayer player = new ScalePlayer(GMInstruments.PIANO_ACOUSTIC_GRAND);
             你若三冬 winterDraft = new 你若三冬();
             Music winter = winterDraft.getMusic(120);
             player.playMusic(winter);
@@ -57,7 +57,7 @@ public class PlayGround {
     public static void play我们都拥有海洋() {
         try {
             // 1. 初始化播放器
-            MusicPlayer player = new MusicPlayer();
+            ScalePlayer player = new ScalePlayer(GMInstruments.PIANO_ACOUSTIC_GRAND);
 
             // 2. 创建主旋律和和声的 "乐谱草稿"
             我们都拥有海洋.Melody melodyDraft = new 我们都拥有海洋.Melody();
@@ -83,6 +83,6 @@ public class PlayGround {
     }
 
     public static void main(String[] args) {
-        play我们都拥有海洋();
+        play大东北我的家乡();
     }
 }

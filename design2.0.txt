@@ -1,7 +1,6 @@
 class MusicalInstrument:
     Synthesizer synth
     int[] channels
-    int[] availableGM     // 可用的GMInstrument索引，例如吉他只能从24-31选；ScalePlayer可以选所有的
     int id                // 什么乐器
     void playNote(Note note)
     void playLyric(Lyric lyric)

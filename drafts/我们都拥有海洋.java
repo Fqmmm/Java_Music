@@ -276,10 +276,6 @@ public final class 我们都拥有海洋 {
                 我们都拥有海洋收尾, 空两拍, 空一拍
             ).clone();
 
-            if (instrument >= 0) {
-                music.unifyInstrument(instrument);
-            }
-
             if (velocity >= 0) {
                 music.unifyVelocity(velocity);
             }
@@ -451,10 +447,6 @@ public final class 我们都拥有海洋 {
                 我的模样2, 空半拍,
                 HelloHelloHello
             ).clone();
-
-            if (instrument >= 0) {
-                music.unifyInstrument(instrument);
-            }
 
             if (velocity >= 0) {
                 music.unifyVelocity(velocity);

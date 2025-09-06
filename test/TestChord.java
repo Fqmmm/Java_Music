@@ -1,8 +1,9 @@
 package test;
 
+import constant.GMInstruments;
 import model.Chord;
 import model.Note;
-import util.MusicPlayer;
+import util.ScalePlayer;
 
 /**
  * 用于测试新版 Chord 类的程序。
@@ -11,10 +12,10 @@ import util.MusicPlayer;
 public class TestChord {
 
     public static void main(String[] args) {
-        MusicPlayer player = null;
+        ScalePlayer player = null;
         try {
             Thread.sleep(2000);
-            player = new MusicPlayer();
+            player = new ScalePlayer(GMInstruments.PIANO_ACOUSTIC_GRAND);
             // 设定一个统一的速度 (BPM)
             int pace = 120;
             System.out.println("--- 开始测试自统一时长的 Chord 类 ---");

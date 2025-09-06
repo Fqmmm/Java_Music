@@ -313,10 +313,6 @@ public class 花海 implements MusicDraft {
             结尾空三拍
         );
 
-        if (instrument >= 0) {
-            music.unifyInstrument(instrument);
-        }
-
         if (velocity >= 0) {
             music.unifyVelocity(velocity);
         }

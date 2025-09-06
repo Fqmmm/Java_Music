@@ -3,7 +3,7 @@ package test;
 import util.ChordFactory;
 import constant.GMInstruments; // 假设您的 GMInstruments 在 constant 包下
 import model.MusicDraft;
-import util.MusicPlayer;
+import util.ScalePlayer;
 import model.Chord;
 /**
  * 用于全面测试 ChordLibrary 中所有重载方法的程序。
@@ -12,9 +12,9 @@ import model.Chord;
 public class TestChordFactory {
 
     public static void main(String[] args) {
-        MusicPlayer player = null;
+        ScalePlayer player = null;
         try {
-            player = new MusicPlayer();
+            player = new ScalePlayer(GMInstruments.PIANO_ACOUSTIC_GRAND);
             // --- 全局测试参数 ---
             int pace = 100;
             double length = 2; // 每个和弦播放两拍

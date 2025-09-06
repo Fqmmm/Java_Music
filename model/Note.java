@@ -13,7 +13,7 @@ public class Note implements Cloneable {
     private double fraction; // 占这一小节的几分之几
     private int duration; // 持续时间（毫秒）
     private int velocity; // 响度
-    private int instrument; // 乐器
+    // private int instrument; // 乐器
 
     public Note(int scale, double fraction) {
         this(scale, fraction, Settings.velocity, Settings.instrument);
@@ -28,7 +28,7 @@ public class Note implements Cloneable {
         this.fraction = fraction;
         // this.duration = (int) (fraction * 60 / Settings.pace * 1000); // 毫秒
         this.velocity = velocity;
-        this.instrument = instrument;
+        // this.instrument = instrument;
     }
 
     public int scale() {
@@ -47,17 +47,17 @@ public class Note implements Cloneable {
         return fraction;
     }
 
-    public double instrument() {
-        return instrument;
-    }
+    // public double instrument() {
+    //     return instrument;
+    // }
 
     public void setDuration(int duration) {
         this.duration = duration;
     }
 
-    public void setInstrument(int instrument) {
-        this.instrument = instrument;
-    }
+    // public void setInstrument(int instrument) {
+    //     this.instrument = instrument;
+    // }
 
     public void setVelocity(int velocity) {
         this.velocity = velocity;
@@ -84,7 +84,7 @@ public class Note implements Cloneable {
         if (newScale < 0)
             newScale = 0; // 如果降调太多，变成休止符
 
-        return new Note(newScale, this.fraction, this.velocity, this.instrument);
+        return new Note(newScale, this.fraction, this.velocity);
     }
 
     // 静态工厂方法现在调用 create 方法
@@ -154,21 +154,20 @@ public class Note implements Cloneable {
         Note note = (Note) o;
         return scale == note.scale &&
                 Double.compare(note.fraction, fraction) == 0 &&
-                velocity == note.velocity &&
-                instrument == note.instrument;
+                velocity == note.velocity;
     }
 
     @Override
     public int hashCode() {
         // 使用 Objects.hash 来根据核心属性生成一个一致的哈希码
-        return Objects.hash(scale, fraction, velocity, instrument);
+        return Objects.hash(scale, fraction, velocity);
     }
 
     public void showDebugInfo() {
         System.out.println("scale:" + scale);
         System.out.println("fraction:" + fraction);
         System.out.println("duration:" + duration);
-        System.out.println("instrument:" + instrument);
+        // System.out.println("instrument:" + instrument);
         System.out.println("velocity:" + velocity);
     }
 

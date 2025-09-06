@@ -248,11 +248,6 @@ public class 王妃 implements MusicDraft {
             空一拍
         );
 
-        // 设置乐器
-        if (instrument >= 0) {
-            music.unifyInstrument(instrument);
-        }
-
         if (velocity >= 0) {
             music.unifyVelocity(velocity);
         }
