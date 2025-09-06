@@ -18,9 +18,5 @@ public interface MusicDraft {
         return getMusic(pace, -1);
     }
 
-    default Music getMusic(int pace, int instrument) {
-        return getMusic(pace, instrument, -1);
-    }
-
-    Music getMusic(int pace, int instrument, int velocity);
+    Music getMusic(int pace, int velocity);
 }
