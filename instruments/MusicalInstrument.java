@@ -1,4 +1,4 @@
-package util;
+package instruments;
 
 import javax.sound.midi.MidiChannel;
 import javax.sound.midi.MidiSystem;

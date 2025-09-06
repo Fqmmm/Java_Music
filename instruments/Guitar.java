@@ -1,4 +1,4 @@
-package util;
+package instruments;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -7,6 +7,7 @@ import java.util.List;
 import javax.sound.midi.MidiChannel;
 
 import constant.GMInstruments;
+import drafts.MusicDraft;
 import model.*;
 
 public class Guitar extends MusicalInstrument {
