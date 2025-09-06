@@ -1,6 +1,6 @@
 package model;
 
-import util.MusicalInstrument; // 假设您的乐器类都在 instrument 包下
+import instruments.MusicalInstrument; // 假设您的乐器类都在 instrument 包下
 
 /**
  * Part (声部) 类，用于将一个乐器 (MusicalInstrument)

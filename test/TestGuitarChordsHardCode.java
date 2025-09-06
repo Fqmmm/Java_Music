@@ -1,6 +1,7 @@
 package test;
-import util.*;
 import constant.*;
+import instruments.Guitar;
+
 public class TestGuitarChordsHardCode {
     public static void main(String[] args) throws Exception {
         Guitar guitar = new Guitar(GMInstruments.GUITAR_ACOUSTIC_NYLON);

@@ -1,7 +1,7 @@
 package test;
 
 import model.GuitarChord;
-import util.Guitar;
+import instruments.Guitar;
 import constant.GMInstruments;
 
 public class TestGuitarChordDB {

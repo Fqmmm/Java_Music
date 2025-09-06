@@ -3,7 +3,7 @@ package test;
 import constant.GMInstruments;
 import drafts.花海;
 import model.Music;
-import util.ScalePlayer;
+import instruments.ScalePlayer;
 
 public class TestTranspose {
 

@@ -1,6 +1,6 @@
 package constant;
 
-import model.MusicDraft;
+import drafts.MusicDraft;
 
 public class GuitarTuning {
     public static int[] STANDARD_TUNING =  {

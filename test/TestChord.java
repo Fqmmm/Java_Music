@@ -3,7 +3,7 @@ package test;
 import constant.GMInstruments;
 import model.Chord;
 import model.Note;
-import util.ScalePlayer;
+import instruments.ScalePlayer;
 
 /**
  * 用于测试新版 Chord 类的程序。

@@ -2,8 +2,8 @@ package test;
 
 import constant.GMInstruments;
 import model.Chord;
-import model.MusicDraft;
-import util.Guitar;
+import drafts.MusicDraft;
+import instruments.Guitar;
 import util.ChordFactory;
 
 public class TestGuitarPlayChord {

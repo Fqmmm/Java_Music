@@ -1,4 +1,4 @@
-package util;
+package instruments;
 
 import java.util.List;
 import javax.sound.midi.*;

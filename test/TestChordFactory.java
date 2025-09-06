@@ -2,8 +2,8 @@ package test;
 
 import util.ChordFactory;
 import constant.GMInstruments; // 假设您的 GMInstruments 在 constant 包下
-import model.MusicDraft;
-import util.ScalePlayer;
+import drafts.MusicDraft;
+import instruments.ScalePlayer;
 import model.Chord;
 /**
  * 用于全面测试 ChordLibrary 中所有重载方法的程序。

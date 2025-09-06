@@ -3,7 +3,6 @@ package drafts;
 
 import model.Lyric;
 import model.Music;
-import model.MusicDraft;
 import model.Note;
 
 /**

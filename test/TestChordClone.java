@@ -3,7 +3,7 @@ package test;
 import constant.GMInstruments;
 import model.Chord;
 import model.Note;
-import util.ScalePlayer;
+import instruments.ScalePlayer;
 
 public class TestChordClone {
     public static void main(String[] args) {

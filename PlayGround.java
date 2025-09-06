@@ -1,7 +1,8 @@
 import constant.GMInstruments;
 import drafts.*;
 import model.Music;
-import util.ScalePlayer;
+import model.Part;
+import instruments.*;
 
 public class PlayGround {
     
@@ -21,7 +22,7 @@ public class PlayGround {
         try {
             ScalePlayer player = new ScalePlayer(GMInstruments.BRASS_TRUMPET);
             大东北我的家乡 dongbei = new 大东北我的家乡();
-            Music dongbeiMusic = dongbei.getMusic(130, GMInstruments.LEAD_2_SAWTOOTH);
+            Music dongbeiMusic = dongbei.getMusic(130);
             player.playMusic(dongbeiMusic);
             player.close();
         } catch (Exception e) {
@@ -56,26 +57,22 @@ public class PlayGround {
 
     public static void play我们都拥有海洋() {
         try {
-            // 1. 初始化播放器
-            ScalePlayer player = new ScalePlayer(GMInstruments.PIANO_ACOUSTIC_GRAND);
+            ScalePlayer player1 = new ScalePlayer(GMInstruments.PIANO_ACOUSTIC_GRAND);
+            ScalePlayer player2 = new ScalePlayer(GMInstruments.STRINGS_VIOLIN);
 
-            // 2. 创建主旋律和和声的 "乐谱草稿"
             我们都拥有海洋.Melody melodyDraft = new 我们都拥有海洋.Melody();
             我们都拥有海洋.Harmony harmonyDraft = new 我们都拥有海洋.Harmony();
 
-            // 3. 设定歌曲速度 (BPM)，并根据草稿生成最终的 Music 对象
-            // 必须保证主旋律与和声的速度一致
             int pace = 71; 
-            Music melody = melodyDraft.getMusic(pace, 0);
-            Music harmony = harmonyDraft.getMusic(pace, GMInstruments.STRINGS_VIOLIN, 60);
+            Music melody = melodyDraft.getMusic(pace, 100).transposed(3);
+            Music harmony = harmonyDraft.getMusic(pace, 80).transposed(3);
 
-            // 4. 使用多音轨播放功能，同时播放主旋律与和声
-            // System.out.println("正在播放：《我们都拥有海洋》...");
-            player.playMultipleMusic(melody, harmony);
+            Part melodyPart = new Part(player1, melody);
+            Part harmonyPart = new Part(player2, harmony);
+            ScalePlayer.playMultipleMusic(melodyPart, harmonyPart);
 
-            // 5. 播放完毕后，关闭播放器并释放资源
-            player.close();
-            // System.out.println("播放结束。");
+            player1.close();
+            player2.close();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,6 +80,6 @@ public class PlayGround {
     }
 
     public static void main(String[] args) {
-        play大东北我的家乡();
+        play我们都拥有海洋();
     }
 }
