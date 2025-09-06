@@ -53,32 +53,6 @@ public class Guitar extends MusicalInstrument {
     }
 
     /**
-     * 弹一根弦
-     * 
-     * @param stringID 第几根弦，从1开始计数
-     * @param duration 弹多长时间（毫秒）
-     * @param velocity 用多大的力弹
-     */
-    public void playSingleString(int stringID, int duration, int velocity) throws Exception {
-        if (stringID < 1 || stringID > 6) {
-            throw new Exception("没有这根弦");
-        }
-
-        int scale = guitarStrings[stringID - 1].getScale();
-        int channelIndex = instrumentID % 16;
-        MidiChannel channel = channels[channelIndex];
-        channel.programChange(instrumentID);
-        channel.noteOn(scale, velocity);
-
-        try {
-            Thread.sleep(duration);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        channel.noteOff(scale);
-    }
-
-    /**
      * 【首选/高效方法】播放一个 GuitarChord。
      * 这个方法是专门为 GuitarChord 设计的，它直接使用对象自带的、
      * 从数据库加载的精确指法字符串，效率和准确性都最高。
@@ -143,6 +117,10 @@ public class Guitar extends MusicalInstrument {
         return lowestStringIndex;
     }
 
+    /**
+     * 如果传入的不是GuitarChord，则自动计算应该按哪些弦
+     * @param chord 要按的和弦
+     */
     @Override
     public void playChord(Chord chord) throws Exception {
         // 1. 重置所有琴弦状态，准备按新和弦
