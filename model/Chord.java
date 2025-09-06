@@ -11,7 +11,7 @@ import java.util.List;
  * 它会在构造时，根据其内部音符的最短时值 (fraction) 和传入的速度 (pace)，
  * 计算并持有自己应该播放的持续时间 (duration)。
  */
-public final class Chord {
+public final class Chord implements Cloneable {
     
     // 字段设为 final，确保和弦在创建后其内容不被改变。
     private final List<Note> notes;
@@ -99,5 +99,14 @@ public final class Chord {
             i++;
             System.out.println();
         }
+    }
+
+    @Override
+    public Chord clone() {
+        ArrayList<Note> newNotes = new ArrayList<>();
+        for (Note note : notes) {
+            newNotes.add(note);
+        }
+        return new Chord(newNotes, pace);
     }
 }
