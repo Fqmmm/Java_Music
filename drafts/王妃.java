@@ -192,7 +192,7 @@ public class 王妃 implements MusicDraft {
     );
 
     @Override
-    public Music getMusic(int pace, int instrument, int velocity) {
+    public Music getMusic(int pace, int velocity) {
         Music music = Music.fromLyrics(pace,
             空一拍,
             摇晃的红酒杯,

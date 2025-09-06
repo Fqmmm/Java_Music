@@ -197,9 +197,9 @@ public final class 我们都拥有海洋 {
         );
         
         @Override
-        public Music getMusic(int pace, int instrument, int velocity) {
+        public Music getMusic(int pace, int velocity) {
             Music music = Music.fromLyrics(pace,
-                空四拍, 空一拍,
+                空四拍, 空四拍, 空一拍,
                 如果这是再不返回的夏天, 空一拍,
                 好好地告别, 空两拍,
                 和重要的人说再见, 空两拍,
@@ -371,10 +371,10 @@ public final class 我们都拥有海洋 {
         public static final Lyric 我的模样2 = Lyric.fromLyricOfSameTone("我的模样", 穿着球鞋);
         
         @Override
-        public Music getMusic(int pace, int instrument, int velocity) {
+        public Music getMusic(int pace, int velocity) {
             Music music = Music.fromLyrics(pace,
                 // --- 歌曲结构 ---
-                空四拍,
+                空四拍, 空四拍,
                 空四拍, 空四拍, 空四拍, 空四拍, 空四拍, 空四拍, 空四拍, 空四拍,
 
                 空半拍, 让我选择, 空两拍,

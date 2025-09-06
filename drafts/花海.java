@@ -277,7 +277,7 @@ public class 花海 implements MusicDraft {
     );
     public static final Lyric 回忆划不开 = 距离隔不开;
     
-    public Music getMusic(int pace, int instrument, int velocity) {
+    public Music getMusic(int pace, int velocity) {
         // 定义整首歌曲的结构，按照播放顺序排列
         Music music = Music.fromLyrics(pace,
             前奏,

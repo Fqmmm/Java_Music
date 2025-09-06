@@ -181,7 +181,7 @@ public class 你若三冬 implements MusicDraft {
     public static final Lyric 触景生情自古以来 = Lyric.fromLyricOfSameTone("触景生情自古以来", 化作眼泪哭着醒来);
 
     @Override
-    public Music getMusic(int pace, int instrument, int velocity) {
+    public Music getMusic(int pace, int velocity) {
         Music music = Music.fromLyrics(pace,
             空一拍,
             远方谁为了谁, 一直望穿秋水, 是谁为谁月下贪杯,

@@ -49,7 +49,7 @@ public class 大东北我的家乡 implements MusicDraft {
     );
 
     @Override
-    public Music getMusic(int pace, int instrument, int velocity) {
+    public Music getMusic(int pace, int velocity) {
         Music music = Music.fromLyrics(pace, 前奏);
 
         // 设置音量
