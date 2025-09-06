@@ -182,10 +182,10 @@ public class Note implements Cloneable {
 
     public void showDebugInfo() {
         System.out.println("scale:" + scale);
-        System.out.println("fraction" + fraction);
-        System.out.println("duration" + duration);
-        System.out.println("instrument" + instrument);
-        System.out.println("velocity" + velocity);
+        System.out.println("fraction:" + fraction);
+        System.out.println("duration:" + duration);
+        System.out.println("instrument:" + instrument);
+        System.out.println("velocity:" + velocity);
     }
 
 }
