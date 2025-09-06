@@ -16,7 +16,7 @@ public final class ChordFactory {
     private static final int MAJOR_THIRD = 4;       // 大三度
     private static final int PERFECT_FIFTH = 7;     // 纯五度
     private static final int DIMINISHED_FIFTH = 6;  // 减五度
-    private static final int MINOR_SIXTH = 8;   // 小六度
+    private static final int MINOR_SIXTH = 8;       // 小六度
     private static final int MINOR_SEVENTH = 10;    // 小七度
     private static final int MAJOR_SEVENTH = 11;    // 大七度
 
