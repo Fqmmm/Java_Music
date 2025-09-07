@@ -85,7 +85,7 @@ public class Guitar extends MusicalInstrument {
         GuitarString stringToPlay = guitarStrings[stringIndex - 1];
 
         // ▼▼▼ 关键修正：使用 shouldPlay() 来判断 ▼▼▼
-        if (!stringToPlay.shouldPlay()) {
+        if (stringToPlay.isMute()) {
             Thread.sleep(duration);
             return;
         }
@@ -319,7 +319,7 @@ public class Guitar extends MusicalInstrument {
 
         // 4. 执行 noteOn 循环 (核心逻辑)
         for (int i = loopStart; (step > 0) ? i <= loopEnd : i >= loopEnd; i += step) {
-            if (guitarStrings[i].shouldPlay()) {
+            if (!guitarStrings[i].isMute()) {
                 channel.noteOn(guitarStrings[i].getScale(), velocity);
                 Thread.sleep(strumDelay);
             }
@@ -331,7 +331,7 @@ public class Guitar extends MusicalInstrument {
 
         // 6. 执行 noteOff (关闭所有在范围内的、被按下的弦)
         for (int i = startIdx; i <= endIdx; i++) {
-            if (guitarStrings[i].shouldPlay()) {
+            if (!guitarStrings[i].isMute()) {
                 channel.noteOff(guitarStrings[i].getScale());
             }
         }
@@ -377,8 +377,8 @@ public class Guitar extends MusicalInstrument {
          * 【新增/核心】判断这根弦是否应该发声。
          * 只要品格不是 -1 (静音)，它就应该发声。
          */
-        public boolean shouldPlay() {
-            return this.fret != -1;
+        public boolean isMute() {
+            return this.fret == -1;
         }
     }
 }
