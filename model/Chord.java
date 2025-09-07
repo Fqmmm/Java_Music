@@ -78,6 +78,10 @@ public class Chord implements Cloneable {
         return this.duration;
     }
 
+    public int getPace() {
+        return this.pace;
+    }
+    
     /**
      * 创建并返回一个当前和弦经过移调（升/降调）后的新实例。
      * 这个方法是不可变的，它不会修改原始和弦。
