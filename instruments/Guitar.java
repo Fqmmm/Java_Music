@@ -18,7 +18,7 @@ public class Guitar extends MusicalInstrument {
     // --- 【新】定义一个枚举来表示扫弦方向 ---
     private enum StrumDirection {
         DOWN, // 向下扫 (从低音到高音)
-        UP    // 向上扫 (从高音到低音)
+        UP // 向上扫 (从高音到低音)
     }
 
     public Guitar() throws Exception {
@@ -53,7 +53,7 @@ public class Guitar extends MusicalInstrument {
         return guitarStrings;
     }
 
-     /**
+    /**
      * 【修正】松开所有弦，将它们的状态设为“不发声”。
      */
     public void reset() throws Exception {
@@ -94,7 +94,7 @@ public class Guitar extends MusicalInstrument {
         MidiChannel channel = channels[instrumentID % 16];
         channel.programChange(instrumentID);
         channel.controlChange(7, 127);
-        
+
         channel.noteOn(scale, velocity);
         Thread.sleep(duration);
         channel.noteOff(scale);
@@ -255,6 +255,7 @@ public class Guitar extends MusicalInstrument {
 
     /**
      * 【增强版】正向扫弦 (下拨)，从低音弦扫向高音弦。
+     * 
      * @param startString 起始弦 (1-6)
      * @param endString   结束弦 (1-6)
      * @param duration    总持续时间 (毫秒)
@@ -263,7 +264,7 @@ public class Guitar extends MusicalInstrument {
     public void strum(int startString, int endString, int duration, int velocity) throws InterruptedException {
         _strum(startString, endString, duration, velocity, StrumDirection.DOWN);
     }
-    
+
     /**
      * 【新功能】反向扫弦 (上拨)，从高音弦扫向低音弦。
      */
@@ -276,7 +277,8 @@ public class Guitar extends MusicalInstrument {
     /**
      * 私有的核心扫弦实现，处理所有扫弦逻辑。
      */
-    private void _strum(int string1, int string2, int totalDuration, int velocity, StrumDirection direction) throws InterruptedException {
+    private void _strum(int string1, int string2, int totalDuration, int velocity, StrumDirection direction)
+            throws InterruptedException {
         // 1. 参数预处理和校验
         // 将琴弦号(1-6)转换为数组索引(0-5)
         int idx1 = string1 - 1;
@@ -288,17 +290,18 @@ public class Guitar extends MusicalInstrument {
 
         int startIdx = Math.min(idx1, idx2);
         int endIdx = Math.max(idx1, idx2);
-        
+
         int numStringsToPlay = 0;
         for (int i = startIdx; i <= endIdx; i++) {
             if (guitarStrings[i].isPressed()) {
                 numStringsToPlay++;
             }
         }
-        if (numStringsToPlay == 0) return; // 没有按弦，直接返回
+        if (numStringsToPlay == 0)
+            return; // 没有按弦，直接返回
 
         // 2. 准备 MIDI 通道和计算延迟
-        int strumDelay = Math.max(1, (int)(totalDuration * 0.125 / numStringsToPlay));
+        int strumDelay = Math.max(1, (int) (totalDuration * 0.125 / numStringsToPlay));
         MidiChannel channel = channels[instrumentID % 16];
         channel.programChange(instrumentID);
         channel.controlChange(7, 127);
@@ -334,6 +337,74 @@ public class Guitar extends MusicalInstrument {
             if (!guitarStrings[i].isMute()) {
                 channel.noteOff(guitarStrings[i].getScale());
             }
+        }
+    }
+
+    /**
+     * 【新功能】根据指定的右手分解型来弹奏一个和弦。
+     * @param chord 要弹奏的和弦
+     * @param pattern 右手分解模式
+     */
+    public void playArpeggio(Chord chord, ArpeggioPattern pattern) throws Exception {
+        if (chord == null || pattern == null) return;
+
+        // 1. 按下和弦，并找出根音所在的弦是哪一根
+        // 我们需要修改 switchChordTo 来返回这个信息
+        int rootStringIndex = switchChordToAndGetRootString(chord);
+        if (rootStringIndex == -1) {
+            System.err.println("警告: 无法为琶音确定根音弦。");
+            return;
+        }
+
+        MidiChannel channel = channels[instrumentID % 16];
+        channel.programChange(instrumentID);
+        channel.controlChange(7, 127);
+        
+        // 2. 遍历模式中的每一个动作 (ArpeggioEvent)
+        for (ArpeggioEvent event : pattern.getEvents()) {
+            List<Integer> stringsToPluck = new ArrayList<>();
+            // 解析 'T' (占位符0)
+            for (int stringNum : event.stringsToPluck()) {
+                if (stringNum == 0) {
+                    stringsToPluck.add(rootStringIndex + 1); // 转换为1-6的弦号
+                } else {
+                    stringsToPluck.add(stringNum);
+                }
+            }
+            
+            int duration = (int)(event.fraction() * 60.0 / chord.getPace() * 1000);
+            int velocity = 100; // 默认力度
+
+            // 3. 同时按下本次动作的所有音符
+            for (int stringNum : stringsToPluck) {
+                GuitarString string = guitarStrings[stringNum - 1];
+                if (!string.isMute()) {
+                    channel.noteOn(string.getScale(), velocity);
+                }
+            }
+
+            // 4. 等待这个动作的持续时间
+            Thread.sleep(duration);
+
+            // 5. 同时松开本次动作的所有音符
+            for (int stringNum : stringsToPluck) {
+                GuitarString string = guitarStrings[stringNum - 1];
+                if (!string.isMute()) {
+                    channel.noteOff(string.getScale());
+                }
+            }
+        }
+    }
+
+    /**
+     * 【修改】我们需要一个能返回根音弦位置的 switchChordTo 版本
+     */
+    public int switchChordToAndGetRootString(Chord chord) throws Exception {
+        reset();
+        if (chord instanceof GuitarChord) {
+            return pressFingering(((GuitarChord) chord).getFingering());
+        } else {
+            return calculateFingering(chord);
         }
     }
 
