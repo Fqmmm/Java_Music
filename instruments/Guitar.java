@@ -15,6 +15,12 @@ public class Guitar extends MusicalInstrument {
     private GuitarString[] guitarStrings;
     private int[] tuning; // 调弦方式
 
+    // --- 【新】定义一个枚举来表示扫弦方向 ---
+    private enum StrumDirection {
+        DOWN, // 向下扫 (从低音到高音)
+        UP    // 向上扫 (从高音到低音)
+    }
+
     public Guitar() throws Exception {
         this(GMInstruments.GUITAR_ACOUSTIC_NYLON, GuitarTuning.STANDARD_TUNING);
     }
@@ -47,29 +53,51 @@ public class Guitar extends MusicalInstrument {
         return guitarStrings;
     }
 
-    /**
-     * 松开所有弦
+     /**
+     * 【修正】松开所有弦，将它们的状态设为“不发声”。
      */
     public void reset() throws Exception {
         for (GuitarString guitarString : guitarStrings) {
-            guitarString.setFret(-1);
+            guitarString.setFret(-1); // 统一使用 -1 作为“不按/静音”的状态
         }
     }
 
     /**
-     * 和弦转换
-     * @param chord
+     * 【修正】和弦转换：只按弦，不发声。
      */
-    public void switchChordTo(Chord chord) {
-
+    public void switchChordTo(Chord chord) throws Exception {
+        reset(); // 切换前先将所有弦设为不发声
+        if (chord instanceof GuitarChord) {
+            pressFingering(((GuitarChord) chord).getFingering());
+        } else {
+            calculateFingering(chord);
+        }
     }
 
     /**
-     * 弹一根弦
-     * @param stringIndex 从1开始数
+     * 【修正】弹拨单根琴弦。
      */
-    public void playSingleString(int stringIndex) {
+    public void playSingleString(int stringIndex, int duration, int velocity) throws InterruptedException {
+        if (stringIndex < 1 || stringIndex > 6) {
+            System.err.println("错误: 琴弦号必须在 1-6 之间。");
+            return;
+        }
+        GuitarString stringToPlay = guitarStrings[stringIndex - 1];
 
+        // ▼▼▼ 关键修正：使用 shouldPlay() 来判断 ▼▼▼
+        if (!stringToPlay.shouldPlay()) {
+            Thread.sleep(duration);
+            return;
+        }
+
+        int scale = stringToPlay.getScale();
+        MidiChannel channel = channels[instrumentID % 16];
+        channel.programChange(instrumentID);
+        channel.controlChange(7, 127);
+        
+        channel.noteOn(scale, velocity);
+        Thread.sleep(duration);
+        channel.noteOff(scale);
     }
 
     /**
@@ -96,7 +124,7 @@ public class Guitar extends MusicalInstrument {
 
             // 4. 执行扫弦动作
             // 使用和弦自带的持续时间，并设定一个适中的力度（如110）
-            strum(startingStringIndex, guitarChord.getDuration(), 110);
+            strum(startingStringIndex, 1, guitarChord.getDuration(), 110);
 
         } catch (Exception e) {
             System.err.println("播放 GuitarChord 时出错: " + e.getMessage());
@@ -139,6 +167,7 @@ public class Guitar extends MusicalInstrument {
 
     /**
      * 如果传入的不是GuitarChord，则自动计算应该按哪些弦
+     * 
      * @param chord 要按的和弦
      */
     @Override
@@ -147,10 +176,10 @@ public class Guitar extends MusicalInstrument {
         reset();
 
         // 2. 根据和弦，计算并设置每根弦应该按的品格
-        int rootStringIndex = pressChordFingering(chord);
+        int rootStringIndex = calculateFingering(chord);
 
         // 3. 执行扫弦
-        strum(rootStringIndex, chord.getDuration(), 100);
+        strum(rootStringIndex, 1, chord.getDuration(), 100);
     }
 
     /**
@@ -159,7 +188,7 @@ public class Guitar extends MusicalInstrument {
      * @param chord 要按的和弦
      * @return 根音所在的琴弦索引 (0-5)
      */
-    private int pressChordFingering(Chord chord) throws Exception {
+    private int calculateFingering(Chord chord) throws Exception {
         List<Note> targetNotes = new ArrayList<>(chord.getNotes());
         // 将目标音符按音高升序排序，优先处理低音
         targetNotes.sort(Comparator.comparingInt(Note::scale));
@@ -225,40 +254,85 @@ public class Guitar extends MusicalInstrument {
     }
 
     /**
-     * 执行扫弦动作
-     * 
-     * @param startStringIndex 从哪根弦开始扫 (0-5, 0是1弦, 5是6弦)
-     * @param totalDuration    整个和弦的持续时间
-     * @param velocity         力度
+     * 【增强版】正向扫弦 (下拨)，从低音弦扫向高音弦。
+     * @param startString 起始弦 (1-6)
+     * @param endString   结束弦 (1-6)
+     * @param duration    总持续时间 (毫秒)
+     * @param velocity    力度
      */
-    public void strum(int startStringIndex, int totalDuration, int velocity) throws InterruptedException {
-        // 计算每根弦之间扫弦的微小延迟，模拟真实感
-        // 假设扫弦动作占用总时长的 1/8，可以调整这个比例
-        int strumDelay = Math.max(1, (int) (totalDuration * 0.125 / 6));
+    public void strum(int startString, int endString, int duration, int velocity) throws InterruptedException {
+        _strum(startString, endString, duration, velocity, StrumDirection.DOWN);
+    }
+    
+    /**
+     * 【新功能】反向扫弦 (上拨)，从高音弦扫向低音弦。
+     */
+    public void strumBackward(int startString, int endString, int duration, int velocity) throws InterruptedException {
+        _strum(startString, endString, duration, velocity, StrumDirection.UP);
+    }
 
+    // --- 【新】私有的、核心的扫弦方法 ---
+
+    /**
+     * 私有的核心扫弦实现，处理所有扫弦逻辑。
+     */
+    private void _strum(int string1, int string2, int totalDuration, int velocity, StrumDirection direction) throws InterruptedException {
+        // 1. 参数预处理和校验
+        // 将琴弦号(1-6)转换为数组索引(0-5)
+        int idx1 = string1 - 1;
+        int idx2 = string2 - 1;
+        if (idx1 < 0 || idx1 > 5 || idx2 < 0 || idx2 > 5) {
+            System.err.println("错误: 琴弦号必须在 1-6 之间。");
+            return;
+        }
+
+        int startIdx = Math.min(idx1, idx2);
+        int endIdx = Math.max(idx1, idx2);
+        
+        int numStringsToPlay = 0;
+        for (int i = startIdx; i <= endIdx; i++) {
+            if (guitarStrings[i].isPressed()) {
+                numStringsToPlay++;
+            }
+        }
+        if (numStringsToPlay == 0) return; // 没有按弦，直接返回
+
+        // 2. 准备 MIDI 通道和计算延迟
+        int strumDelay = Math.max(1, (int)(totalDuration * 0.125 / numStringsToPlay));
         MidiChannel channel = channels[instrumentID % 16];
         channel.programChange(instrumentID);
+        channel.controlChange(7, 127);
 
-        // --- 步骤1: 快速依次开启琴弦发声 (noteOn) ---
-        // 从低音弦扫到高音弦
-        for (int i = startStringIndex; i >= 0; i--) {
-            int scale = guitarStrings[i].getScale();
-            if (scale > 0) { // 确保有音高
-                channel.noteOn(scale, velocity);
-                Thread.sleep(strumDelay); // 模拟扫弦的延迟
+        // 3. 根据方向，决定循环的起始、结束和步长
+        int loopStart, loopEnd, step;
+        if (direction == StrumDirection.DOWN) {
+            // 下拨：从大索引(低音)到小索引(高音)
+            loopStart = endIdx;
+            loopEnd = startIdx;
+            step = -1;
+        } else { // StrumDirection.UP
+            // 上拨：从小索引(高音)到大索引(低音)
+            loopStart = startIdx;
+            loopEnd = endIdx;
+            step = 1;
+        }
+
+        // 4. 执行 noteOn 循环 (核心逻辑)
+        for (int i = loopStart; (step > 0) ? i <= loopEnd : i >= loopEnd; i += step) {
+            if (guitarStrings[i].shouldPlay()) {
+                channel.noteOn(guitarStrings[i].getScale(), velocity);
+                Thread.sleep(strumDelay);
             }
         }
 
-        // --- 步骤2: 等待和弦的主要持续时间 ---
-        int remainingDuration = Math.max(0, totalDuration - (startStringIndex + 1) * strumDelay);
+        // 5. 等待剩余时间
+        int remainingDuration = Math.max(0, totalDuration - numStringsToPlay * strumDelay);
         Thread.sleep(remainingDuration);
 
-        // --- 步骤3: 同时关闭所有发声的琴弦 (noteOff) ---
-        for (int i = 0; i < guitarStrings.length; i++) {
-            int scale = guitarStrings[i].getScale();
-            // 只关闭那些被按响了的弦
-            if (guitarStrings[i].fret > 0 || i <= startStringIndex) {
-                channel.noteOff(scale);
+        // 6. 执行 noteOff (关闭所有在范围内的、被按下的弦)
+        for (int i = startIdx; i <= endIdx; i++) {
+            if (guitarStrings[i].shouldPlay()) {
+                channel.noteOff(guitarStrings[i].getScale());
             }
         }
     }
@@ -290,6 +364,21 @@ public class Guitar extends MusicalInstrument {
                 throw new Exception("品格数有误");
             }
             this.fret = fret;
+        }
+
+        /**
+         * 这根弦是否被按住了
+         */
+        public boolean isPressed() {
+            return this.fret != 0;
+        }
+
+        /**
+         * 【新增/核心】判断这根弦是否应该发声。
+         * 只要品格不是 -1 (静音)，它就应该发声。
+         */
+        public boolean shouldPlay() {
+            return this.fret != -1;
         }
     }
 }
