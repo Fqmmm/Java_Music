@@ -347,51 +347,26 @@ public class Guitar extends MusicalInstrument {
      */
     public void playArpeggio(Chord chord, ArpeggioPattern pattern) throws Exception {
         if (chord == null || pattern == null) return;
-
-        // 1. 按下和弦，并找出根音所在的弦是哪一根
-        // 我们需要修改 switchChordTo 来返回这个信息
         int rootStringIndex = switchChordToAndGetRootString(chord);
-        if (rootStringIndex == -1) {
-            System.err.println("警告: 无法为琶音确定根音弦。");
-            return;
-        }
 
-        MidiChannel channel = channels[instrumentID % 16];
-        channel.programChange(instrumentID);
-        channel.controlChange(7, 127);
-        
-        // 2. 遍历模式中的每一个动作 (ArpeggioEvent)
         for (ArpeggioEvent event : pattern.getEvents()) {
-            List<Integer> stringsToPluck = new ArrayList<>();
-            // 解析 'T' (占位符0)
-            for (int stringNum : event.stringsToPluck()) {
-                if (stringNum == 0) {
-                    stringsToPluck.add(rootStringIndex + 1); // 转换为1-6的弦号
-                } else {
-                    stringsToPluck.add(stringNum);
-                }
-            }
+            int duration = (int)(event.getFraction() * 60.0 / chord.getPace() * 1000);
             
-            int duration = (int)(event.fraction() * 60.0 / chord.getPace() * 1000);
-            int velocity = 100; // 默认力度
-
-            // 3. 同时按下本次动作的所有音符
-            for (int stringNum : stringsToPluck) {
-                GuitarString string = guitarStrings[stringNum - 1];
-                if (!string.isMute()) {
-                    channel.noteOn(string.getScale(), velocity);
-                }
-            }
-
-            // 4. 等待这个动作的持续时间
-            Thread.sleep(duration);
-
-            // 5. 同时松开本次动作的所有音符
-            for (int stringNum : stringsToPluck) {
-                GuitarString string = guitarStrings[stringNum - 1];
-                if (!string.isMute()) {
-                    channel.noteOff(string.getScale());
-                }
+            switch (event.getType()) {
+                case PLUCK:
+                    playPinch(event.getStrings(), rootStringIndex, duration, 100);
+                    break;
+                case STRUM_DOWN:
+                    List<Integer> downRange = event.getStrings();
+                    strum(downRange.get(0), downRange.get(1), duration, 110);
+                    break;
+                case STRUM_UP:
+                    List<Integer> upRange = event.getStrings();
+                    strumBackward(upRange.get(0), upRange.get(1), duration, 90);
+                    break;
+                case REST:
+                    Thread.sleep(duration);
+                    break;
             }
         }
     }
@@ -405,6 +380,36 @@ public class Guitar extends MusicalInstrument {
             return pressFingering(((GuitarChord) chord).getFingering());
         } else {
             return calculateFingering(chord);
+        }
+    }
+
+    /**
+     * 新增辅助方法: 弹奏一个 "Pinch" 动作 (同时拨多根弦)
+     */
+    private void playPinch(List<Integer> stringsToPluck, int rootStringIdx, int duration, int velocity) throws InterruptedException {
+        MidiChannel channel = channels[instrumentID % 16];
+        channel.programChange(instrumentID);
+        channel.controlChange(7, 127);
+        
+        List<GuitarString> stringsToPlay = new ArrayList<>();
+        for (int stringNum : stringsToPluck) {
+            int finalStringNum = (stringNum == 0) ? rootStringIdx + 1 : stringNum;
+            GuitarString string = guitarStrings[finalStringNum - 1];
+            if (!string.isMute()) {
+                stringsToPlay.add(string);
+            }
+        }
+        
+        // 同时 Note On
+        for (GuitarString string : stringsToPlay) {
+            channel.noteOn(string.getScale(), velocity);
+        }
+        
+        Thread.sleep(duration);
+        
+        // 同时 Note Off
+        for (GuitarString string : stringsToPlay) {
+            channel.noteOff(string.getScale());
         }
     }
 

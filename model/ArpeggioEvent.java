@@ -3,9 +3,29 @@ package model;
 import java.util.List;
 
 /**
- * 代表一次琶音/分解和弦中的拨弦动作。
- * 这是一个不可变的数据记录 (Record)。
- * @param stringsToPluck 要拨动的琴弦列表 (1-6)。我们用一个特殊值 0 来代表"T" (Thumb)，它将动态映射到和弦的最低音弦。
- * @param fraction 这个动作的节拍时值 (例如 0.125 代表一个八分音符)。
+ * 代表一次右手动作。
  */
-public record ArpeggioEvent(List<Integer> stringsToPluck, double fraction) {}
+public final class ArpeggioEvent {
+
+    public enum EventType {
+        PLUCK,       // 拨弦 (单个或多个)
+        STRUM_DOWN,  // 向下扫弦
+        STRUM_UP,    // 向上扫弦
+        REST         // 休止
+    }
+
+    private final EventType type;
+    private final List<Integer> strings; // 对于 PLUCK 是要拨的弦; 对于 STRUM 是 [start, end]
+    private final double fraction;
+
+    public ArpeggioEvent(EventType type, List<Integer> strings, double fraction) {
+        this.type = type;
+        this.strings = (strings == null) ? List.of() : List.copyOf(strings);
+        this.fraction = fraction;
+    }
+    
+    // Getters
+    public EventType getType() { return type; }
+    public List<Integer> getStrings() { return strings; }
+    public double getFraction() { return fraction; }
+}
