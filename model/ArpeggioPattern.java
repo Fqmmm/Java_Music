@@ -3,8 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public final class ArpeggioPattern {
 
@@ -18,77 +16,97 @@ public final class ArpeggioPattern {
         return events;
     }
 
-    /**
-     * 【最终修正版】从 DSL 字符串创建琶音模式。
-     * 采用更稳健的两阶段解析策略。
-     */
     public static ArpeggioPattern fromString(String patternString, double defaultFraction) {
         List<ArpeggioEvent> events = new ArrayList<>();
-        
-        // 阶段 1: 将字符串切分成 "节奏块" 和 "普通动作块"
-        // 正则表达式匹配: 一个中括号包裹的所有内容，或者连续的非中括号非空格字符
-        Pattern mainPattern = Pattern.compile("\\[[^\\]]+\\]|[^\\s\\[\\]]+");
-        Matcher mainMatcher = mainPattern.matcher(patternString);
+        String cleanString = patternString.replaceAll("\\s", "");
+        int index = 0;
 
-        while (mainMatcher.find()) {
-            String block = mainMatcher.group();
-            
-            if (block.startsWith("[")) {
-                // --- 处理节奏块, e.g., "[3(12)]" ---
-                String content = block.substring(1, block.length() - 1); // 提取 "3(12)"
+        while (index < cleanString.length()) {
+            char currentChar = cleanString.charAt(index);
+
+            if (currentChar == '[') {
+                // --- 处理节奏块 ---
                 int bracketCount = 1;
-                // 处理双中括号
-                if (content.startsWith("[")) {
-                    bracketCount = 2;
-                    content = content.substring(1, content.length() - 1);
+                index++; // 跳过 '['
+                if (index < cleanString.length() && cleanString.charAt(index) == '[') {
+                    bracketCount++;
+                    index++; // 跳过第二个 '['
+                }
+
+                int closingBracketIndex = findClosingBracket(cleanString, index, bracketCount);
+                if (closingBracketIndex == -1) {
+                    System.err.println("解析错误: 在 " + cleanString + " 中找不到匹配的中括号。");
+                    break;
+                }
+                
+                String content = cleanString.substring(index, closingBracketIndex);
+                List<ArpeggioEvent> blockEvents = parseBlockContent(content, defaultFraction);
+                
+                if (blockEvents.isEmpty()) {
+                    index = closingBracketIndex + bracketCount;
+                    continue;
                 }
                 
                 double blockFraction = defaultFraction / Math.pow(2, bracketCount);
-                List<String> tokens = tokenize(content); // 切分内部动作
-                double eventFraction = blockFraction / tokens.size(); // 平分时长
+                double eventFraction = blockFraction / blockEvents.size();
 
-                for (String token : tokens) {
-                    try {
-                        events.add(parseToken(token, eventFraction));
-                    } catch (IllegalArgumentException e) {
-                        System.err.println("错误 (节奏块内): " + e.getMessage() + " 在 '" + block + "'");
-                    }
+                for (ArpeggioEvent event : blockEvents) {
+                    events.add(createEventCopyWithNewFraction(event, eventFraction));
                 }
+
+                index = closingBracketIndex + bracketCount;
 
             } else {
-                // --- 处理普通动作块, e.g., "TS" ---
-                List<String> tokens = tokenize(block); // "TS" -> ["T", "S"]
-                for (String token : tokens) {
-                    try {
-                        events.add(parseToken(token, defaultFraction)); // 使用默认时长
-                    } catch (IllegalArgumentException e) {
-                        System.err.println("错误 (普通块内): " + e.getMessage() + " 在 '" + block + "'");
-                    }
+                // --- 处理普通动作 ---
+                int nextIndex = findNextTokenEnd(cleanString, index);
+                String token = cleanString.substring(index, nextIndex);
+                try {
+                    events.add(parseToken(token, defaultFraction));
+                } catch (IllegalArgumentException e) {
+                    System.err.println("解析错误: " + e.getMessage() + " 在 '" + token + "'");
                 }
+                index = nextIndex;
             }
         }
         return new ArpeggioPattern(events);
     }
 
-    /**
-     * 辅助方法：将 "T(12)S" 这样的字符串切分成 ["T", "(12)", "S"]
-     */
-    private static List<String> tokenize(String content) {
-        List<String> tokens = new ArrayList<>();
-        // 正则表达式匹配: S, s, T, -, 数字, 或 (...)
-        Pattern tokenPattern = Pattern.compile("[SsT-]|\\d|\\([^)]+\\)");
-        Matcher matcher = tokenPattern.matcher(content);
-        while (matcher.find()) {
-            tokens.add(matcher.group());
+    private static List<ArpeggioEvent> parseBlockContent(String content, double fraction) {
+        List<ArpeggioEvent> blockEvents = new ArrayList<>();
+        int index = 0;
+        while(index < content.length()) {
+            int nextIndex = findNextTokenEnd(content, index);
+            String token = content.substring(index, nextIndex);
+            try {
+                 blockEvents.add(parseToken(token, fraction));
+            } catch (IllegalArgumentException e) {
+                 System.err.println("解析错误: " + e.getMessage() + " 在块内 '" + token + "'");
+            }
+            index = nextIndex;
         }
-        return tokens;
+        return blockEvents;
     }
     
-    /**
-     * 【保持不变】这个 parseToken 方法的逻辑是正确的。
-     */
+    private static int findNextTokenEnd(String str, int start) {
+        if (start >= str.length()) return start;
+        char firstChar = str.charAt(start);
+        if (firstChar == '(') {
+            int closingParen = str.indexOf(')', start);
+            return (closingParen == -1) ? str.length() : closingParen + 1;
+        }
+        return start + 1;
+    }
+    
+    private static int findClosingBracket(String str, int start, int count) {
+        String closing = (count == 1) ? "]" : "]]";
+        return str.indexOf(closing, start);
+    }
+
+    private static ArpeggioEvent createEventCopyWithNewFraction(ArpeggioEvent event, double newFraction) {
+        return new ArpeggioEvent(event.getType(), event.getStrings(), newFraction);
+    }
+    
     private static ArpeggioEvent parseToken(String token, double fraction) {
-        // (这里的代码和我们上一版最终重构的 parseToken 完全一样)
         if (token == null || token.isEmpty()) throw new IllegalArgumentException("动作单元不能为空。");
         switch (token) {
             case "T": return new ArpeggioEvent(ArpeggioEvent.EventType.PLUCK, List.of(0), fraction);

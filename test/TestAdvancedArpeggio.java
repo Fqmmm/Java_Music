@@ -77,7 +77,7 @@ public class TestAdvancedArpeggio {
             // --- 5. 混合模式测试 ---
             System.out.println("\n--- 测试 5: 混合模式 ---");
             // T(八分) - 下扫(八分) - 3(十六分) - (12)拨弦(十六分)
-            ArpeggioPattern complexPattern = ArpeggioPattern.fromString("TS[3(12)]", 0.5);
+            ArpeggioPattern complexPattern = ArpeggioPattern.fromString("TS[3][(12)]", 0.5);
             System.out.println("  |> 模式: 'TS[3(12)]' (复杂的混合技巧) @ C Major");
             guitar.playArpeggio(cMajor, complexPattern);
 
