@@ -20,6 +20,7 @@ public abstract class MusicalInstrument {
     public void play(Playable item) throws Exception {
         play(item, item.duration());
     }
+    
     public void play(Playable item, int duration) throws Exception {
         if (item instanceof Note) {
             playNote((Note)item, duration);
