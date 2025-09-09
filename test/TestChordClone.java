@@ -13,17 +13,19 @@ public class TestChordClone {
             player = new ScalePlayer(GMInstruments.PIANO_ACOUSTIC_GRAND);
             // 设定一个统一的速度 (BPM)
             int pace = 120;
+            int fraction = 2;
             System.out.println("--- 开始测试自统一时长的 Chord 类 ---");
 
             // --- 阶段1: 创建并播放 C 大三和弦 ---
             // 我们现在直接在 fromNotes 方法中传入 pace。
             // Chord 的构造函数会自动调用 unifyDuration，为所有音符设置正确的时长。
             System.out.println("\n正在播放: C 大三和弦 (四分音符)");
-            Chord cMajor = Chord.fromNotes(pace,
+            Chord cMajor = Chord.fromNotes(fraction,
                 Note.quarterNote(60), // C4
                 Note.quarterNote(64), // E4
                 Note.quarterNote(67)  // G4
             ).clone();
+            cMajor.setDurationFromPace(pace);
             // cMajor.showDebugInfo();
             player.playChord(cMajor);
             
@@ -32,12 +34,12 @@ public class TestChordClone {
             // --- 阶段2: 创建并播放一个时长不统一的和弦 ---
             // 看看 unifyDuration 是否能正确处理
             System.out.println("正在播放: 时长不统一的和弦 (应以最短的四分音符为准)");
-            Chord mixedChord = Chord.fromNotes(pace,
+            Chord mixedChord = Chord.fromNotes(fraction,
                 Note.quarterNote(55), // G3, 四分音符 (最短)
                 Note.halfNote(59),    // B3, 二分音符
                 Note.fullNote(62)     // D4, 全音符
             ).clone();
-            // mixedChord.showDebugInfo();
+            mixedChord.setDuration(5000);
             player.playChord(mixedChord);
             
             Thread.sleep(2000);
@@ -47,6 +49,7 @@ public class TestChordClone {
             // transposed 方法会返回一个新的 Chord 对象，
             // 这个新对象的构造函数同样会自动计算并设置新音符的时长。
             Chord dMajor = cMajor.transposed(2).clone();
+            dMajor.setDurationFromPace(pace);
             // dMajor.showDebugInfo();
             // 现在 dMajor 里的音符已经有了正确的 duration，可以直接播放！
             player.playChord(dMajor);
