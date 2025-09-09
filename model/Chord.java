@@ -11,10 +11,10 @@ import constant.Settings;
  */
 public class Chord implements Playable {
     
-    private List<Note> notes;
-    private double fraction;
-    private int duration; // Chord 自己持有统一的播放时长
-    private int velocity;
+    protected List<Note> notes;
+    protected double fraction;
+    protected int duration; // Chord 自己持有统一的播放时长
+    protected int velocity;
 
     /**
      * Chord 类的核心构造函数。

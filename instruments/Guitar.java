@@ -379,7 +379,7 @@ public class Guitar extends MusicalInstrument {
         for (ArpeggioEvent event : pattern.getEvents()) {
             List<Integer> stringsToPluck = new ArrayList<>();
             // 解析 'T' (占位符0)
-            for (int stringNum : event.stringsToPluck()) {
+            for (int stringNum : event.getStrings()) {
                 if (stringNum == 0) {
                     stringsToPluck.add(rootStringIndex + 1); // 转换为1-6的弦号
                 } else {

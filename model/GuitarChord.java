@@ -17,8 +17,16 @@ public final class GuitarChord extends Chord {
     
     private final String fingering; // 指法，例如 "x32010"
 
-    public GuitarChord(List<Note> notes, int pace, String fingering) {
-        super(notes, pace);
+    public GuitarChord(List<Note> notes, double fraction) {
+        this(notes, fraction, null, Settings.velocity);
+    }
+
+    public GuitarChord(List<Note> notes, double fraction, String fingering) {
+        this(notes, fraction, fingering, Settings.velocity);
+    }
+
+    public GuitarChord(List<Note> notes, double fraction, String fingering, int velocity) {
+        super(notes, fraction, velocity);
         this.fingering = fingering;
     }
 
@@ -33,7 +41,7 @@ public final class GuitarChord extends Chord {
      * @param tuning 调弦方式
      * @return 一个 GuitarChord 对象，如果找不到则返回 null
      */
-    public static GuitarChord fromString(String name, int pace, int[] tuning) {
+    public static GuitarChord fromString(String name, double fraction, int[] tuning) {
         String root;
         String suffix;
 
@@ -76,7 +84,7 @@ public final class GuitarChord extends Chord {
             List<Note> notes = FingeringParser.fingeringToNotes(fingering, tuning);
             
             // --- 5. 创建并返回 GuitarChord 实例 ---
-            return new GuitarChord(notes, pace, fingering);
+            return new GuitarChord(notes, fraction, fingering);
 
         } catch (IOException e) {
             System.err.println("错误: 无法读取和弦文件: " + filePath + "。请检查路径和文件名。");

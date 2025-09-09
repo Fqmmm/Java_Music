@@ -12,7 +12,7 @@ public class TestTranspose {
         花海 花海draft = new 花海();
         Music 花海 = 花海draft.getMusic(80);
         花海.setSinger("周杰伦");
-        player.playMusic(花海.transposed(3));
+        player.playMusic(花海.transposed(0));
         player.close();
     }
 }

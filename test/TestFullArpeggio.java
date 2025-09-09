@@ -17,16 +17,19 @@ public class TestFullArpeggio {
         try {
             // --- 初始化 ---
             guitar = new Guitar(GMInstruments.GUITAR_ACOUSTIC_NYLON); // 钢弦吉他音色更适合民谣
-            int pace = 60; // 设定一个标准的速度
-            
+            int pace = 80; // 设定一个标准的速度
+            int fraction = 1;
             System.out.println("--- 吉他琶音模式全面测试 ---");
             System.out.println("乐器: 钢弦吉他 | 速度: " + pace + " BPM");
             System.out.println("和弦进行: G -> C -> D -> G\n");
 
             // --- 1. 加载本次测试需要的所有和弦 ---
-            GuitarChord gMajor = GuitarChord.fromString("Gmajor", pace, GuitarTuning.STANDARD_TUNING);
-            GuitarChord cMajor = GuitarChord.fromString("Cmajor", pace, GuitarTuning.STANDARD_TUNING);
-            GuitarChord dMajor = GuitarChord.fromString("Dmajor", pace, GuitarTuning.STANDARD_TUNING);
+            GuitarChord gMajor = GuitarChord.fromString("Gmajor", fraction, GuitarTuning.STANDARD_TUNING);
+            GuitarChord cMajor = GuitarChord.fromString("Cmajor", fraction, GuitarTuning.STANDARD_TUNING);
+            GuitarChord dMajor = GuitarChord.fromString("Dmajor", fraction, GuitarTuning.STANDARD_TUNING);
+            gMajor.setDurationFromPace(pace);
+            cMajor.setDurationFromPace(pace);
+            dMajor.setDurationFromPace(pace);
 
             GuitarChord[] progression = {gMajor, cMajor, dMajor, gMajor};
 

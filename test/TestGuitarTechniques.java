@@ -14,10 +14,11 @@ public class TestGuitarTechniques {
     public static void main(String[] args) {
         Guitar acousticGuitar = null;
         try {
-            int duration = 1000;
             // --- 初始化 ---
+            int duration = 800;
             acousticGuitar = new Guitar(GMInstruments.GUITAR_ACOUSTIC_NYLON);
             int pace = 90; // 设定一个适中的速度
+            int fraction = 1;
             int defaultVelocity = 100; // 默认力度
             int accentVelocity = 120; // 重音力度
 
@@ -29,9 +30,9 @@ public class TestGuitarTechniques {
             System.out.println("  |> 将依次按下 C Major 和 G Major 和弦，并分别进行分解弹奏。");
             
             // 加载 C Major 和弦
-            GuitarChord cMajor = GuitarChord.fromString("Cmajor", pace, GuitarTuning.STANDARD_TUNING);
+            GuitarChord cMajor = GuitarChord.fromString("Cmajor", fraction, GuitarTuning.STANDARD_TUNING);
             // 加载 G Major 和弦
-            GuitarChord gMajor = GuitarChord.fromString("Gmajor", pace, GuitarTuning.STANDARD_TUNING);
+            GuitarChord gMajor = GuitarChord.fromString("Gmajor", fraction, GuitarTuning.STANDARD_TUNING);
 
             if (cMajor != null && gMajor != null) {
                 // **演奏 C Major 分解**
@@ -76,7 +77,8 @@ public class TestGuitarTechniques {
             System.out.println("\n--- 测试2: 正向与反向扫弦对比 ---");
             System.out.println("  |> 将按下 Am 和弦，并进行一次下拨和一次上拨。");
 
-            GuitarChord aMinor = GuitarChord.fromString("Aminor", pace, GuitarTuning.STANDARD_TUNING);
+            GuitarChord aMinor = GuitarChord.fromString("Aminor", fraction, GuitarTuning.STANDARD_TUNING);
+            aMinor.setDurationFromPace(pace);
             if (aMinor != null) {
                 // **准备 Am 和弦**
                 acousticGuitar.switchChordTo(aMinor);
