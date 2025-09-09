@@ -64,6 +64,8 @@ public abstract class MusicalInstrument {
 
     abstract public void playChord(Chord chord) throws Exception;
 
+    abstract public void playChord(Chord chord, int duration) throws Exception;
+    
     public void close() {
         if (synth != null && synth.isOpen()) {
             synth.close();

@@ -8,6 +8,7 @@ import javax.sound.midi.MidiChannel;
 
 import constant.GMInstruments;
 import constant.GuitarTuning;
+import constant.Settings;
 import model.*;
 
 public class Guitar extends MusicalInstrument {
@@ -100,6 +101,10 @@ public class Guitar extends MusicalInstrument {
         channel.noteOff(scale);
     }
 
+    public void playChord(GuitarChord guitarChord) {
+        playChord(guitarChord, guitarChord.duration());
+    }
+
     /**
      * 【首选/高效方法】播放一个 GuitarChord。
      * 这个方法是专门为 GuitarChord 设计的，它直接使用对象自带的、
@@ -107,7 +112,7 @@ public class Guitar extends MusicalInstrument {
      *
      * @param guitarChord 要播放的、包含精确指法的吉他和弦
      */
-    public void playChord(GuitarChord guitarChord) {
+    public void playChord(GuitarChord guitarChord, int duration) {
         // 1. 安全性检查：确保传入的对象和其指法有效
         if (guitarChord == null || guitarChord.getFingering() == null || guitarChord.getFingering().isEmpty()) {
             System.err.println("警告: 尝试播放一个空的或没有指法的 GuitarChord。");
@@ -124,7 +129,7 @@ public class Guitar extends MusicalInstrument {
 
             // 4. 执行扫弦动作
             // 使用和弦自带的持续时间，并设定一个适中的力度（如110）
-            strum(startingStringIndex, 1, guitarChord.getDuration(), 110);
+            strum(startingStringIndex, 1, duration, 110);
 
         } catch (Exception e) {
             System.err.println("播放 GuitarChord 时出错: " + e.getMessage());
@@ -165,13 +170,18 @@ public class Guitar extends MusicalInstrument {
         return lowestStringIndex;
     }
 
+    @Override
+    public void playChord(Chord chord) throws Exception {
+        playChord(chord, chord.duration());
+    }
+
     /**
      * 如果传入的不是GuitarChord，则自动计算应该按哪些弦
      * 
      * @param chord 要按的和弦
      */
     @Override
-    public void playChord(Chord chord) throws Exception {
+    public void playChord(Chord chord, int duration) throws Exception {
         // 1. 重置所有琴弦状态，准备按新和弦
         reset();
 
@@ -179,7 +189,7 @@ public class Guitar extends MusicalInstrument {
         int rootStringIndex = calculateFingering(chord);
 
         // 3. 执行扫弦
-        strum(rootStringIndex, 1, chord.getDuration(), 100);
+        strum(rootStringIndex, 1, duration, 100);
     }
 
     /**
@@ -340,12 +350,17 @@ public class Guitar extends MusicalInstrument {
         }
     }
 
+    public void playArpeggio(Chord chord, ArpeggioPattern pattern) throws Exception {
+        playArpeggio(chord, pattern, Settings.velocity);
+    }
+
     /**
      * 【新功能】根据指定的右手分解型来弹奏一个和弦。
      * @param chord 要弹奏的和弦
      * @param pattern 右手分解模式
+     * @param velocity 音量
      */
-    public void playArpeggio(Chord chord, ArpeggioPattern pattern) throws Exception {
+    public void playArpeggio(Chord chord, ArpeggioPattern pattern, int velocity) throws Exception {
         if (chord == null || pattern == null) return;
 
         // 1. 按下和弦，并找出根音所在的弦是哪一根
@@ -372,9 +387,6 @@ public class Guitar extends MusicalInstrument {
                 }
             }
             
-            int duration = (int)(event.fraction() * 60.0 / chord.getPace() * 1000);
-            int velocity = 100; // 默认力度
-
             // 3. 同时按下本次动作的所有音符
             for (int stringNum : stringsToPluck) {
                 GuitarString string = guitarStrings[stringNum - 1];
@@ -384,7 +396,7 @@ public class Guitar extends MusicalInstrument {
             }
 
             // 4. 等待这个动作的持续时间
-            Thread.sleep(duration);
+            Thread.sleep(chord.duration());
 
             // 5. 同时松开本次动作的所有音符
             for (int stringNum : stringsToPluck) {

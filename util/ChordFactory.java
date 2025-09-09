@@ -23,184 +23,138 @@ public final class ChordFactory {
     // ======================================================================
     // |                         大三和弦 (Major Triad)                     |
     // ======================================================================
-    public static Chord majorTriad(int rootScale, double fraction, int pace) {
-        return Chord.fromNotes(pace,
+    public static Chord majorTriad(int rootScale, double fraction) {
+        return Chord.fromNotes(fraction,
             new Note(rootScale, fraction),
             new Note(rootScale + MAJOR_THIRD, fraction),
             new Note(rootScale + PERFECT_FIFTH, fraction)
         );
     }
-    public static Chord majorTriad(int rootScale, double fraction, int pace, int instrument) {
-        return Chord.fromNotes(pace,
-            new Note(rootScale, fraction, instrument),
-            new Note(rootScale + MAJOR_THIRD, fraction, instrument),
-            new Note(rootScale + PERFECT_FIFTH, fraction, instrument)
-        );
-    }
-    public static Chord majorTriad(int rootScale, double fraction, int pace, int instrument, int velocity) {
-        return Chord.fromNotes(pace,
-            new Note(rootScale, fraction, velocity, instrument),
-            new Note(rootScale + MAJOR_THIRD, fraction, velocity, instrument),
-            new Note(rootScale + PERFECT_FIFTH, fraction, velocity, instrument)
+    public static Chord majorTriad(int rootScale, double fraction, int velocity) {
+        return Chord.fromNotes(fraction,
+            new Note(rootScale, fraction, velocity),
+            new Note(rootScale + MAJOR_THIRD, fraction, velocity),
+            new Note(rootScale + PERFECT_FIFTH, fraction, velocity)
         );
     }
 
     // ======================================================================
     // |                         小三和弦 (Minor Triad)                     |
     // ======================================================================
-    public static Chord minorTriad(int rootScale, double fraction, int pace) {
-        return Chord.fromNotes(pace,
+    public static Chord minorTriad(int rootScale, double fraction) {
+        return Chord.fromNotes(fraction,
             new Note(rootScale, fraction),
             new Note(rootScale + MINOR_THIRD, fraction),
             new Note(rootScale + PERFECT_FIFTH, fraction)
         );
     }
-    public static Chord minorTriad(int rootScale, double fraction, int pace, int instrument) {
-        return Chord.fromNotes(pace,
-            new Note(rootScale, fraction, instrument),
-            new Note(rootScale + MINOR_THIRD, fraction, instrument),
-            new Note(rootScale + PERFECT_FIFTH, fraction, instrument)
-        );
-    }
-    public static Chord minorTriad(int rootScale, double fraction, int pace, int instrument, int velocity) {
-        return Chord.fromNotes(pace,
-            new Note(rootScale, fraction, velocity, instrument),
-            new Note(rootScale + MINOR_THIRD, fraction, velocity, instrument),
-            new Note(rootScale + PERFECT_FIFTH, fraction, velocity, instrument)
+
+    public static Chord minorTriad(int rootScale, double fraction, int velocity) {
+        return Chord.fromNotes(fraction,
+            new Note(rootScale, fraction, velocity),
+            new Note(rootScale + MINOR_THIRD, fraction, velocity),
+            new Note(rootScale + PERFECT_FIFTH, fraction, velocity)
         );
     }
 
     // ======================================================================
     // |                         减三和弦 (Diminished Triad)                |
     // ======================================================================
-    public static Chord diminishedTriad(int rootScale, double fraction, int pace) {
-        return Chord.fromNotes(pace,
+    public static Chord diminishedTriad(int rootScale, double fraction) {
+        return Chord.fromNotes(fraction,
             new Note(rootScale, fraction),
             new Note(rootScale + MINOR_THIRD, fraction),
             new Note(rootScale + DIMINISHED_FIFTH, fraction)
         );
     }
-    public static Chord diminishedTriad(int rootScale, double fraction, int pace, int instrument) {
-        return Chord.fromNotes(pace,
-            new Note(rootScale, fraction, instrument),
-            new Note(rootScale + MINOR_THIRD, fraction, instrument),
-            new Note(rootScale + DIMINISHED_FIFTH, fraction, instrument)
-        );
-    }
-    public static Chord diminishedTriad(int rootScale, double fraction, int pace, int instrument, int velocity) {
-        return Chord.fromNotes(pace,
-            new Note(rootScale, fraction, velocity, instrument),
-            new Note(rootScale + MINOR_THIRD, fraction, velocity, instrument),
-            new Note(rootScale + DIMINISHED_FIFTH, fraction, velocity, instrument)
+    
+    public static Chord diminishedTriad(int rootScale, double fraction, int velocity) {
+        return Chord.fromNotes(fraction,
+            new Note(rootScale, fraction, velocity),
+            new Note(rootScale + MINOR_THIRD, fraction, velocity),
+            new Note(rootScale + DIMINISHED_FIFTH, fraction, velocity)
         );
     }
     
     // ======================================================================
     // |                         增三和弦 (Augmented Triad)                 |
     // ======================================================================
-    public static Chord augmentedTriad(int rootScale, double fraction, int pace) {
-        return Chord.fromNotes(pace,
+    public static Chord augmentedTriad(int rootScale, double fraction) {
+        return Chord.fromNotes(fraction,
             new Note(rootScale, fraction),
             new Note(rootScale + MAJOR_THIRD, fraction),
             new Note(rootScale + MINOR_SIXTH, fraction)
         );
     }
-    public static Chord augmentedTriad(int rootScale, double fraction, int pace, int instrument) {
-        return Chord.fromNotes(pace,
-            new Note(rootScale, fraction, instrument),
-            new Note(rootScale + MAJOR_THIRD, fraction, instrument),
-            new Note(rootScale + MINOR_SIXTH, fraction, instrument)
-        );
-    }
-    public static Chord augmentedTriad(int rootScale, double fraction, int pace, int instrument, int velocity) {
-        return Chord.fromNotes(pace,
-            new Note(rootScale, fraction, velocity, instrument),
-            new Note(rootScale + MAJOR_THIRD, fraction, velocity, instrument),
-            new Note(rootScale + MINOR_SIXTH, fraction, velocity, instrument)
+   
+    public static Chord augmentedTriad(int rootScale, double fraction, int velocity) {
+        return Chord.fromNotes(fraction,
+            new Note(rootScale, fraction, velocity),
+            new Note(rootScale + MAJOR_THIRD, fraction, velocity),
+            new Note(rootScale + MINOR_SIXTH, fraction, velocity)
         );
     }
 
     // ======================================================================
     // |                         属七和弦 (Dominant 7th)                    |
     // ======================================================================
-    public static Chord dominant7th(int rootScale, double fraction, int pace) {
-        return Chord.fromNotes(pace,
+    public static Chord dominant7th(int rootScale, double fraction) {
+        return Chord.fromNotes(fraction,
             new Note(rootScale, fraction),
             new Note(rootScale + MAJOR_THIRD, fraction),
             new Note(rootScale + PERFECT_FIFTH, fraction),
             new Note(rootScale + MINOR_SEVENTH, fraction)
         );
     }
-    public static Chord dominant7th(int rootScale, double fraction, int pace, int instrument) {
-        return Chord.fromNotes(pace,
-            new Note(rootScale, fraction, instrument),
-            new Note(rootScale + MAJOR_THIRD, fraction, instrument),
-            new Note(rootScale + PERFECT_FIFTH, fraction, instrument),
-            new Note(rootScale + MINOR_SEVENTH, fraction, instrument)
-        );
-    }
-    public static Chord dominant7th(int rootScale, double fraction, int pace, int instrument, int velocity) {
-        return Chord.fromNotes(pace,
-            new Note(rootScale, fraction, velocity, instrument),
-            new Note(rootScale + MAJOR_THIRD, fraction, velocity, instrument),
-            new Note(rootScale + PERFECT_FIFTH, fraction, velocity, instrument),
-            new Note(rootScale + MINOR_SEVENTH, fraction, velocity, instrument)
+    
+    public static Chord dominant7th(int rootScale, double fraction, int velocity) {
+        return Chord.fromNotes(fraction,
+            new Note(rootScale, fraction, velocity),
+            new Note(rootScale + MAJOR_THIRD, fraction, velocity),
+            new Note(rootScale + PERFECT_FIFTH, fraction, velocity),
+            new Note(rootScale + MINOR_SEVENTH, fraction, velocity)
         );
     }
 
     // ======================================================================
     // |                         大七和弦 (Major 7th)                       |
     // ======================================================================
-    public static Chord major7th(int rootScale, double fraction, int pace) {
-        return Chord.fromNotes(pace,
+    public static Chord major7th(int rootScale, double fraction) {
+        return Chord.fromNotes(fraction,
             new Note(rootScale, fraction),
             new Note(rootScale + MAJOR_THIRD, fraction),
             new Note(rootScale + PERFECT_FIFTH, fraction),
             new Note(rootScale + MAJOR_SEVENTH, fraction)
         );
     }
-    public static Chord major7th(int rootScale, double fraction, int pace, int instrument) {
-        return Chord.fromNotes(pace,
-            new Note(rootScale, fraction, instrument),
-            new Note(rootScale + MAJOR_THIRD, fraction, instrument),
-            new Note(rootScale + PERFECT_FIFTH, fraction, instrument),
-            new Note(rootScale + MAJOR_SEVENTH, fraction, instrument)
-        );
-    }
-    public static Chord major7th(int rootScale, double fraction, int pace, int instrument, int velocity) {
-        return Chord.fromNotes(pace,
-            new Note(rootScale, fraction, velocity, instrument),
-            new Note(rootScale + MAJOR_THIRD, fraction, velocity, instrument),
-            new Note(rootScale + PERFECT_FIFTH, fraction, velocity, instrument),
-            new Note(rootScale + MAJOR_SEVENTH, fraction, velocity, instrument)
+    
+    public static Chord major7th(int rootScale, double fraction, int velocity) {
+        return Chord.fromNotes(fraction,
+            new Note(rootScale, fraction, velocity),
+            new Note(rootScale + MAJOR_THIRD, fraction, velocity),
+            new Note(rootScale + PERFECT_FIFTH, fraction, velocity),
+            new Note(rootScale + MAJOR_SEVENTH, fraction, velocity)
         );
     }
 
     // ======================================================================
     // |                         小七和弦 (Minor 7th)                       |
     // ======================================================================
-    public static Chord minor7th(int rootScale, double fraction, int pace) {
-        return Chord.fromNotes(pace,
+    public static Chord minor7th(int rootScale, double fraction) {
+        return Chord.fromNotes(fraction,
             new Note(rootScale, fraction),
             new Note(rootScale + MINOR_THIRD, fraction),
             new Note(rootScale + PERFECT_FIFTH, fraction),
             new Note(rootScale + MINOR_SEVENTH, fraction)
         );
     }
-    public static Chord minor7th(int rootScale, double fraction, int pace, int instrument) {
-        return Chord.fromNotes(pace,
-            new Note(rootScale, fraction, instrument),
-            new Note(rootScale + MINOR_THIRD, fraction, instrument),
-            new Note(rootScale + PERFECT_FIFTH, fraction, instrument),
-            new Note(rootScale + MINOR_SEVENTH, fraction, instrument)
-        );
-    }
-    public static Chord minor7th(int rootScale, double fraction, int pace, int instrument, int velocity) {
-        return Chord.fromNotes(pace,
-            new Note(rootScale, fraction, velocity, instrument),
-            new Note(rootScale + MINOR_THIRD, fraction, velocity, instrument),
-            new Note(rootScale + PERFECT_FIFTH, fraction, velocity, instrument),
-            new Note(rootScale + MINOR_SEVENTH, fraction, velocity, instrument)
+ 
+    public static Chord minor7th(int rootScale, double fraction, int velocity) {
+        return Chord.fromNotes(fraction,
+            new Note(rootScale, fraction, velocity),
+            new Note(rootScale + MINOR_THIRD, fraction, velocity),
+            new Note(rootScale + PERFECT_FIFTH, fraction, velocity),
+            new Note(rootScale + MINOR_SEVENTH, fraction, velocity)
         );
     }
 }

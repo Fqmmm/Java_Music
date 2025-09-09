@@ -4,45 +4,72 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import constant.Settings;
+
 /**
  * Chord 类代表一个和弦，即一组同时发声的音符。
- * 
- * 这是一个不可变 (Immutable) 类。一旦一个 Chord 对象被创建，它的内容就不会改变。
- * 它会在构造时，根据其内部音符的最短时值 (fraction) 和传入的速度 (pace)，
- * 计算并持有自己应该播放的持续时间 (duration)。
  */
-public class Chord implements Cloneable {
+public class Chord implements Cloneable, Playable {
     
-    // 字段设为 final，确保和弦在创建后其内容不被改变。
-    private final List<Note> notes;
-    private final double fraction;
-    private final int duration; // Chord 自己持有统一的播放时长
-    private final int pace;
+    private List<Note> notes;
+    private double fraction;
+    private int duration; // Chord 自己持有统一的播放时长
+    private int velocity;
 
     /**
      * Chord 类的核心构造函数。
      * @param notes 组成和弦的音符列表
-     * @param pace  用于计算时长的速度 (BPM)
      */
-    public Chord(List<Note> notes, int pace) {
-        this.pace = pace;
-        this.notes = notes;
-        double shortestFraction = shortestFraction();
-        this.fraction = shortestFraction;
+    public Chord(List<Note> notes) {
+        this(notes, shortestFraction(notes), Settings.velocity);
         
-        // 根据最短时值和速度，计算并存储自己的 duration
-        if (shortestFraction == Double.POSITIVE_INFINITY || shortestFraction <= 0) {
-            this.duration = 0; // 如果没有有效音符或时值为0，则时长为0
-        } else {
-            this.duration = (int) (shortestFraction * 60.0 / pace * 1000);
-        }
+    }
 
-        for (Note note : notes) {
+    public Chord(List<Note> notes, double fraction) {
+        this(notes, fraction, Settings.velocity);
+    }
+
+    public Chord(List<Note> notes, double fraction, int velocity) {
+        this.notes = notes;
+        this.fraction = fraction;
+        this.velocity = velocity;
+        this.duration = 0;      // 占位符
+    }
+
+    @Override
+    public double fraction() {
+        return this.fraction;
+    }
+
+    @Override
+    public int velocity() {
+        return this.velocity;
+    }
+
+    @Override
+    public int duration() {
+        return this.duration;
+    }
+
+    @Override
+    public void setDuration(int duration) {
+        this.duration = duration;
+        for (Note note : this.notes) {
             note.setDuration(duration);
         }
     }
 
-    private double shortestFraction() {
+    @Override
+    public void setDurationFromPace(int pace) {
+        this.setDuration((int) (this.fraction() * 60 / pace * 1000));
+    }
+
+    /**
+     * 辅助方法：获取notes里fraction最小的一个
+     * @param notes
+     * @return 最小的fraction
+     */
+    private static double shortestFraction(List<Note> notes) {
         double shortestFraction = Double.POSITIVE_INFINITY;
         if (notes != null) {
             for (Note note : notes) {
@@ -56,12 +83,15 @@ public class Chord implements Cloneable {
 
     /**
      * 便捷的静态工厂方法，用于从一系列 Note 中创建和弦。
-     * @param pace 速度 (BPM)
      * @param newNotes 组成和弦的音符
      * @return 一个新的 Chord 对象
      */
-    public static Chord fromNotes(int pace, Note... newNotes) {
-        return new Chord(new ArrayList<>(Arrays.asList(newNotes)), pace);
+    public static Chord fromNotes(Note... newNotes) {
+        return new Chord(new ArrayList<>(Arrays.asList(newNotes)));
+    }
+
+    public static Chord fromNotes(double fraction, Note... newNotes) {
+        return new Chord(new ArrayList<>(Arrays.asList(newNotes)), fraction);
     }
     
     /**
@@ -69,17 +99,6 @@ public class Chord implements Cloneable {
      */
     public List<Note> getNotes() {
         return this.notes;
-    }
-
-    /**
-     * 返回这个和弦应该播放的统一持续时间（毫秒）。
-     */
-    public int getDuration() {
-        return this.duration;
-    }
-
-    public int getPace() {
-        return this.pace;
     }
     
     /**
@@ -93,7 +112,7 @@ public class Chord implements Cloneable {
         for (Note note : this.notes) {
             transposedNotes.add(note.transposed(value));
         }
-        return new Chord(transposedNotes, this.pace);
+        return new Chord(transposedNotes, this.fraction, this.velocity);
     }
 
     public void showDebugInfo() {
@@ -113,6 +132,6 @@ public class Chord implements Cloneable {
         for (Note note : notes) {
             newNotes.add(note);
         }
-        return new Chord(newNotes, pace);
+        return new Chord(newNotes, this.fraction, this.velocity);
     }
 }

@@ -7,42 +7,38 @@ import constant.Settings;
 /**
  * 音符类
  */
-public class Note implements Cloneable {
+public class Note implements Cloneable, Playable {
 
     private int scale; // 音阶
     private double fraction; // 占这一小节的几分之几
     private int duration; // 持续时间（毫秒）
     private int velocity; // 响度
-    // private int instrument; // 乐器
 
     public Note(int scale, double fraction) {
-        this(scale, fraction, Settings.velocity, Settings.instrument);
+        this(scale, fraction, Settings.velocity);
     }
 
-    public Note(int scale, double fraction, int instrument) {
-        this(scale, fraction, Settings.velocity, instrument);
-    }
-
-    public Note(int scale, double fraction, int velocity, int instrument) {
+    public Note(int scale, double fraction, int velocity) {
         this.scale = scale;
         this.fraction = fraction;
-        // this.duration = (int) (fraction * 60 / Settings.pace * 1000); // 毫秒
         this.velocity = velocity;
-        // this.instrument = instrument;
     }
 
     public int scale() {
         return scale;
     }
 
+    @Override
     public int duration() {
         return duration;
     }
 
+    @Override
     public int velocity() {
         return velocity;
     }
 
+    @Override
     public double fraction() {
         return fraction;
     }
@@ -51,13 +47,15 @@ public class Note implements Cloneable {
     //     return instrument;
     // }
 
+    @Override
     public void setDuration(int duration) {
         this.duration = duration;
     }
 
-    // public void setInstrument(int instrument) {
-    //     this.instrument = instrument;
-    // }
+    @Override
+    public void setDurationFromPace(int pace) {
+        this.setDuration((int) (this.fraction() * 60 / pace * 1000));
+    }
 
     public void setVelocity(int velocity) {
         this.velocity = velocity;
@@ -96,40 +94,40 @@ public class Note implements Cloneable {
         return new Note(scale, 0.25);
     }
 
-    public static Note quarterNote(int scale, int velocity, int instrument) {
-        return new Note(scale, 0.25, velocity, instrument);
+    public static Note quarterNote(int scale, int velocity) {
+        return new Note(scale, 0.25, velocity);
     }
 
     public static Note halfNote(int scale) {
         return new Note(scale, 0.5);
     }
 
-    public static Note halfNote(int scale, int velocity, int instrument) {
-        return new Note(scale, 0.5, velocity, instrument);
+    public static Note halfNote(int scale, int velocity) {
+        return new Note(scale, 0.5, velocity);
     }
 
     public static Note fullNote(int scale) {
         return new Note(scale, 1.0);
     }
 
-    public static Note fullNote(int scale, int velocity, int instrument) {
-        return new Note(scale, 1.0, velocity, instrument);
+    public static Note fullNote(int scale, int velocity) {
+        return new Note(scale, 1.0, velocity);
     }
 
     public static Note dottedNote0_75(int scale) {
         return new Note(scale, 0.75);
     }
 
-    public static Note dottedNote0_75(int scale, int velocity, int instrument) {
-        return new Note(scale, 0.75, velocity, instrument);
+    public static Note dottedNote0_75(int scale, int velocity) {
+        return new Note(scale, 0.75, velocity);
     }
 
     public static Note dottedNote1_5(int scale) {
         return new Note(scale, 1.5);
     }
 
-    public static Note dottedNote1_5(int scale, int velocity, int instrument) {
-        return new Note(scale, 1.5, velocity, instrument);
+    public static Note dottedNote1_5(int scale, int velocity) {
+        return new Note(scale, 1.5, velocity);
     }
 
     @Override

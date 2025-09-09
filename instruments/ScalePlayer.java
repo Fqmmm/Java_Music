@@ -51,6 +51,11 @@ public class ScalePlayer extends MusicalInstrument {
         }
     }
 
+    @Override
+    public void playChord(Chord chord) {
+        playChord(chord, chord.duration());
+    }
+
     /**
      * 播放单个和弦 (最终修正版)
      * 1. 修正了通道分配逻辑，避免使用打击乐通道 9。
@@ -59,7 +64,7 @@ public class ScalePlayer extends MusicalInstrument {
      * @param chord 要播放的和弦
      */
     @Override
-    public void playChord(Chord chord) {
+    public void playChord(Chord chord, int duration) {
         if (chord == null || chord.getNotes().isEmpty()) {
             return;
         }
@@ -85,7 +90,7 @@ public class ScalePlayer extends MusicalInstrument {
         }
 
         try {
-            Thread.sleep(chord.getDuration());
+            Thread.sleep(duration);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
