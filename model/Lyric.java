@@ -5,30 +5,29 @@ import java.util.Iterator;
 
 /**
  * 歌词类
- * 包含：这句歌词的音符和歌词本身（字符串）
  */
-public class Lyric implements Iterable<Note>, Cloneable {
-    private ArrayList<Note> notes;
-    private String words;
+public class Lyric implements Iterable<Playable>, Cloneable {
+    private ArrayList<Playable> items;
+    private String text;
 
-    public Lyric(ArrayList<Note> notes) {
-        this(notes, null);
+    public Lyric(ArrayList<Playable> items) {
+        this(items, null);
     }
 
-    public Lyric(ArrayList<Note> notes, String words) {
-        this.notes = notes;
-        this.words = words;
+    public Lyric(ArrayList<Playable> items, String text) {
+        this.items = items;
+        this.text = text;
     }
 
     // public void unifyInstrument(int instrument) {
-    //     for (Note note : this) {
+    //     for (Playable note : this) {
     //         note.setInstrument(instrument);
     //     }
     // }
 
     public void unifyVelocity(int velocity) {
-        for (Note note : this) {
-            note.setVelocity(velocity);
+        for (Playable item : this) {
+            item.setVelocity(velocity);
         }
     }
 
@@ -39,49 +38,49 @@ public class Lyric implements Iterable<Note>, Cloneable {
      * @return 一个全新的 Lyric 对象
      */
     public Lyric transposed(int value) {
-        ArrayList<Note> transposedNotes = new ArrayList<>();
-        for (Note note : this) {
-            transposedNotes.add(note.transposed(value));
+        ArrayList<Playable> transposedPlayables = new ArrayList<>();
+        for (Playable item : this) {
+            transposedPlayables.add(item.transposed(value));
         }
         // 返回一个包含新音符列表的新 Lyric 实例
-        return new Lyric(transposedNotes, this.words);
+        return new Lyric(transposedPlayables, this.text);
     }
 
-    public static Lyric fromNotes(String words, Note... manyNotes) {
-        Lyric lyric = new Lyric(new ArrayList<>(), words);
-        for (Note note : manyNotes) {
-            lyric.notes.add(note);
+    public static Lyric fromPlayables(String text, Playable... manyPlayables) {
+        Lyric lyric = new Lyric(new ArrayList<>(), text);
+        for (Playable item : manyPlayables) {
+            lyric.items.add(item);
         }
         return lyric;
     };
 
-    public static Lyric fromNotes(Note... manyNotes) {
-        return fromNotes(null, manyNotes);
+    public static Lyric fromPlayables(Playable... manyPlayables) {
+        return fromPlayables(null, manyPlayables);
     }
 
     /**
      * 曲调一样，词不一样
      */
-    public static Lyric fromLyricOfSameTone(String words, Lyric lyric) {
-        return new Lyric(lyric.notes, words);
+    public static Lyric fromLyricOfSameTone(String text, Lyric lyric) {
+        return new Lyric(lyric.items, text);
     }
 
     public static Lyric fromLyricOfSameTone(Lyric lyric) {
-        return new Lyric(lyric.notes);
+        return new Lyric(lyric.items);
     }
 
     public void show() {
-        if (this.words != null) {
-            System.out.println(words);
+        if (this.text != null) {
+            System.out.println(text);
         }
     }
 
     @Override
-    public Iterator<Note> iterator() {
+    public Iterator<Playable> iterator() {
         return new LyricIterator();
     }
 
-    private class LyricIterator implements Iterator<Note> {
+    private class LyricIterator implements Iterator<Playable> {
         private int index;
 
         public LyricIterator() {
@@ -90,14 +89,14 @@ public class Lyric implements Iterable<Note>, Cloneable {
 
         @Override
         public boolean hasNext() {
-            return index < notes.size();
+            return index < items.size();
         }
 
         @Override
-        public Note next() {
-            Note nextNote = notes.get(index);
+        public Playable next() {
+            Playable nextPlayable = items.get(index);
             index++;
-            return nextNote;
+            return nextPlayable;
 
         }
     }
@@ -108,9 +107,9 @@ public class Lyric implements Iterable<Note>, Cloneable {
             Lyric clonedLyric = (Lyric) super.clone();
 
             // 深拷贝 notes 列表
-            clonedLyric.notes = new ArrayList<>();
-            for (Note note : this.notes) {
-                clonedLyric.notes.add(note.clone());
+            clonedLyric.items = new ArrayList<>();
+            for (Playable note : this.items) {
+                clonedLyric.items.add(note.clone());
             }
 
             return clonedLyric;
@@ -125,7 +124,7 @@ public class Lyric implements Iterable<Note>, Cloneable {
      * 
      * @return 旋律相同、没有词的歌词
      */
-    public Lyric toEmptyWords() {
-        return new Lyric(this.notes);
+    public Lyric toEmptyText() {
+        return new Lyric(this.items);
     }
 }

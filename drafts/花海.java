@@ -12,7 +12,7 @@ public class 花海 implements MusicDraft {
 
     // 你编写的所有 Lyric 数组都保留在这里，无需任何改动
     // ... (前奏, 静止了所有的花开, 等等... 代码过长，此处省略)
-    public static final Lyric 前奏 = Lyric.fromNotes(
+    public static final Lyric 前奏 = Lyric.fromPlayables(
         Note.emptyNote(1),
 
         Note.halfNote(medium[1]),
@@ -73,7 +73,7 @@ public class 花海 implements MusicDraft {
         Note.emptyNote(2)
     );
 
-    public static final Lyric 静止了所有的花开 = Lyric.fromNotes("静止了所有的花开",
+    public static final Lyric 静止了所有的花开 = Lyric.fromPlayables("静止了所有的花开",
         Note.quarterNote(medium[1]),
         Note.dottedNote0_75(medium[3]),
         Note.fullNote(medium[3]),
@@ -87,7 +87,7 @@ public class 花海 implements MusicDraft {
         Note.emptyNote(1)
     );
 
-    public static final Lyric 遥远了清晰了爱 = Lyric.fromNotes("遥远了清晰了爱",
+    public static final Lyric 遥远了清晰了爱 = Lyric.fromPlayables("遥远了清晰了爱",
         Note.quarterNote(medium[1]),
         Note.dottedNote0_75(medium[3]),
         Note.fullNote(medium[3]),
@@ -99,7 +99,7 @@ public class 花海 implements MusicDraft {
         Note.emptyNote(2)
     );
 
-    public static final Lyric 天郁闷爱却很喜欢 = Lyric.fromNotes("天郁闷爱却很喜欢",
+    public static final Lyric 天郁闷爱却很喜欢 = Lyric.fromPlayables("天郁闷爱却很喜欢",
         Note.quarterNote(medium[1]),
         Note.dottedNote0_75(medium[4]),
         Note.fullNote(medium[4]),
@@ -113,7 +113,7 @@ public class 花海 implements MusicDraft {
         Note.emptyNote(1)
     );
 
-    public static final Lyric 那时候我不懂这叫爱 = Lyric.fromNotes("那时候我不懂这叫爱",
+    public static final Lyric 那时候我不懂这叫爱 = Lyric.fromPlayables("那时候我不懂这叫爱",
         Note.quarterNote(medium[1]),
         Note.dottedNote0_75(medium[3]),
         Note.fullNote(medium[2]),
@@ -129,7 +129,7 @@ public class 花海 implements MusicDraft {
         Note.emptyNote(2)
     );
 
-    public static final Lyric 你喜欢站在那窗台 = Lyric.fromNotes("你喜欢站在那窗台",
+    public static final Lyric 你喜欢站在那窗台 = Lyric.fromPlayables("你喜欢站在那窗台",
         Note.quarterNote(medium[1]),
         Note.dottedNote0_75(medium[3]),
         Note.fullNote(medium[3]),
@@ -143,7 +143,7 @@ public class 花海 implements MusicDraft {
         Note.emptyNote(1)
     );
 
-    public static final Lyric 你好久都没再来 = Lyric.fromNotes("你好久都没再来",
+    public static final Lyric 你好久都没再来 = Lyric.fromPlayables("你好久都没再来",
         Note.quarterNote(medium[1]),
         Note.dottedNote0_75(medium[3]),
         Note.fullNote(medium[3]),
@@ -156,7 +156,7 @@ public class 花海 implements MusicDraft {
         Note.emptyNote(2)
     );
 
-    public static final Lyric 彩色的时间染上空白 = Lyric.fromNotes("彩色的时间染上空白",
+    public static final Lyric 彩色的时间染上空白 = Lyric.fromPlayables("彩色的时间染上空白",
         Note.quarterNote(medium[1]),
         Note.dottedNote0_75(medium[4]),
         Note.fullNote(medium[4]),
@@ -171,7 +171,7 @@ public class 花海 implements MusicDraft {
         Note.emptyNote(1)
     );
 
-    public static final Lyric 是你流的泪晕开 = Lyric.fromNotes("是你流的泪晕开",
+    public static final Lyric 是你流的泪晕开 = Lyric.fromPlayables("是你流的泪晕开",
         Note.halfNote(medium[5]),
         Note.halfNote(medium[4]),
         Note.halfNote(medium[4]),
@@ -183,7 +183,7 @@ public class 花海 implements MusicDraft {
         Note.emptyNote(1)
     );
 
-    public static final Lyric 不要你离开 = Lyric.fromNotes("不要你离开",
+    public static final Lyric 不要你离开 = Lyric.fromPlayables("不要你离开",
         Note.halfNote(medium[1]),
         Note.halfNote(medium[2]),
         Note.halfNote(medium[3]),
@@ -192,7 +192,7 @@ public class 花海 implements MusicDraft {
         Note.emptyNote(1)
     );
 
-    public static final Lyric 距离隔不开 = Lyric.fromNotes("距离隔不开", 
+    public static final Lyric 距离隔不开 = Lyric.fromPlayables("距离隔不开", 
         Note.halfNote(medium[3]),
         Note.halfNote(medium[2]),
         Note.halfNote(medium[1]),
@@ -201,7 +201,7 @@ public class 花海 implements MusicDraft {
         Note.emptyNote(1)
     );
 
-    public static final Lyric 思念变成海 = Lyric.fromNotes("思念变成海",
+    public static final Lyric 思念变成海 = Lyric.fromPlayables("思念变成海",
         Note.halfNote(medium[1]),
         Note.halfNote(medium[2]),
         Note.halfNote(medium[3]),
@@ -209,7 +209,7 @@ public class 花海 implements MusicDraft {
         new Note(high[1], 1.75)
     );
 
-    public static final Lyric 在窗外进不来 = Lyric.fromNotes("在窗外进不来",
+    public static final Lyric 在窗外进不来 = Lyric.fromPlayables("在窗外进不来",
         Note.halfNote(high[1]),
         Note.halfNote(high[1]),
         Note.halfNote(medium[7]),
@@ -223,7 +223,7 @@ public class 花海 implements MusicDraft {
 
     public static final Lyric 原谅说太快 = Lyric.fromLyricOfSameTone("原谅说太快", 不要你离开);
 
-    public static final Lyric 爱成了阻碍 = Lyric.fromNotes("爱成了阻碍",
+    public static final Lyric 爱成了阻碍 = Lyric.fromPlayables("爱成了阻碍",
         Note.halfNote(medium[3]),
         Note.halfNote(medium[2]),
         Note.halfNote(medium[1]),
@@ -232,7 +232,7 @@ public class 花海 implements MusicDraft {
         Note.emptyNote(1)
     );
 
-    public static final Lyric 手中的风筝放太快回不来 = Lyric.fromNotes("手中的风筝放太快回不来",
+    public static final Lyric 手中的风筝放太快回不来 = Lyric.fromPlayables("手中的风筝放太快回不来",
         Note.halfNote(medium[1]),
         Note.halfNote(medium[2]),
         Note.halfNote(medium[3]),
@@ -254,7 +254,7 @@ public class 花海 implements MusicDraft {
     public static final Lyric 天空仍灿烂 = Lyric.fromLyricOfSameTone("天空仍灿烂", 不要你离开);
     public static final Lyric 它爱着大海 = Lyric.fromLyricOfSameTone("它爱着大海", 爱成了阻碍);
 
-    public static final Lyric 情歌被打败 = Lyric.fromNotes("情歌被打败",
+    public static final Lyric 情歌被打败 = Lyric.fromPlayables("情歌被打败",
         Note.halfNote(medium[1]),
         Note.halfNote(medium[2]),
         Note.halfNote(medium[3]),
@@ -263,7 +263,7 @@ public class 花海 implements MusicDraft {
         Note.emptyNote(1)
     );
 
-    public static final Lyric 爱已不存在 = Lyric.fromNotes("爱已不存在",
+    public static final Lyric 爱已不存在 = Lyric.fromPlayables("爱已不存在",
         Note.halfNote(medium[1]),
         Note.halfNote(low[7]),
         Note.halfNote(low[6]),
@@ -271,7 +271,7 @@ public class 花海 implements MusicDraft {
         new Note(medium[1], 1.25)
     );
 
-    public static final Lyric 结尾空三拍 = Lyric.fromNotes(
+    public static final Lyric 结尾空三拍 = Lyric.fromPlayables(
         Note.emptyNote(3)
     );
     public static final Lyric 回忆划不开 = 距离隔不开;

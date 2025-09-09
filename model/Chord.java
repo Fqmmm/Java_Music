@@ -9,7 +9,7 @@ import constant.Settings;
 /**
  * Chord 类代表一个和弦，即一组同时发声的音符。
  */
-public class Chord implements Cloneable, Playable {
+public class Chord implements Playable {
     
     private List<Note> notes;
     private double fraction;
@@ -51,6 +51,11 @@ public class Chord implements Cloneable, Playable {
         return this.duration;
     }
 
+    @Override
+    public void setVelocity(int velocity) {
+        this.velocity = velocity;
+    }
+    
     @Override
     public void setDuration(int duration) {
         this.duration = duration;
@@ -107,6 +112,7 @@ public class Chord implements Cloneable, Playable {
      * @param value 需要提升的半音数量
      * @return 一个全新的、经过移调的 Chord 对象
      */
+    @Override
     public Chord transposed(int value) {
         ArrayList<Note> transposedNotes = new ArrayList<>();
         for (Note note : this.notes) {

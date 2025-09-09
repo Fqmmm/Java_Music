@@ -17,7 +17,24 @@ public abstract class MusicalInstrument {
         this.instrumentID = id;
     }
 
+    public void play(Playable item) throws Exception {
+        play(item, item.duration());
+    }
+    public void play(Playable item, int duration) throws Exception {
+        if (item instanceof Note) {
+            playNote((Note)item, duration);
+        } else if (item instanceof Chord) {
+            playChord((Chord)item, duration);
+        } else {
+            throw new Exception("fuck!");
+        }
+    }
+
     public void playNote(Note note) {
+        playNote(note, note.duration());
+    }
+
+    public void playNote(Note note, int duration) {
         // 为不同的乐器分配不同的通道
         int channelIndex = instrumentID % 16;
         MidiChannel channel = channels[channelIndex];
@@ -31,7 +48,7 @@ public abstract class MusicalInstrument {
         }
 
         try {
-            Thread.sleep(note.duration());
+            Thread.sleep(duration);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -41,14 +58,14 @@ public abstract class MusicalInstrument {
         }
     }
 
-    public void playLyric(Lyric lyric) {
+    public void playLyric(Lyric lyric) throws Exception {
         lyric.show();
-        for (Note note : lyric) {
-            playNote(note);
+        for (Playable item : lyric) {
+            play(item);
         }
     }
 
-    public void playMusic(Music music) {
+    public void playMusic(Music music) throws Exception {
         if (music.title() != null) {
             System.out.println("即将播放歌曲：" + music.title());
         }
@@ -65,7 +82,7 @@ public abstract class MusicalInstrument {
     abstract public void playChord(Chord chord) throws Exception;
 
     abstract public void playChord(Chord chord, int duration) throws Exception;
-    
+
     public void close() {
         if (synth != null && synth.isOpen()) {
             synth.close();

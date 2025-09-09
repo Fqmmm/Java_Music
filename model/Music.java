@@ -16,7 +16,7 @@ public class Music implements Iterable<Lyric>, Cloneable {
     public Music(ArrayList<Lyric> lyrics, int pace) {
         this.lyrics = lyrics;
         this.pace = pace;
-        this.setNoteDuration(); // 设置每个音符的时长
+        this.setPlayableDuration(); // 设置每个音符的时长
         // this.title = this.getClass().getName(); // 歌曲名默认为类名
         this.singer = null;
     }
@@ -42,15 +42,15 @@ public class Music implements Iterable<Lyric>, Cloneable {
         for (Lyric lyric : manyLyrics) {
             music.lyrics.add(lyric);
         }
-        music.setNoteDuration(); // 在这里设置每个音符的时长
+        music.setPlayableDuration(); // 在这里设置每个音符/和弦的时长
         return music;
     }
 
     // 每个音符的时长
-    public void setNoteDuration() {
+    public void setPlayableDuration() {
         for (Lyric lyric : this.lyrics) {
-            for (Note note : lyric) {
-                note.setDuration((int) (note.fraction() * 60 / this.pace * 1000));
+            for (Playable item : lyric) {
+                item.setDuration((int) (item.fraction() * 60 / this.pace * 1000));
             }
         }
     }

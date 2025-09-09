@@ -7,7 +7,7 @@ import model.Note;
  * 《王妃》的乐谱。只包含一段主歌+一段副歌。
  */
 public class 王妃 implements MusicDraft {
-    public static Lyric 摇晃的红酒杯 = Lyric.fromNotes("摇晃的红酒杯",
+    public static Lyric 摇晃的红酒杯 = Lyric.fromPlayables("摇晃的红酒杯",
         Note.halfNote(medium[3]),
         Note.halfNote(medium[2]),
         Note.halfNote(medium[1]),
@@ -16,7 +16,7 @@ public class 王妃 implements MusicDraft {
         Note.fullNote(low[6])
     );
 
-    public static Lyric 嘴唇像染着鲜血 = Lyric.fromNotes("嘴唇像染着鲜血",
+    public static Lyric 嘴唇像染着鲜血 = Lyric.fromPlayables("嘴唇像染着鲜血",
         Note.halfNote(low[6]),
         Note.halfNote(medium[1]),
         Note.halfNote(medium[2]),
@@ -29,7 +29,7 @@ public class 王妃 implements MusicDraft {
 
     public static final Lyric 那不寻常的美 = Lyric.fromLyricOfSameTone("那不寻常的美", 摇晃的红酒杯);
 
-    public static final Lyric 难赦免的罪 = Lyric.fromNotes("难赦免的罪",
+    public static final Lyric 难赦免的罪 = Lyric.fromPlayables("难赦免的罪",
         Note.halfNote(low[3]),
         Note.halfNote(low[3]),
         Note.halfNote(low[5]),
@@ -43,7 +43,7 @@ public class 王妃 implements MusicDraft {
 
     public static final Lyric 脚下踩着玫瑰 = Lyric.fromLyricOfSameTone("脚下踩着玫瑰", 那不寻常的美);
 
-    public static final Lyric 回敬一个吻当安慰 = Lyric.fromNotes("回敬一个吻当安慰",
+    public static final Lyric 回敬一个吻当安慰 = Lyric.fromPlayables("回敬一个吻当安慰",
         Note.halfNote(low[3]),
         Note.halfNote(low[3]),
         Note.halfNote(low[5]),
@@ -55,7 +55,7 @@ public class 王妃 implements MusicDraft {
         Note.fullNote(medium[1])
     );
 
-    public static final Lyric 可怜 = Lyric.fromNotes("可怜",
+    public static final Lyric 可怜 = Lyric.fromPlayables("可怜",
         Note.fullNote(medium[2]),
         Note.fullNote(medium[1])
     );
@@ -76,7 +76,7 @@ public class 王妃 implements MusicDraft {
 
     public static final Lyric 捍卫你的秘密花园 = Lyric.fromLyricOfSameTone("捍卫你的秘密花园", 回敬一个吻当安慰);
 
-    public static final Lyric 夜太美尽管再危险 = Lyric.fromNotes("夜太美尽管再危险",
+    public static final Lyric 夜太美尽管再危险 = Lyric.fromPlayables("夜太美尽管再危险",
         Note.fullNote(medium[3]),
         Note.fullNote(medium[5]),
         Note.fullNote(medium[6]),
@@ -89,7 +89,7 @@ public class 王妃 implements MusicDraft {
         Note.dottedNote1_5(medium[1])
     );
 
-    public static final Lyric 总有人黑着眼眶熬着夜 = Lyric.fromNotes("总有人黑着眼眶熬着夜",
+    public static final Lyric 总有人黑着眼眶熬着夜 = Lyric.fromPlayables("总有人黑着眼眶熬着夜",
         Note.halfNote(medium[3]),
         Note.halfNote(medium[5]),
         Note.halfNote(medium[6]),
@@ -103,7 +103,7 @@ public class 王妃 implements MusicDraft {
         new Note(medium[2], 2.0/3 + 1)
     );
 
-    public static final Lyric 爱太美尽管再危险 = Lyric.fromNotes("爱太美尽管再危险",
+    public static final Lyric 爱太美尽管再危险 = Lyric.fromPlayables("爱太美尽管再危险",
         Note.fullNote(medium[3]),
         Note.fullNote(medium[5]),
         Note.fullNote(medium[6]),
@@ -116,7 +116,7 @@ public class 王妃 implements MusicDraft {
         Note.fullNote(medium[1])
     );
 
-    public static final Lyric 愿赔上了一切超支千年的泪 = Lyric.fromNotes("愿赔上了一切超支千年的泪",
+    public static final Lyric 愿赔上了一切超支千年的泪 = Lyric.fromPlayables("愿赔上了一切超支千年的泪",
         Note.halfNote(medium[3]),
         Note.halfNote(high[1]),
         Note.halfNote(medium[7]),
@@ -135,7 +135,7 @@ public class 王妃 implements MusicDraft {
 
     public static final Lyric 也想尝粉身碎骨的滋味 = Lyric.fromLyricOfSameTone("也想尝粉身碎骨的滋味", 总有人黑着眼眶熬着夜);
 
-    public static final Lyric 你太美尽管再无言 = Lyric.fromNotes("你太美尽管再无言",
+    public static final Lyric 你太美尽管再无言 = Lyric.fromPlayables("你太美尽管再无言",
         Note.fullNote(medium[3]),
         Note.fullNote(medium[5]),
         Note.fullNote(medium[6]),
@@ -159,7 +159,7 @@ public class 王妃 implements MusicDraft {
         // Note.fullNote(medium[1]),
     );  
 
-    public static final Lyric 我都想用石堆隔绝世界 = Lyric.fromNotes("我都想用石堆隔绝世界",
+    public static final Lyric 我都想用石堆隔绝世界 = Lyric.fromPlayables("我都想用石堆隔绝世界",
         Note.halfNote(medium[3]),
         Note.halfNote(high[1]),
         Note.halfNote(medium[7]),
@@ -172,7 +172,7 @@ public class 王妃 implements MusicDraft {
         Note.fullNote(medium[1])
     );
 
-    public static final Lyric 我的王妃我要霸占你的美 = Lyric.fromNotes("我的王妃我要霸占你的美",
+    public static final Lyric 我的王妃我要霸占你的美 = Lyric.fromPlayables("我的王妃我要霸占你的美",
         Note.fullNote(medium[2]),
         Note.halfNote(medium[1]),
         Note.halfNote(medium[2]),

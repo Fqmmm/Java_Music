@@ -7,7 +7,7 @@ import constant.Settings;
 /**
  * 音符类
  */
-public class Note implements Cloneable, Playable {
+public class Note implements Playable {
 
     private int scale; // 音阶
     private double fraction; // 占这一小节的几分之几
@@ -57,6 +57,7 @@ public class Note implements Cloneable, Playable {
         this.setDuration((int) (this.fraction() * 60 / pace * 1000));
     }
 
+    @Override
     public void setVelocity(int velocity) {
         this.velocity = velocity;
     }
@@ -68,6 +69,7 @@ public class Note implements Cloneable, Playable {
      * @param value 需要提升/降低（传入负数）的半音数量
      * @return 一个全新的、经过移调的 Note 对象
      */
+    @Override
     public Note transposed(int value) {
         // 如果是休止符，返回一个相同的休止符
         if (this.scale <= 0) {
@@ -168,5 +170,4 @@ public class Note implements Cloneable, Playable {
         // System.out.println("instrument:" + instrument);
         System.out.println("velocity:" + velocity);
     }
-
 }

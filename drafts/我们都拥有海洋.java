@@ -31,7 +31,7 @@ public final class 我们都拥有海洋 {
     public static class Melody implements MusicDraft {
         
         // --- 主旋律乐句定义 (此处省略，与您提供的代码相同) ---
-        public static final Lyric 如果这是再不返回的夏天 = Lyric.fromNotes("如果这是再不返回的夏天",
+        public static final Lyric 如果这是再不返回的夏天 = Lyric.fromPlayables("如果这是再不返回的夏天",
             Note.quarterNote(medium[2]),
             Note.quarterNote(medium[3]),
             Note.quarterNote(medium[3]),
@@ -45,7 +45,7 @@ public final class 我们都拥有海洋 {
             new Note(medium[3], 1.25)
         );
 
-        public static final Lyric 好好地告别 = Lyric.fromNotes("好好地告别",
+        public static final Lyric 好好地告别 = Lyric.fromPlayables("好好地告别",
             Note.quarterNote(medium[2]),
             Note.quarterNote(medium[5]),
             Note.quarterNote(low[7]),
@@ -53,7 +53,7 @@ public final class 我们都拥有海洋 {
             Note.halfNote(low[6])
         );
 
-        public static final Lyric 和重要的人说再见 = Lyric.fromNotes("和重要的人说再见",
+        public static final Lyric 和重要的人说再见 = Lyric.fromPlayables("和重要的人说再见",
             Note.quarterNote(medium[1]),
             Note.quarterNote(medium[5]),
             Note.quarterNote(low[7]),
@@ -68,7 +68,7 @@ public final class 我们都拥有海洋 {
         
         public static final Lyric 这世界太吵 = Lyric.fromLyricOfSameTone("这世界太吵", 好好地告别);
 
-        public static final Lyric 不代表你的声音不珍贵 = Lyric.fromNotes("不代表你的声音不珍贵",
+        public static final Lyric 不代表你的声音不珍贵 = Lyric.fromPlayables("不代表你的声音不珍贵",
             Note.quarterNote(medium[1]),
             Note.quarterNote(medium[5]),
             Note.quarterNote(low[7]),
@@ -81,7 +81,7 @@ public final class 我们都拥有海洋 {
             Note.dottedNote0_75(medium[2])
         );
 
-        public static final Lyric 去哪 = Lyric.fromNotes("去哪",
+        public static final Lyric 去哪 = Lyric.fromPlayables("去哪",
             Note.halfNote(medium[5]), Note.fullNote(low[6])
         );
 
@@ -89,7 +89,7 @@ public final class 我们都拥有海洋 {
 
         public static final Lyric 那我 = Lyric.fromLyricOfSameTone("那我", 去哪);
 
-        public static final Lyric 跑的脚踝到底是为什么 = Lyric.fromNotes(
+        public static final Lyric 跑的脚踝到底是为什么 = Lyric.fromPlayables(
             Note.halfNote(low[6]),
             Note.halfNote(medium[2]),
             Note.quarterNote(medium[1]),
@@ -102,68 +102,68 @@ public final class 我们都拥有海洋 {
             new Note(medium[6], 1.25)
         );
         
-        public static final Lyric 为剧烈的心动 = Lyric.fromNotes("为剧烈的心动",
+        public static final Lyric 为剧烈的心动 = Lyric.fromPlayables("为剧烈的心动",
             Note.dottedNote1_5(high[1]), Note.halfNote(medium[7]), Note.halfNote(medium[6]),
             Note.quarterNote(medium[5]), Note.halfNote(medium[5]), Note.dottedNote0_75(medium[4])
         );
-        public static final Lyric 跑起来去见喜欢的我 = Lyric.fromNotes("跑起来去见喜欢的我",
+        public static final Lyric 跑起来去见喜欢的我 = Lyric.fromPlayables("跑起来去见喜欢的我",
             Note.quarterNote(medium[3]), Note.quarterNote(medium[3]), Note.quarterNote(medium[3]),
             Note.quarterNote(medium[3]), Note.fullNote(medium[3]), Note.halfNote(medium[2]),
             Note.quarterNote(medium[5]), Note.halfNote(medium[5]), Note.dottedNote0_75(medium[2])
         );
-        public static final Lyric 兴趣使然的 = Lyric.fromNotes("兴趣使然的",
+        public static final Lyric 兴趣使然的 = Lyric.fromPlayables("兴趣使然的",
             Note.dottedNote1_5(high[1]), Note.halfNote(medium[7]), Note.halfNote(medium[6]),
             Note.quarterNote(medium[7]), new Note(high[1], 1.25)
         );
-        public static final Lyric 怎么判断有用谁来规定无用 = Lyric.fromNotes("怎么判断有用谁来规定无用",
+        public static final Lyric 怎么判断有用谁来规定无用 = Lyric.fromPlayables("怎么判断有用谁来规定无用",
             Note.quarterNote(medium[5]), Note.quarterNote(medium[5]), Note.quarterNote(medium[5]),
             Note.quarterNote(medium[5]), Note.quarterNote(medium[5]), Note.quarterNote(high[1]),
             Note.emptyNote(0.25), Note.halfNote(medium[7]), Note.quarterNote(medium[7]),
             Note.quarterNote(medium[7]), Note.quarterNote(medium[7]), Note.quarterNote(high[1]), Note.quarterNote(high[2])
         );
-        public static final Lyric 完美的旅程 = Lyric.fromNotes("完美的旅程",
+        public static final Lyric 完美的旅程 = Lyric.fromPlayables("完美的旅程",
             Note.dottedNote1_5(high[1]), Note.halfNote(medium[7]), Note.halfNote(medium[6]),
             Note.quarterNote(medium[5]), new Note(medium[5], 1.25)
         );
-        public static final Lyric 为何每一站是一样的路牌 = Lyric.fromNotes("为何每一站是一样的路牌",
+        public static final Lyric 为何每一站是一样的路牌 = Lyric.fromPlayables("为何每一站是一样的路牌",
             Note.quarterNote(medium[3]), Note.quarterNote(medium[3]), Note.quarterNote(medium[3]),
             Note.quarterNote(medium[3]), Note.dottedNote0_75(medium[3]), Note.quarterNote(medium[1]),
             Note.halfNote(medium[2]), Note.quarterNote(medium[5]), Note.dottedNote0_75(medium[5]),
             Note.quarterNote(low[7]), Note.dottedNote0_75(medium[1])
         );
-        public static final Lyric 石头 = Lyric.fromNotes("石头", Note.quarterNote(low[7]), new Note(medium[1], 1.25));
-        public static final Lyric 所以没有悟空 = Lyric.fromNotes("所以没有悟空",
+        public static final Lyric 石头 = Lyric.fromPlayables("石头", Note.quarterNote(low[7]), new Note(medium[1], 1.25));
+        public static final Lyric 所以没有悟空 = Lyric.fromPlayables("所以没有悟空",
             Note.quarterNote(low[7]), Note.dottedNote0_75(medium[1]), Note.quarterNote(medium[2]),
             Note.dottedNote0_75(medium[3]), Note.quarterNote(medium[4]), Note.quarterNote(medium[5])
         );
-        public static final Lyric 就让我自己走吧 = Lyric.fromNotes("就让我自己走吧",
+        public static final Lyric 就让我自己走吧 = Lyric.fromPlayables("就让我自己走吧",
             Note.quarterNote(medium[5]), Note.quarterNote(high[1]), Note.quarterNote(high[3]),
             Note.quarterNote(high[2]), Note.quarterNote(high[1]), Note.quarterNote(medium[7]), new Note(high[1], 1.25)
         );
-        public static final Lyric 我的球鞋 = Lyric.fromNotes("我的球鞋",
+        public static final Lyric 我的球鞋 = Lyric.fromPlayables("我的球鞋",
             Note.quarterNote(high[2]), Note.halfNote(high[1]), Note.halfNote(medium[7]), new Note(high[1], 1.25)
         );
-        public static final Lyric 我的暴雪 = Lyric.fromNotes("我的暴雪",
+        public static final Lyric 我的暴雪 = Lyric.fromPlayables("我的暴雪",
             Note.quarterNote(high[3]), Note.halfNote(high[2]), Note.halfNote(high[1]), new Note(high[1], 1.25)
         );
-        public static final Lyric 要去见所有我喜欢的一切 = Lyric.fromNotes("要去见所有我喜欢的一切",
+        public static final Lyric 要去见所有我喜欢的一切 = Lyric.fromPlayables("要去见所有我喜欢的一切",
             Note.quarterNote(high[2]), Note.halfNote(high[1]), Note.dottedNote0_75(medium[7]),
             Note.quarterNote(high[2]), Note.quarterNote(high[2]), Note.quarterNote(high[2]),
             Note.quarterNote(high[2]), Note.quarterNote(high[4]), Note.quarterNote(high[3]),
             Note.quarterNote(high[2]), Note.quarterNote(high[1])
         );
-        public static final Lyric 别对我说 = Lyric.fromNotes("别对我说",
+        public static final Lyric 别对我说 = Lyric.fromPlayables("别对我说",
             Note.quarterNote(high[2]), Note.halfNote(high[1]), Note.halfNote(medium[7]), new Note(high[2], 1.25)
         );
-        public static final Lyric 去成为谁的模样 = Lyric.fromNotes("去成为谁的模样",
+        public static final Lyric 去成为谁的模样 = Lyric.fromPlayables("去成为谁的模样",
             Note.quarterNote(medium[7]), Note.quarterNote(high[1]), Note.quarterNote(high[2]),
             Note.quarterNote(high[1]), Note.quarterNote(high[2]), Note.quarterNote(high[3]), Note.quarterNote(high[3])
         );
-        public static final Lyric 未来不在 = Lyric.fromNotes("未来不在",
+        public static final Lyric 未来不在 = Lyric.fromPlayables("未来不在",
             Note.quarterNote(high[1]), Note.quarterNote(medium[6]), Note.quarterNote(medium[7]), new Note(high[1], 1.25)
         );
         public static final Lyric 我本该拥有海洋 = Lyric.fromLyricOfSameTone("我本该拥有海洋", 就让我自己走吧);
-        public static final Lyric 不管会遇见什么Hello = Lyric.fromNotes("不管会遇见什么Hello",
+        public static final Lyric 不管会遇见什么Hello = Lyric.fromPlayables("不管会遇见什么Hello",
             Note.quarterNote(medium[5]), Note.quarterNote(high[1]), Note.quarterNote(high[3]),
             Note.quarterNote(high[2]), Note.quarterNote(high[1]), Note.quarterNote(medium[7]),
             Note.dottedNote0_75(high[1]), Note.quarterNote(high[2]), new Note(high[1], 1.25)
@@ -188,7 +188,7 @@ public final class 我们都拥有海洋 {
         public static final Lyric 借来加血加防 = Lyric.fromLyricOfSameTone("借来加血加防", 所以没有悟空);
         public static final Lyric 不管会遇见什么 = Lyric.fromLyricOfSameTone("不管会遇见什么", 就让我自己走吧);
         public static final Lyric 不管答案是什么Hello = Lyric.fromLyricOfSameTone("不管答案是什么Hello", 不管会遇见什么Hello);
-        public static final Lyric 我们都拥有海洋收尾 = Lyric.fromNotes("我们都拥有海洋",
+        public static final Lyric 我们都拥有海洋收尾 = Lyric.fromPlayables("我们都拥有海洋",
             Note.quarterNote(medium[5]), Note.emptyNote(0.25), Note.quarterNote(high[1]), Note.emptyNote(0.25),
             Note.quarterNote(high[3]), Note.emptyNote(0.25), Note.quarterNote(high[2]), Note.emptyNote(0.25),
             Note.quarterNote(high[1]), Note.emptyNote(0.25), Note.quarterNote(medium[7]), Note.emptyNote(0.5),
@@ -225,7 +225,7 @@ public final class 我们都拥有海洋 {
                 就让我自己走吧, 空半拍,
                 别对我说, 空一拍, 空四分之一拍,
                 去成为谁的模样, 空一拍,
-                未来不在.toEmptyWords(), 空四分之一拍,
+                未来不在.toEmptyText(), 空四分之一拍,
                 我本该拥有海洋, 空一拍, 空四分之一拍,
                 我本该拥有海洋, 空一拍, 空四分之一拍,
                 就让我自己走吧, 空一拍, 空四分之一拍,
@@ -243,7 +243,7 @@ public final class 我们都拥有海洋 {
                 不懂, 空两拍, 空半拍,
                 是否, 空两拍, 空半拍,
                 多久, 空半拍,           // 空四分之一拍, 这里做出改编
-                去爱天空怎能害怕坠落.toEmptyWords(), 空一拍,
+                去爱天空怎能害怕坠落.toEmptyText(), 空一拍,
 
                 人生中的考场,
                 我会勇敢地给出回答,
@@ -263,7 +263,7 @@ public final class 我们都拥有海洋 {
                 就让我自己走吧, 空半拍,
                 别对我说, 空一拍, 空四分之一拍,
                 去成为谁的模样, 空一拍,
-                未来不在.toEmptyWords(), 空四分之一拍,
+                未来不在.toEmptyText(), 空四分之一拍,
                 我本该拥有海洋, 空一拍, 空四分之一拍,
                 我本该拥有海洋, 空一拍, 空四分之一拍,
                 就让我自己走吧, 空一拍, 空四分之一拍,
@@ -289,14 +289,14 @@ public final class 我们都拥有海洋 {
     public static class Harmony implements MusicDraft {
 
         // --- 和声乐句定义 (此处省略，与您提供的代码相同) ---
-        public static final Lyric 让我选择 = Lyric.fromNotes("让我选择",
+        public static final Lyric 让我选择 = Lyric.fromPlayables("让我选择",
             Note.quarterNote(low[6]),
             Note.quarterNote(medium[3]), Note.emptyNote(0.5),
             Note.quarterNote(low[6]),
             Note.quarterNote(medium[2])
         );
 
-        public static final Lyric 只有岸没有海 = Lyric.fromNotes("只有岸没有海",
+        public static final Lyric 只有岸没有海 = Lyric.fromPlayables("只有岸没有海",
             Note.quarterNote(low[6]),
             Note.quarterNote(medium[3]), Note.emptyNote(0.5),
             Note.quarterNote(medium[5]),
@@ -305,7 +305,7 @@ public final class 我们都拥有海洋 {
             Note.quarterNote(medium[2])
         );
 
-        public static final Lyric 长奔跑的脚踝到底是为什么 = Lyric.fromNotes("长奔跑的脚踝到底是为什么",
+        public static final Lyric 长奔跑的脚踝到底是为什么 = Lyric.fromPlayables("长奔跑的脚踝到底是为什么",
             Note.quarterNote(low[6]),
             Note.quarterNote(medium[3]),
             Note.emptyNote(0.5),
@@ -323,41 +323,41 @@ public final class 我们都拥有海洋 {
         );
 
         
-        public static final Lyric 没有悟空 = Lyric.fromNotes("没有悟空",
+        public static final Lyric 没有悟空 = Lyric.fromPlayables("没有悟空",
             Note.quarterNote(medium[2]), Note.dottedNote0_75(medium[3]),
             Note.quarterNote(medium[4]), Note.quarterNote(medium[5])
         );
-        public static final Lyric 石头 = Lyric.fromNotes("石头", Note.quarterNote(low[7]), new Note(medium[1], 1.25));
+        public static final Lyric 石头 = Lyric.fromPlayables("石头", Note.quarterNote(low[7]), new Note(medium[1], 1.25));
         public static final Lyric 没有 = Lyric.fromLyricOfSameTone("没有", 石头);
         public static final Lyric 所以 = Lyric.fromLyricOfSameTone("所以", 石头);
-        public static final Lyric 穿着球鞋 = Lyric.fromNotes("穿着球鞋",
+        public static final Lyric 穿着球鞋 = Lyric.fromPlayables("穿着球鞋",
             Note.halfNote(medium[1]), Note.emptyNote(0.5), Note.halfNote(medium[2]), Note.emptyNote(0.5),
             Note.halfNote(medium[3]), Note.emptyNote(0.5), Note.halfNote(medium[5]), Note.emptyNote(0.5)
         );
         public static final Lyric 迎着暴雪 = Lyric.fromLyricOfSameTone("迎着暴雪", 穿着球鞋);
         public static final Lyric 朝着山野 = Lyric.fromLyricOfSameTone("朝着山野", 穿着球鞋);
-        public static final Lyric 所有我喜欢的一切 = Lyric.fromNotes(
+        public static final Lyric 所有我喜欢的一切 = Lyric.fromPlayables(
             Note.quarterNote(medium[5]), Note.quarterNote(medium[5]), Note.quarterNote(medium[5]),
             Note.quarterNote(medium[5]), Note.quarterNote(medium[6]), Note.quarterNote(medium[5]),
             Note.quarterNote(medium[4]), Note.quarterNote(medium[3])
         );
-        public static final Lyric 哪一代 = Lyric.fromNotes("哪一代", Note.quarterNote(medium[3]), Note.quarterNote(medium[5]), new Note(medium[5], 1.25));
-        public static final Lyric 什么浪 = Lyric.fromNotes("什么浪", Note.quarterNote(medium[3]), Note.quarterNote(medium[4]), new Note(medium[5], 1.25));
+        public static final Lyric 哪一代 = Lyric.fromPlayables("哪一代", Note.quarterNote(medium[3]), Note.quarterNote(medium[5]), new Note(medium[5], 1.25));
+        public static final Lyric 什么浪 = Lyric.fromPlayables("什么浪", Note.quarterNote(medium[3]), Note.quarterNote(medium[4]), new Note(medium[5], 1.25));
         public static final Lyric 都不是 = Lyric.fromLyricOfSameTone("都不是", 什么浪);
-        public static final Lyric 我的模样 = Lyric.fromNotes("我的模样", Note.quarterNote(medium[6]), Note.quarterNote(medium[7]), Note.quarterNote(high[1]), Note.quarterNote(high[1]));
-        public static final Lyric 未来不在沙滩上 = Lyric.fromNotes("未来不在沙滩上",
+        public static final Lyric 我的模样 = Lyric.fromPlayables("我的模样", Note.quarterNote(medium[6]), Note.quarterNote(medium[7]), Note.quarterNote(high[1]), Note.quarterNote(high[1]));
+        public static final Lyric 未来不在沙滩上 = Lyric.fromPlayables("未来不在沙滩上",
             Note.quarterNote(medium[5]), Note.quarterNote(medium[3]), Note.quarterNote(medium[4]),
             Note.halfNote(medium[5]), Note.quarterNote(medium[3]), Note.quarterNote(medium[4]), new Note(medium[5], 1.25)
         );
         public static final Lyric 孤岛极光 = Lyric.fromLyricOfSameTone("孤岛极光", 穿着球鞋);
         public static final Lyric 虚拟城邦 = Lyric.fromLyricOfSameTone("虚拟城邦", 穿着球鞋);
         public static final Lyric 星球流浪 = Lyric.fromLyricOfSameTone("星球流浪", 穿着球鞋);
-        public static final Lyric HelloHelloHello = Lyric.fromNotes("HelloHelloHello",
+        public static final Lyric HelloHelloHello = Lyric.fromPlayables("HelloHelloHello",
             Note.quarterNote(medium[4]), Note.dottedNote0_75(medium[3]),
             Note.quarterNote(medium[6]), Note.dottedNote0_75(medium[5]),
             Note.quarterNote(high[2]), new Note(high[1], 1.25)
         );
-        public static final Lyric 唔 = Lyric.fromNotes("唔", Note.fullNote(medium[1]), Note.fullNote(medium[3]));
+        public static final Lyric 唔 = Lyric.fromPlayables("唔", Note.fullNote(medium[1]), Note.fullNote(medium[3]));
         public static final Lyric 天高地厚 = Lyric.fromLyricOfSameTone("天高地厚", 让我选择);
         public static final Lyric 是短暂的自由 = Lyric.fromLyricOfSameTone("是短暂的自由", 只有岸没有海);
         public static final Lyric 像风筝爱天空怎能害怕坠落 = Lyric.fromLyricOfSameTone("像风筝爱天空怎能害怕坠落", 长奔跑的脚踝到底是为什么);
@@ -380,15 +380,15 @@ public final class 我们都拥有海洋 {
                 空半拍, 只有岸没有海, 空一拍,
                 空半拍, 长奔跑的脚踝到底是为什么, 空一拍,
 
-                Melody.为剧烈的心动.toEmptyWords(),
-                Melody.跑起来去见喜欢的我.toEmptyWords(), 空四拍,
-                Melody.怎么判断有用谁来规定无用.toEmptyWords(), 空半拍,
+                Melody.为剧烈的心动.toEmptyText(),
+                Melody.跑起来去见喜欢的我.toEmptyText(), 空四拍,
+                Melody.怎么判断有用谁来规定无用.toEmptyText(), 空半拍,
                 
-                Melody.完美的旅程.toEmptyWords(),
-                Melody.为何每一站是一样的路牌.toEmptyWords(),
+                Melody.完美的旅程.toEmptyText(),
+                Melody.为何每一站是一样的路牌.toEmptyText(),
                 没有, 空半拍,
                 所以, 空半拍,
-                没有悟空.toEmptyWords(), 空两拍,
+                没有悟空.toEmptyText(), 空两拍,
 
                 穿着球鞋,
                 迎着暴雪,
@@ -407,26 +407,26 @@ public final class 我们都拥有海洋 {
                 空四拍, 空四拍, 空一拍,
                 
                 唔,
-                Melody.生命是原创的情节.toEmptyWords(), 空两拍,
+                Melody.生命是原创的情节.toEmptyText(), 空两拍,
                 
-                Melody.去问明天渴望怎样一张脸.toEmptyWords(), 空一拍,
-                Melody.它说是少年.toEmptyWords(), 空两拍,
-                Melody.它说和我一样毫无经验.toEmptyWords(), 空半拍, 空半拍,
+                Melody.去问明天渴望怎样一张脸.toEmptyText(), 空一拍,
+                Melody.它说是少年.toEmptyText(), 空两拍,
+                Melody.它说和我一样毫无经验.toEmptyText(), 空半拍, 空半拍,
                                 
                 天高地厚, 空两拍, 空半拍,
                 是短暂的自由, 空一拍, 空半拍,
                 像风筝爱天空怎能害怕坠落, 空一拍,
 
-                Melody.人生中的考场.toEmptyWords(),
-                Melody.我会勇敢地给出回答.toEmptyWords(),
-                Melody.亲手署名吧.toEmptyWords(),
-                Melody.有时也会考砸不抄谁的答案.toEmptyWords(), 空半拍,
+                Melody.人生中的考场.toEmptyText(),
+                Melody.我会勇敢地给出回答.toEmptyText(),
+                Melody.亲手署名吧.toEmptyText(),
+                Melody.有时也会考砸不抄谁的答案.toEmptyText(), 空半拍,
                 
-                Melody.挥手告别吧.toEmptyWords(),
-                Melody.记得二十岁流着泪的笑脸.toEmptyWords(),
+                Melody.挥手告别吧.toEmptyText(),
+                Melody.记得二十岁流着泪的笑脸.toEmptyText(),
                 前路, 空半拍,
                 借来, 空半拍,
-                加血加防.toEmptyWords(), 空两拍,
+                加血加防.toEmptyText(), 空两拍,
 
                 穿着球鞋,
                 迎着暴雪,

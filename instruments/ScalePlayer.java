@@ -17,7 +17,7 @@ public class ScalePlayer extends MusicalInstrument {
      * 播放多声部音乐 (新版)。
      * @param parts 一个或多个 Part 对象，每个 Part 包含一个乐器和它要演奏的乐谱。
      */
-    public static void playMultipleMusic(Part... parts) {
+    public static void playMultipleMusic(Part... parts) throws Exception {
         if (parts == null || parts.length == 0) {
             return;
         }
@@ -32,11 +32,17 @@ public class ScalePlayer extends MusicalInstrument {
                 MusicalInstrument instrument = part.getInstrument();
                 Music music = part.getMusic();
                 
-                // 遍历乐谱中的每一个乐句
-                for (Lyric lyric : music) {
-                    // 调用乐器自己的 playLyric 方法来演奏
-                    instrument.playLyric(lyric);
+                try {
+                    // 遍历乐谱中的每一个乐句
+                    for (Lyric lyric : music) {
+                        // 调用乐器自己的 playLyric 方法来演奏
+                        instrument.playLyric(lyric);
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                
                 }
+                
             });
             threads[i].start(); // 启动线程
         }
